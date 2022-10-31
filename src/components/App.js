@@ -1,8 +1,14 @@
+// importing components
+import Layout from './Layout/Layout';
+import RouteComponent from './Route';
+
 // App component
 function App() {
   return (
     <div className="App">
-      Hello
+      <Layout>
+        <RouteComponent />
+      </Layout>
     </div>
   );
 }
