@@ -1,20 +1,27 @@
 // importing components
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+
+// importing helpers
+import {
+    signupUser
+} from '../../utils/helper';
+
 
 // signup components
 function Signup() {
-    const [credentials, setCredentials] = useState(null);
-
-    useEffect(() => {
-        console.table(credentials);
-    }, [credentials])
+    // navigator object
+    const navigator = useNavigate();
 
     return (
         <div className="signup container">
             <h1>
                 Signup Page
             </h1>
+
+            <div className='mb-4'>
+                Already have an account? <Link to="/login">Login</Link>
+            </div>
 
             <Formik
                 initialValues={{
@@ -26,7 +33,7 @@ function Signup() {
                     street: '',
                     region: '',
                     country: '',
-                    postalZip: ''
+                    postal: ''
                 }}
 
                 validate={values => {
@@ -43,13 +50,31 @@ function Signup() {
                     return errors;
                 }}
 
-                onSubmit={(values, actions) => {
+                onSubmit={async (values, actions) => {
                     setTimeout(() => {
                         actions.setSubmitting(false);
                     }, 400);
 
                     // setting data into our states
-                    setCredentials(values);
+                    // signing in user
+                    const res = await signupUser({
+                        firstName: values.firstName,
+                        lastName: values.lastName,
+                        gender: values.gender,
+                        email: values.email,
+                        password: values.password,
+                        street: values.street,
+                        region: values.region,
+                        country: values.country,
+                        postalZip: values.postal
+                    })
+
+                    if (res.error) {
+                        alert('Signup failed!');
+                    } else {
+                        alert('Signup successful!');
+                        navigator('/login', { replace: true }); // redirect user after sign up
+                    }
 
                     // reset the form
                     actions.resetForm();

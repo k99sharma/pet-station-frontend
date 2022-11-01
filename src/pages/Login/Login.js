@@ -1,21 +1,29 @@
 // importing components
 import { Formik, Form, ErrorMessage, Field } from 'formik';
-import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import AuthContext from '../../context/auth';
+
+// importing helpers
+import {
+    loginUser,
+    getClientMachineInformation
+} from '../../utils/helper';
 
 // login components
 function Login() {
-    const [credentials, setCredentials] = useState(null);
-
-    // need to login user
-    useEffect(() => {
-        console.table(credentials);
-    }, [credentials])
+    const navigator = useNavigate();
+    const authCtx = useContext(AuthContext);
 
     return (
         <div className="login container">
             <h1>
                 Login Page
             </h1>
+
+            <div className="mb-4">
+                Dont have an account? <Link to="/signup">Signup</Link>
+            </div>
 
             <Formik
                 initialValues={{ email: '', password: '' }}
@@ -34,13 +42,26 @@ function Login() {
                     return errors;
                 }}
 
-                onSubmit={(values, actions) => {
+                onSubmit={async (values, actions) => {
                     setTimeout(() => {
                         actions.setSubmitting(false);
                     }, 400);
 
-                    // setting data into our states
-                    setCredentials(values);
+                    const res = await loginUser({
+                        email: values.email,
+                        password: values.password,
+                        clientMachineInformation: getClientMachineInformation()
+                    })
+
+                    if (res.error) {
+                        alert('Login failed!');
+                    } else {
+                        // setting value in auth context
+                        authCtx.login(res.data.token);
+
+                        // redirect user to dashboard
+                        navigator('/dashboard', { replace: true })
+                    }
 
                     // reset the form
                     actions.resetForm();

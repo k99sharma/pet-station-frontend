@@ -10,9 +10,14 @@ import './styles/global.css';
 // importing bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+// importing context 
+import { AuthContextProvider } from './context/auth';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <AuthContextProvider>
+      <App />
+    </AuthContextProvider>
   </React.StrictMode>
 );
