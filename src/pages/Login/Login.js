@@ -48,13 +48,21 @@ function Login() {
             >
                 {({ isSubmitting }) => (
                     <Form className="loginForm">
-                        <Field type="email" name="email" placeholder="Email Address" />
-                        <ErrorMessage name="email" component="div" />
-                        <Field type="password" name="password" placeholder="Password" />
-                        <ErrorMessage name="password" component="div" />
-                        <button type="submit" disabled={isSubmitting}>
-                            Login
-                        </button>
+                        <div className="mb-1">
+                            <Field type="email" name="email" placeholder="Email Address" />
+                            <ErrorMessage name="email" component="div" />
+                        </div>
+
+                        <div className="mb-1">
+                            <Field type="password" name="password" placeholder="Password" />
+                            <ErrorMessage name="password" component="div" />
+                        </div>
+
+                        <div className="mt-4">
+                            <button type="submit" disabled={isSubmitting}>
+                                Login
+                            </button>
+                        </div>
                     </Form>
                 )}
             </Formik>
