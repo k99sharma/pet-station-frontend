@@ -1,8 +1,7 @@
 // importing components
 import {
-    BrowserRouter as Router,
-    Routes,
-    Route
+    Route,
+    Routes
 } from 'react-router-dom'
 
 // importing pages
@@ -16,16 +15,15 @@ import NotFound from '../pages/NotFound/NotFound';
 // Route component
 function RouteComponent() {
     return (
-        <Router>
-            <Routes>
-                <Route exact path="/" element={<Home />} />
-                <Route exact path="/login" element={<Login />} />
-                <Route exact path="/signup" element={<Signup />} />
-                <Route exact path="/dashboard" element={<Dashboard />} />
-                <Route exact path="/adoptionList" element={<AdoptionList />} />
-                <Route exact path="*" element={<NotFound />} />
-            </Routes>
-        </Router>
+        <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/signup" element={<Signup />} />
+            <Route exact path="/dashboard" element={<Dashboard />} />
+            <Route exact path="/adoptionList" element={<AdoptionList />} />
+            <Route exact path="*" element={<NotFound />} />
+        </Routes>
+
     )
 }
 
