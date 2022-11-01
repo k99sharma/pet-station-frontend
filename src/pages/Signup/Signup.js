@@ -51,10 +51,6 @@ function Signup() {
                 }}
 
                 onSubmit={async (values, actions) => {
-                    setTimeout(() => {
-                        actions.setSubmitting(false);
-                    }, 400);
-
                     // setting data into our states
                     // signing in user
                     const res = await signupUser({
@@ -73,6 +69,7 @@ function Signup() {
                         alert('Signup failed!');
                     } else {
                         alert('Signup successful!');
+                        actions.setSubmitting(false);
                         navigator('/login', { replace: true }); // redirect user after sign up
                     }
 

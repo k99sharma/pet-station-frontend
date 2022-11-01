@@ -2,7 +2,11 @@
 import {
     Route,
     Routes
-} from 'react-router-dom'
+} from 'react-router-dom';
+import { useContext } from 'react';
+
+// importing context
+import AuthContext from '../context/auth';
 
 // importing pages
 import Home from '../pages/Home/Home';
@@ -14,13 +18,24 @@ import NotFound from '../pages/NotFound/NotFound';
 
 // Route component
 function RouteComponent() {
+    const authCtx = useContext(AuthContext);
+
     return (
         <Routes>
             <Route exact path="/" element={<Home />} />
-            <Route exact path="/login" element={<Login />} />
-            <Route exact path="/signup" element={<Signup />} />
-            <Route exact path="/dashboard" element={<Dashboard />} />
-            <Route exact path="/adoptionList" element={<AdoptionList />} />
+            {
+                authCtx.isLoggedIn
+                    ?
+                    <>
+                        <Route exact path="/dashboard" element={<Dashboard />} />
+                        <Route exact path="/adoptionList" element={<AdoptionList />} />
+                    </>
+                    :
+                    <>
+                        <Route exact path="/login" element={<Login />} />
+                        <Route exact path="/signup" element={<Signup />} />
+                    </>
+            }
             <Route exact path="*" element={<NotFound />} />
         </Routes>
 
