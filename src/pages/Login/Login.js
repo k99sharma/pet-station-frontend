@@ -43,10 +43,6 @@ function Login() {
                 }}
 
                 onSubmit={async (values, actions) => {
-                    setTimeout(() => {
-                        actions.setSubmitting(false);
-                    }, 400);
-
                     const res = await loginUser({
                         email: values.email,
                         password: values.password,
@@ -58,6 +54,8 @@ function Login() {
                     } else {
                         // setting value in auth context
                         authCtx.login(res.data.token);
+
+                        actions.setSubmitting(false);
 
                         // redirect user to dashboard
                         navigator('/dashboard', { replace: true })
