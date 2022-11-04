@@ -34,3 +34,23 @@ export function getClientMachineInformation() {
         browser: "chrome"
     }
 }
+
+
+// function to convert text in title case
+export function titleCase(text) {
+    const result = text.charAt(0).toUpperCase() + text.substring(1,);
+
+    return result;
+}
+
+// function to get user data using user id
+export async function getUserData(userId, token) {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/user/getUserById?userId=${userId}`, {
+        method: 'GET',
+        headers: {
+            'x-auth-token': token
+        }
+    });
+
+    return response.json();
+}
