@@ -44,7 +44,7 @@ function UserDashboard() {
             </div>
 
             <div className="userDashboard__userPets">
-                <UserPets />
+                <UserPets userId={authCtx.user.userId} token={authCtx.token} />
             </div>
         </div>
     )

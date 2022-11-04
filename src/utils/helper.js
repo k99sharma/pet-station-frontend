@@ -54,3 +54,15 @@ export async function getUserData(userId, token) {
 
     return response.json();
 }
+
+// function to get pet data of user
+export async function getPetData(userId, token) {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/pet/getAll/${userId}`, {
+        method: 'GET',
+        headers: {
+            'x-auth-token': token
+        }
+    });
+
+    return response.json();
+}
