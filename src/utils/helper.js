@@ -90,3 +90,15 @@ export async function createNewPetRequest(data, userId, token) {
 
     return response.json();
 }
+
+// function to delete pet
+export async function deletePet(token, petId) {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/pet/delete/${petId}`, {
+        method: 'DELETE',
+        headers: {
+            'x-auth-token': token
+        }
+    })
+
+    return response.json();
+}

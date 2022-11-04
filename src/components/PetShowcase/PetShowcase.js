@@ -2,11 +2,11 @@
 import { useState, useEffect } from 'react';
 
 // importing utilities
-import { getPetData } from '../../utils/helper';
+import { getPetData, deletePet } from '../../utils/helper';
 
 // pet showcase component
 function PetShowcase(props) {
-    const { userId, token, isPetModified } = props;
+    const { userId, token, isPetModified, handleModification } = props;
     const [pets, setPets] = useState([]);
 
     useEffect(() => {
@@ -23,6 +23,22 @@ function PetShowcase(props) {
                 alert('Unable to fetch pets data');
             })
     }, [isPetModified])
+
+    const handleDelete = (petId) => {
+        deletePet(token, petId)
+            .then(res => {
+                if (res.error) {
+                    alert('Unable to delete pet.')
+                } else {
+                    alert('Pet is deleted')
+                    handleModification()
+                }
+            })
+            .catch(err => {
+                console.error(err)
+                alert('Unable to send request.')
+            })
+    }
 
     return (
         <div className="petShowcase">
@@ -70,6 +86,12 @@ function PetShowcase(props) {
                                     }
                                 </li>
                             </ul>
+
+                            <div className="petShowcase__gallery__delete">
+                                <button onClick={() => handleDelete(pet.petId)} type="button">
+                                    Delete
+                                </button>
+                            </div>
                         </div>
                     ))
                 }

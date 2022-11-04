@@ -9,7 +9,7 @@ import { createNewPetRequest } from '../../utils/helper';
 // create new pet component function 
 function CreateNewPet(props) {
     // destructuring props
-    const { userId, token, setIsModified } = props;
+    const { userId, token, handleModification } = props;
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -24,7 +24,7 @@ function CreateNewPet(props) {
                 if (res.error) {
                     alert('Unable to create pet.');
                 } else {
-                    setIsModified(1)
+                    handleModification()
                     alert('New pet created')
                 }
             })

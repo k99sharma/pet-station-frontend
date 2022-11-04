@@ -1,6 +1,7 @@
 // importing components
 import { useContext, useEffect, useState } from "react";
 import UserPets from '../UserPets/UserPets';
+import PetAdoption from "../PetAdoption/PetAdoption";
 
 // importing utilities
 import { getUserData } from "../../utils/helper";
@@ -45,6 +46,10 @@ function UserDashboard() {
 
             <div className="userDashboard__userPets">
                 <UserPets userId={authCtx.user.userId} token={authCtx.token} />
+            </div>
+
+            <div className="userDashboard__adoption">
+                <PetAdoption userId={authCtx.user.userId} token={authCtx.token} />
             </div>
         </div>
     )
