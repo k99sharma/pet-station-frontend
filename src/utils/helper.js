@@ -66,3 +66,27 @@ export async function getPetData(userId, token) {
 
     return response.json();
 }
+
+// function to create new pet for user
+export async function createNewPetRequest(data, userId, token) {
+    const payload = {
+        name: data.name,
+        breed: data.breed,
+        category: data.category,
+        age: data.age,
+        weight: data.weight,
+        ownerId: userId,
+        gender: data.gender
+    }
+
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/pet/create`, {
+        method: 'POST',
+        headers: {
+            'x-auth-token': token,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    })
+
+    return response.json();
+}

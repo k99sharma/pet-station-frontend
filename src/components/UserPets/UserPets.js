@@ -1,32 +1,17 @@
 // importing components
-import { useState, useEffect } from 'react';
+import { useState, lazy, Suspense } from 'react';
+
+import Spinner from 'react-bootstrap/Spinner';
 import CreateNewPet from '../CreateNewPet/CreateNewPet';
-
-// importing utilities
-import { getPetData } from '../../utils/helper';
-
 
 // user pets components
 function UserPets(props) {
     const { userId, token } = props;
 
-    const [pets, setPets] = useState([]);
+    const [isPetModified, setIsPetModified] = useState(0);
 
-    useEffect(() => {
-        function fetchUserPets() {
-            return getPetData(userId, token)
-        }
-
-        fetchUserPets()
-            .then(res => {
-                console.log(res)
-                setPets(res.data);
-            })
-            .catch(err => {
-                console.log(err);
-                alert('Unable to fetch pets data');
-            })
-    }, [])
+    // lazy loading
+    const PetShowcase = lazy(() => import('../PetShowcase/PetShowcase'))
 
     return (
         <div className="userPets mt-5">
@@ -35,23 +20,19 @@ function UserPets(props) {
             </div>
 
             <div className="userPets__newPetButton">
-                <CreateNewPet />
+                <CreateNewPet userId={userId} token={token} setIsModified={setIsPetModified} />
             </div>
 
-            <div className="userPets__pets">
-                {
-                    pets.length !== 0
-                        ?
-                        pets.map(pet => (
-                            <div key={pet.petId} className="pet">
-                                console.log(pet)
-                            </div>
-                        ))
-                        :
-                        <div>
-                            No pets found
-                        </div>
-                }
+            <div className="userPets__pets my-4">
+                <Suspense
+                    fallback={
+                        <Spinner animation="border" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                        </Spinner>}
+                >
+                    <PetShowcase userId={userId} token={token} isPetModified={isPetModified} setIsPetModified={setIsPetModified} />
+                </Suspense>
+
             </div>
         </div>
     )
