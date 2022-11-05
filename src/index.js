@@ -14,6 +14,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { AuthContextProvider } from './context/auth';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+// query client 
+
 root.render(
   <AuthContextProvider>
     <App />
