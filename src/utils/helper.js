@@ -102,3 +102,15 @@ export async function deletePet(token, petId) {
 
     return response.json();
 }
+
+// function to fetch all pets put by user for adoption
+export async function fetchPetsForAdoption(userId, token) {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/adoption/get/allUserPetsForAdoption/${userId}`, {
+        method: 'GET',
+        headers: {
+            'x-auth-token': token
+        }
+    })
+
+    return response.json();
+}
