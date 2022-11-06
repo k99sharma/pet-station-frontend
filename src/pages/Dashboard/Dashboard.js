@@ -12,6 +12,7 @@ function Dashboard() {
     // context
     const authCtx = useContext(AuthContext);
 
+    // fetch user data
     return (
         <div className="dashboard">
             {
@@ -19,7 +20,7 @@ function Dashboard() {
                     ?
                     <AdminDashboard />
                     :
-                    <UserDashboard />
+                    <UserDashboard token={authCtx.token} />
             }
         </div>
     )

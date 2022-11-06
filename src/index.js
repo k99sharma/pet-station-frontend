@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 // importing components
 import App from './components/App'
@@ -14,11 +15,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { AuthContextProvider } from './context/auth';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-
+const queryClient = new QueryClient();
 // query client 
 
 root.render(
-  <AuthContextProvider>
-    <App />
-  </AuthContextProvider>
+  <QueryClientProvider client={queryClient}>
+    <AuthContextProvider>
+      <App />
+    </AuthContextProvider>
+  </QueryClientProvider>
 );
