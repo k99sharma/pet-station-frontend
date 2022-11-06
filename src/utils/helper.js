@@ -16,7 +16,10 @@ export async function loginUser(email, password) {
         .then(res => { result = res.data })
         .catch(err => {
             if (err.response) {
-                result = err.response.data;
+                result = {
+                    error: true,
+                    message: err.response.data
+                }
             } else if (err.request) {
                 console.log(err.request);
             } else {
@@ -47,7 +50,10 @@ export async function signupUser(data) {
         .then(res => { result = res.data })
         .catch(err => {
             if (err.response) {
-                result = err.response.data;
+                result = {
+                    error: true,
+                    message: err.response.data
+                }
             } else if (err.request) {
                 console.log(err.request);
             } else {
@@ -60,20 +66,25 @@ export async function signupUser(data) {
 
 
 // function to fetch user data
-export async function fetchUserData(email, token) {
+export async function fetchUserData(userId, token) {
     let result;
 
-    await axios.get(`${CONFIGS.API_URL}/user/getUserById?userId=${email}`, {
-        'x-auth-token': token
+    await axios.get(`${CONFIGS.API_URL}/user/getUserById?userId=${userId}`, {
+        headers: {
+            'x-auth-token': token
+        }
     })
         .then(res => { result = res.data })
         .catch(err => {
             if (err.response) {
-                result = err.response.data;
+                result = {
+                    error: true,
+                    message: err.response.data
+                }
             } else if (err.request) {
                 console.log(err.request);
             } else {
-                console.log('Error', (err.message))
+                console.log('Error', err.message);
             }
         })
 
