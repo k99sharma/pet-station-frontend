@@ -26,12 +26,28 @@ function Navbar() {
                         ?
                         <>
                             <li>
-                                <Link to="/dashboard">
-                                    Dashboard
+                                <Link to="/adoption">
+                                    Adoption
                                 </Link>
                             </li>
                             <li>
-                                <Logout />
+                                Profile
+
+                                <ul>
+                                    <li>
+                                        <Link to="/dashboard">
+                                            Dashboard
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/settings">
+                                            Settings
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Logout />
+                                    </li>
+                                </ul>
                             </li>
                         </>
                         :

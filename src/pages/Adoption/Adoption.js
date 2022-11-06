@@ -1,10 +1,10 @@
 // adoption list function 
-function AdoptionList() {
+function Adoption() {
     return (
         <div className="adoptionList">
-            Adoption List Page
+            Adoption Page
         </div>
     )
 }
 
-export default AdoptionList;
+export default Adoption;
