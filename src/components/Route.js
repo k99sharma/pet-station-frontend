@@ -11,6 +11,7 @@ import AuthContext from '../context/auth';
 // importing pages
 import Home from '../pages/Home/Home';
 import Login from '../pages/Login/Login';
+import ResetPassword from '../pages/ResetPassword/ResetPassword';
 import Signup from '../pages/Signup/Signup';
 import Dashboard from '../pages/Dashboard/Dashboard';
 import AdoptionList from '../pages/AdoptionList/AdoptionList';
@@ -33,6 +34,7 @@ function RouteComponent() {
                     :
                     <>
                         <Route exact path="/login" element={<Login />} />
+                        <Route exact path="/resetPassword" element={<ResetPassword />} />
                         <Route exact path="/signup" element={<Signup />} />
                     </>
             }
