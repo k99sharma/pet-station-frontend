@@ -90,3 +90,8 @@ export async function fetchUserData(userId, token) {
 
     return result;
 }
+
+// function to convert string in title case
+export function titleCase(text) {
+    return text.charAt(0).toUpperCase() + text.substr(1).toLowerCase();
+}
