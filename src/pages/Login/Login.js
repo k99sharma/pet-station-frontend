@@ -22,6 +22,12 @@ function Login() {
             <div className="login__form mt-5">
                 <LoginForm />
             </div>
+
+            <div className="login__from mt-3">
+                <Link to="/resetPassword">
+                    Forgot Password?
+                </Link>
+            </div>
         </div>
     )
 }
