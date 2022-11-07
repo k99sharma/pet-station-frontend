@@ -34,11 +34,19 @@ function DashboardPetShow() {
                 Available Pets
             </div>
 
-            <div className="dashboardPetShow__cards d-flex">
-                {
-                    data.data.map(pet => <div key={pet.name}><PetCard data={pet} /></div>)
-                }
-            </div>
+            {
+                data.data.length !== 0
+                    ?
+                    <div className="dashboardPetShow__cards d-flex">
+                        {
+                            data.data.map(pet => <div key={pet.name}><PetCard data={pet} token={authCtx.token} /></div>)
+                        }
+                    </div>
+                    :
+                    <div className="dashboardPetShow__noPets">
+                        No pets available.
+                    </div>
+            }
         </div>
     )
 }

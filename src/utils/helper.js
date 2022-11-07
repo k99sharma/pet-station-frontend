@@ -147,3 +147,29 @@ export async function fetchAllUserPets(ownerId, token) {
 
     return result;
 }
+
+// function to delete pet
+export async function deletePet(petId, token) {
+    let result;
+
+    await axios.delete(`${CONFIGS.API_URL}/pet/delete/${petId}`, {
+        headers: {
+            'x-auth-token': token
+        }
+    })
+        .then(res => { result = res.data })
+        .catch(err => {
+            if (err.response) {
+                result = {
+                    error: true,
+                    message: err.response.data
+                }
+            } else if (err.request) {
+                console.log(err.request)
+            } else {
+                console.log('Error', err.message)
+            }
+        })
+
+    return result;
+}
