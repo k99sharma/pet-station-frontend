@@ -95,3 +95,55 @@ export async function fetchUserData(userId, token) {
 export function titleCase(text) {
     return text.charAt(0).toUpperCase() + text.substr(1).toLowerCase();
 }
+
+// function to create new pet
+export async function createNewPet(payload, token) {
+    let result;
+
+    await axios.post(`${CONFIGS.API_URL}/pet/create`, payload, {
+        headers: {
+            'x-auth-token': token
+        },
+    })
+        .then(res => { result = res.data })
+        .catch(err => {
+            if (err.response) {
+                result = {
+                    error: true,
+                    message: err.response.data
+                }
+            } else if (err.request) {
+                console.log(err.request);
+            } else {
+                console.log('Error', err.message);
+            }
+        })
+
+    return result;
+}
+
+// function to fetch user pets
+export async function fetchAllUserPets(ownerId, token) {
+    let result;
+
+    await axios.get(`${CONFIGS.API_URL}/pet/getAll/${ownerId}`, {
+        headers: {
+            'x-auth-token': token
+        }
+    })
+        .then(res => { result = res.data })
+        .catch(err => {
+            if (err.response) {
+                result = {
+                    error: true,
+                    message: err.response.data
+                }
+            } else if (err.request) {
+                console.log(err.request)
+            } else {
+                console.log('Error', err.message)
+            }
+        })
+
+    return result;
+}
