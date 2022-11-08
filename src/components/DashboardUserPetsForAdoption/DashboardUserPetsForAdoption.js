@@ -1,7 +1,37 @@
 import { useQuery } from "react-query";
 
 // importing utilities
-import { fetchAllUserPetsForAdoption } from "../../utils/helper";
+import { fetchAllUserPetsForAdoption, completeAdoption } from "../../utils/helper";
+
+function AdoptionPetCard(_props) {
+    const { pet, token } = _props;
+
+    const handleClick = async () => {
+        const response = await completeAdoption(pet.petId, token)
+
+        if (response.error)
+            alert('Adoption cannot be completed.')
+
+        else
+            alert('Adoption Completed.')
+    }
+
+    return (
+        <div className="adoptionPetCard">
+            <div className="adoptionPetCard__info">
+                {
+                    pet.name
+                }
+            </div>
+
+            <div>
+                <button type="button" onClick={handleClick}>
+                    Adopt
+                </button>
+            </div>
+        </div>
+    )
+}
 
 // dashboard user pets for adoption component
 function DashboardUserPetForAdoption(_props) {
@@ -32,7 +62,7 @@ function DashboardUserPetForAdoption(_props) {
                 {
                     data.data.length !== 0
                         ?
-                        data.data.map(pet => <div>{pet.name}</div>)
+                        data.data.map(pet => <div key={pet.name}><AdoptionPetCard pet={pet} token={token} /></div>)
                         :
                         <div>No pet is available</div>
                 }

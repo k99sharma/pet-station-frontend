@@ -228,7 +228,61 @@ export async function fetchAllUserPetsForAdoption(ownerId, token) {
             }
         })
 
-    console.log(result);
+    return result;
+}
+
+// function to fetch all pets available for adoption
+export async function fetchAllPetsAvailableForAdoption(token) {
+    let result;
+
+    await axios.get(`${CONFIGS.API_URL}/adoption/getAllPets`, {
+        headers: {
+            'x-auth-token': token
+        }
+    })
+        .then(res => { result = res.data })
+        .catch(err => {
+            if (err.response) {
+                result = {
+                    error: true,
+                    message: err.response.data
+                }
+            } else if (err.request) {
+                console.log(err.request)
+            } else {
+                console.log('Error', err.message)
+            }
+        })
+
+    return result;
+}
+
+// function to make adoption complete request
+export async function completeAdoption(petId, token) {
+    let result;
+
+    const payload = {
+        data: 'None'
+    };
+
+    await axios.post(`${CONFIGS.API_URL}/adoption/complete/${petId}`, payload, {
+        headers: {
+            'x-auth-token': token
+        }
+    })
+        .then(res => { result = res.data })
+        .catch(err => {
+            if (err.response) {
+                result = {
+                    error: true,
+                    message: err.response.data
+                }
+            } else if (err.request) {
+                console.log(err.request)
+            } else {
+                console.log('Error', err.message)
+            }
+        })
 
     return result;
 }
