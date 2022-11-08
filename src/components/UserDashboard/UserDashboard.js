@@ -2,6 +2,7 @@
 import Image from 'react-bootstrap/Image'
 
 import DashboardPet from '../DashboardPet/DashboardPet';
+import DashboardAdoption from '../DashboardAdoption/DashboardAdoption';
 
 // importing utilities
 import { titleCase } from '../../utils/helper';
@@ -42,6 +43,10 @@ function UserDashboard(_props) {
 
             <div className="userDashboard__pet py-3">
                 <DashboardPet />
+            </div>
+
+            <div className="userDashboard__adoption py-3">
+                <DashboardAdoption />
             </div>
         </div>
     )

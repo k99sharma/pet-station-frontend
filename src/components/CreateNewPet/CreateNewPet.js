@@ -12,10 +12,8 @@ import { catBreed, dogBreed } from '../../utils/breed';
 import { createNewPet } from '../../utils/helper';
 
 // create new pet component
-function CreateNewPet(_props) {
+function CreateNewPet() {
     const authCtx = useContext(AuthContext);
-
-    const { setIsModified } = _props;
 
     const [show, setShow] = useState(false);
 
@@ -29,7 +27,6 @@ function CreateNewPet(_props) {
 
     const handleClose = () => {
         setShow(false);
-        setIsModified(false);
     }
 
     const handleSubmit = async (e) => {
