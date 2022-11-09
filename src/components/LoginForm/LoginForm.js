@@ -7,6 +7,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
+import Spinner from 'react-bootstrap/Spinner';
+
 // importing utilities functions
 import { loginUser } from '../../utils/helper';
 
@@ -83,9 +85,19 @@ function LoginForm() {
                         </div>
 
                         <div className="my-4">
-                            <button className="login__container__loginButton py-2 rounded" type="submit" disabled={isSubmitting}>
-                                Sign in
-                            </button>
+                            {
+                                isSubmitting
+                                    ?
+                                    <div className="d-flex justify-content-center align-items-center">
+                                        <Spinner animation="border" role="status">
+                                            <span className="visually-hidden">Loading...</span>
+                                        </Spinner>
+                                    </div>
+                                    :
+                                    <button className="login__container__loginButton py-2 rounded" type="submit" disabled={isSubmitting}>
+                                        Sign in
+                                    </button>
+                            }
                         </div>
                     </Form>
                 )}

@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { Formik, Form, ErrorMessage, Field } from "formik";
 import * as Yup from "yup";
 
+import Spinner from 'react-bootstrap/Spinner'
+
 // importing states
 import states from './statesList';
 
@@ -138,9 +140,19 @@ function SignupForm() {
                         </div>
 
                         <div className="mt-4">
-                            <button className="signup__container__signupButton py-2 rounded" type="submit" disabled={isSubmitting}>
-                                Signup
-                            </button>
+                            {
+                                isSubmitting
+                                    ?
+                                    <div className="d-flex justify-content-center align-items-center">
+                                        <Spinner animation="border" role="status">
+                                            <span className="visually-hidden">Loading...</span>
+                                        </Spinner>
+                                    </div>
+                                    :
+                                    <button className="signup__container__signupButton py-2 rounded" type="submit" disabled={isSubmitting}>
+                                        Signup
+                                    </button>
+                            }
                         </div>
                     </Form>
                 )}
