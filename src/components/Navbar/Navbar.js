@@ -1,3 +1,6 @@
+// import css
+import './Navbar.css'
+
 // importing components
 import { useContext } from 'react';
 import { Link } from 'react-router-dom'
@@ -6,7 +9,6 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import Button from 'react-bootstrap/Button';
 import Logout from '../Logout/Logout';
 
 // importing context
@@ -19,7 +21,7 @@ function CustomNavbar() {
     return (
         <Navbar bg="light" variant="light" expand="lg">
             <Container>
-                <Navbar.Brand>
+                <Navbar.Brand className="d-flex justify-content-center align-items-center">
                     <img
                         src="/assets/logo.png"
                         width="40"
@@ -34,7 +36,7 @@ function CustomNavbar() {
                 <Navbar.Collapse id="main-navbar">
                     <Nav className="me-auto">
                         <Nav.Link>
-                            <Link className="text-decoration-none text-black" to="/">
+                            <Link className="link" to="/">
                                 Home
                             </Link>
                         </Nav.Link>
@@ -42,7 +44,7 @@ function CustomNavbar() {
                             authCtx.isLoggedIn
                                 ?
                                 <Nav.Link>
-                                    <Link className="text-decoration-none text-black" to="/adoption">
+                                    <Link className="link" to="/adoption">
                                         Adoption
                                     </Link>
                                 </Nav.Link>
@@ -57,13 +59,13 @@ function CustomNavbar() {
                                 ?
                                 <>
                                     <Nav.Link>
-                                        <Link className="text-decoration-none text-black" to="/dashboard">
+                                        <Link className="link" to="/dashboard">
                                             Dashboard
                                         </Link>
                                     </Nav.Link>
 
                                     <Nav.Link>
-                                        <Link className="text-decoration-none text-black" to="/settings">
+                                        <Link className="link" to="/settings">
                                             Settings
                                         </Link>
                                     </Nav.Link>
@@ -74,29 +76,27 @@ function CustomNavbar() {
                                 </>
                                 :
                                 <Nav.Link>
-                                    <Link to="/login">
-                                        <Button variant="success">
-                                            Login
-                                        </Button>
+                                    <Link className="link font-weight-bold" to="/login">
+                                        Log In
                                     </Link>
                                 </Nav.Link>
                         }
                     </Nav>
                 </Navbar.Collapse>
 
-                <Nav className="d-none d-md-block">
+                <Nav className="d-none d-md-flex">
                     {
                         authCtx.isLoggedIn
                             ?
                             <NavDropdown title={<img src="/assets/profile.png" height={30} width={30} alt="account" />} id="main-navbar-dropdown">
                                 <NavDropdown.Item>
-                                    <Link className="text-decoration-none text-black" to="/dashboard">
+                                    <Link className="link" to="/dashboard">
                                         Dashboard
                                     </Link>
                                 </NavDropdown.Item>
 
                                 <NavDropdown.Item>
-                                    <Link className="text-decoration-none text-black" to="/settings">
+                                    <Link className="link" to="/settings">
                                         Settings
                                     </Link>
                                 </NavDropdown.Item>
@@ -107,10 +107,8 @@ function CustomNavbar() {
                             </NavDropdown>
                             :
                             <Nav.Link>
-                                <Link to="/login">
-                                    <Button variant="success">
-                                        Login
-                                    </Button>
+                                <Link className="link" to="/login">
+                                    Log In
                                 </Link>
                             </Nav.Link>
                     }

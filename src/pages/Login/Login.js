@@ -1,3 +1,6 @@
+// import css
+import './Login.css'
+
 // importing components
 import { Link } from 'react-router-dom';
 
@@ -7,20 +10,20 @@ import LoginForm from '../../components/LoginForm/LoginForm';
 // login component
 function Login() {
     return (
-        <div className="d-flex justify-content-center align-items-center">
-            <div className="login container p-2">
-                <div className="login__header h1">
+        <div className="login d-flex justify-content-center align-items-center">
+            <div className="login__container p-5 d-flex flex-column align-items-center">
+                <div className="login__container__header h1">
                     Login Page
                 </div>
 
-                <div className="login__subheader">
+                <div className="login__container__subheader">
                     {
                         `Don't have an account? `
                     }
                     <Link to="/signup">Signup</Link>
                 </div>
 
-                <div className="login__form mt-5">
+                <div className="login__container__form mt-5">
                     <LoginForm />
                 </div>
 
