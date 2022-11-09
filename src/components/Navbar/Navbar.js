@@ -17,13 +17,13 @@ function CustomNavbar() {
     const authCtx = useContext(AuthContext);
 
     return (
-        <Navbar bg="dark" variant="dark" expand="lg">
+        <Navbar bg="light" variant="light" expand="lg">
             <Container>
                 <Navbar.Brand>
                     <img
                         src="/assets/logo.png"
-                        width="30"
-                        height="30"
+                        width="40"
+                        height="40"
                         className="d-inline-block align-top"
                         alt="pet station logo"
                     />{' '}
@@ -34,7 +34,7 @@ function CustomNavbar() {
                 <Navbar.Collapse id="main-navbar">
                     <Nav className="me-auto">
                         <Nav.Link>
-                            <Link className="text-decoration-none text-white" to="/">
+                            <Link className="text-decoration-none text-black" to="/">
                                 Home
                             </Link>
                         </Nav.Link>
@@ -42,7 +42,7 @@ function CustomNavbar() {
                             authCtx.isLoggedIn
                                 ?
                                 <Nav.Link>
-                                    <Link className="text-decoration-none text-white" to="/adoption">
+                                    <Link className="text-decoration-none text-black" to="/adoption">
                                         Adoption
                                     </Link>
                                 </Nav.Link>
@@ -57,13 +57,13 @@ function CustomNavbar() {
                                 ?
                                 <>
                                     <Nav.Link>
-                                        <Link className="text-decoration-none text-white" to="/dashboard">
+                                        <Link className="text-decoration-none text-black" to="/dashboard">
                                             Dashboard
                                         </Link>
                                     </Nav.Link>
 
                                     <Nav.Link>
-                                        <Link className="text-decoration-none text-white" to="/settings">
+                                        <Link className="text-decoration-none text-black" to="/settings">
                                             Settings
                                         </Link>
                                     </Nav.Link>
