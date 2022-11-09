@@ -1,3 +1,6 @@
+// import css
+import './SignupForm.css'
+
 // importing components
 import { useNavigate } from "react-router-dom";
 import { Formik, Form, ErrorMessage, Field } from "formik";
@@ -81,23 +84,23 @@ function SignupForm() {
             >
                 {({ isSubmitting }) => (
                     <Form autoComplete="off">
-                        <div className="mb-1">
-                            <Field type="text" name="firstName" placeholder="First Name" />
-                            <ErrorMessage name="firstName" component="div" />
+                        <div className="mb-3">
+                            <Field className="inputField" type="text" name="firstName" placeholder="First Name" />
+                            <ErrorMessage className="errorMessage" name="firstName" component="div" />
                         </div>
 
-                        <div className="mb-1">
-                            <Field type="text" name="lastName" placeholder="Last Name" />
-                            <ErrorMessage name="lastName" component="div" />
+                        <div className="mb-3">
+                            <Field className="inputField" type="text" name="lastName" placeholder="Last Name" />
+                            <ErrorMessage className="errorMessage" name="lastName" component="div" />
                         </div>
 
-                        <div className="mb-1">
-                            <Field type="email" name="email" placeholder="Email Address" />
-                            <ErrorMessage name="email" component="div" />
+                        <div className="mb-3">
+                            <Field className="inputField" type="email" name="email" placeholder="Email Address" />
+                            <ErrorMessage className="errorMessage" name="email" component="div" />
                         </div>
 
-                        <div className="mb-1">
-                            <Field as="select" name="gender">
+                        <div className="mb-3">
+                            <Field className="inputField" as="select" name="gender">
                                 <option value="">Gender</option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
@@ -105,23 +108,23 @@ function SignupForm() {
                             </Field>
                         </div>
 
-                        <div className="mb-1">
-                            <Field type="password" name="password" placeholder="Password" />
-                            <ErrorMessage name="password" component="div" />
+                        <div className="mb-3">
+                            <Field className="inputField" type="password" name="password" placeholder="Password" />
+                            <ErrorMessage className="errorMessage" name="password" component="div" />
                         </div>
 
-                        <div className="mb-1">
-                            <Field type="password" name="passwordConfirmation" placeholder="Retype Password" />
-                            <ErrorMessage name="passwordConfirmation" component="div" />
+                        <div className="mb-3">
+                            <Field className="inputField" type="password" name="passwordConfirmation" placeholder="Retype Password" />
+                            <ErrorMessage className="errorMessage" name="passwordConfirmation" component="div" />
                         </div>
 
-                        <div className="mb-1">
-                            <Field name="street" as="textarea" placeholder="Address" />
-                            <ErrorMessage name="street" component="div" />
+                        <div className="mb-3">
+                            <Field className="inputField" name="street" as="textarea" placeholder="Address" />
+                            <ErrorMessage className="errorMessage" name="street" component="div" />
                         </div>
 
-                        <div className="mb-1">
-                            <Field name="region" as="select">
+                        <div className="mb-3">
+                            <Field className="inputField" name="region" as="select">
                                 <option value="">State</option>
                                 {
                                     states.map((state) => <option key={state} value={state}>{state}</option>)
@@ -129,13 +132,13 @@ function SignupForm() {
                             </Field>
                         </div>
 
-                        <div className="mb-1">
-                            <Field type="text" name="postalZip" placeholder="Postal Zip" />
-                            <ErrorMessage name="postalZip" component="div" />
+                        <div className="mb-3">
+                            <Field className="inputField" type="text" name="postalZip" placeholder="Postal Zip" />
+                            <ErrorMessage className="errorMessage" name="postalZip" component="div" />
                         </div>
 
                         <div className="mt-4">
-                            <button type="submit" disabled={isSubmitting}>
+                            <button className="signup__container__signupButton py-2 rounded" type="submit" disabled={isSubmitting}>
                                 Signup
                             </button>
                         </div>
