@@ -85,19 +85,17 @@ function LoginForm() {
                         </div>
 
                         <div className="my-4">
-                            {
-                                isSubmitting
-                                    ?
-                                    <div className="d-flex justify-content-center align-items-center">
-                                        <Spinner animation="border" role="status">
+                            <button className="login__container__loginButton py-2 rounded" type="submit" disabled={isSubmitting}>
+                                {
+                                    isSubmitting
+                                        ?
+                                        <Spinner animation="border" role="status" size="sm">
                                             <span className="visually-hidden">Loading...</span>
                                         </Spinner>
-                                    </div>
-                                    :
-                                    <button className="login__container__loginButton py-2 rounded" type="submit" disabled={isSubmitting}>
-                                        Sign in
-                                    </button>
-                            }
+                                        :
+                                        `${'Sign in'}`
+                                }
+                            </button>
                         </div>
                     </Form>
                 )}

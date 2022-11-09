@@ -140,19 +140,18 @@ function SignupForm() {
                         </div>
 
                         <div className="mt-4">
-                            {
-                                isSubmitting
-                                    ?
-                                    <div className="d-flex justify-content-center align-items-center">
-                                        <Spinner animation="border" role="status">
+
+                            <button className="signup__container__signupButton py-2 rounded" type="submit" disabled={isSubmitting}>
+                                {
+                                    isSubmitting
+                                        ?
+                                        <Spinner animation="border" role="status" size="sm">
                                             <span className="visually-hidden">Loading...</span>
                                         </Spinner>
-                                    </div>
-                                    :
-                                    <button className="signup__container__signupButton py-2 rounded" type="submit" disabled={isSubmitting}>
-                                        Signup
-                                    </button>
-                            }
+                                        :
+                                        `${'Signup'}`
+                                }
+                            </button>
                         </div>
                     </Form>
                 )}

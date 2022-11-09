@@ -3,6 +3,8 @@ import { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { useQuery } from 'react-query';
 
+import Loading from "../Loading/Loading"
+
 // importing utilities
 import { fetchAllUserPets, addPetForAdoption } from '../../utils/helper';
 
@@ -56,7 +58,7 @@ function DashboardAddPetForAdoptionButton(_props) {
     })
 
     if (isLoading)
-        return <div>...Loading</div>
+        return <Loading />
 
     if (error)
         return <div>Error.</div>

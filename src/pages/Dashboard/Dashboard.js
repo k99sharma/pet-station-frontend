@@ -4,6 +4,7 @@ import { useQuery } from 'react-query';
 
 import UserDashboard from '../../components/UserDashboard/UserDashboard';
 import AdminDashboard from '../../components/AdminDashboard/AdminDashboard';
+import Loading from '../../components/Loading/Loading'
 
 // importing contexts
 import AuthContext from '../../context/auth';
@@ -23,7 +24,7 @@ function Dashboard() {
     })
 
     if (isLoading)
-        return <div>Loading....</div>
+        return <Loading />
 
     if (data.error || error) {
         return <div>Error occurred!</div>
