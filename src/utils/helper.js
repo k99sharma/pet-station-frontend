@@ -16,7 +16,10 @@ export async function loginUser(email, password) {
         .then(res => { result = res.data })
         .catch(err => {
             if (err.response) {
-                result = err.response.data;
+                result = {
+                    error: true,
+                    message: err.response.data
+                }
             } else if (err.request) {
                 console.log(err.request);
             } else {
@@ -27,6 +30,7 @@ export async function loginUser(email, password) {
     return result;
 }
 
+// function to make signup request
 export async function signupUser(data) {
     const payload = {
         firstName: data.firstName,
@@ -46,11 +50,237 @@ export async function signupUser(data) {
         .then(res => { result = res.data })
         .catch(err => {
             if (err.response) {
-                result = err.response.data;
+                result = {
+                    error: true,
+                    message: err.response.data
+                }
             } else if (err.request) {
                 console.log(err.request);
             } else {
                 console.log('Error', (err.message))
+            }
+        })
+
+    return result;
+}
+
+
+// function to fetch user data
+export async function fetchUserData(userId, token) {
+    let result;
+
+    await axios.get(`${CONFIGS.API_URL}/user/getUserById?userId=${userId}`, {
+        headers: {
+            'x-auth-token': token
+        }
+    })
+        .then(res => { result = res.data })
+        .catch(err => {
+            if (err.response) {
+                result = {
+                    error: true,
+                    message: err.response.data
+                }
+            } else if (err.request) {
+                console.log(err.request);
+            } else {
+                console.log('Error', err.message);
+            }
+        })
+
+    return result;
+}
+
+// function to convert string in title case
+export function titleCase(text) {
+    return text.charAt(0).toUpperCase() + text.substr(1).toLowerCase();
+}
+
+// function to create new pet
+export async function createNewPet(payload, token) {
+    let result;
+
+    await axios.post(`${CONFIGS.API_URL}/pet/create`, payload, {
+        headers: {
+            'x-auth-token': token
+        },
+    })
+        .then(res => { result = res.data })
+        .catch(err => {
+            if (err.response) {
+                result = {
+                    error: true,
+                    message: err.response.data
+                }
+            } else if (err.request) {
+                console.log(err.request);
+            } else {
+                console.log('Error', err.message);
+            }
+        })
+
+    return result;
+}
+
+// function to fetch user pets
+export async function fetchAllUserPets(ownerId, token) {
+    let result;
+
+    await axios.get(`${CONFIGS.API_URL}/pet/getAll/${ownerId}`, {
+        headers: {
+            'x-auth-token': token
+        }
+    })
+        .then(res => { result = res.data })
+        .catch(err => {
+            if (err.response) {
+                result = {
+                    error: true,
+                    message: err.response.data
+                }
+            } else if (err.request) {
+                console.log(err.request)
+            } else {
+                console.log('Error', err.message)
+            }
+        })
+
+    return result;
+}
+
+// function to delete pet
+export async function deletePet(petId, token) {
+    let result;
+
+    await axios.delete(`${CONFIGS.API_URL}/pet/delete/${petId}`, {
+        headers: {
+            'x-auth-token': token
+        }
+    })
+        .then(res => { result = res.data })
+        .catch(err => {
+            if (err.response) {
+                result = {
+                    error: true,
+                    message: err.response.data
+                }
+            } else if (err.request) {
+                console.log(err.request)
+            } else {
+                console.log('Error', err.message)
+            }
+        })
+
+    return result;
+}
+
+
+// function to put pet on adoption
+export async function addPetForAdoption(petId, token) {
+    let result;
+
+    const payload = {
+        data: null
+    }
+
+    await axios.post(`${CONFIGS.API_URL}/adoption/putPetForAdoption/${petId}`, payload, {
+        headers: {
+            'x-auth-token': token
+        }
+    })
+        .then(res => { result = res.data })
+        .catch(err => {
+            if (err.response) {
+                result = {
+                    error: true,
+                    message: err.response.data
+                }
+            } else if (err.request) {
+                console.log(err.request)
+            } else {
+                console.log('Error', err.message)
+            }
+        })
+
+    return result;
+}
+
+// function to fetch all pets put on adoption by user
+export async function fetchAllUserPetsForAdoption(ownerId, token) {
+    let result;
+
+    await axios.post(`${CONFIGS.API_URL}/adoption/get/allUserPetsForAdoption/${ownerId}`, {
+        headers: {
+            'x-auth-token': token
+        }
+    })
+        .then(res => { result = res.data })
+        .catch(err => {
+            if (err.response) {
+                result = {
+                    error: true,
+                    message: err.response.data
+                }
+            } else if (err.request) {
+                console.log(err.request)
+            } else {
+                console.log('Error', err.message)
+            }
+        })
+
+    return result;
+}
+
+// function to fetch all pets available for adoption
+export async function fetchAllPetsAvailableForAdoption(token) {
+    let result;
+
+    await axios.get(`${CONFIGS.API_URL}/adoption/getAllPets`, {
+        headers: {
+            'x-auth-token': token
+        }
+    })
+        .then(res => { result = res.data })
+        .catch(err => {
+            if (err.response) {
+                result = {
+                    error: true,
+                    message: err.response.data
+                }
+            } else if (err.request) {
+                console.log(err.request)
+            } else {
+                console.log('Error', err.message)
+            }
+        })
+
+    return result;
+}
+
+// function to make adoption complete request
+export async function completeAdoption(petId, token) {
+    let result;
+
+    const payload = {
+        data: 'None'
+    };
+
+    await axios.post(`${CONFIGS.API_URL}/adoption/complete/${petId}`, payload, {
+        headers: {
+            'x-auth-token': token
+        }
+    })
+        .then(res => { result = res.data })
+        .catch(err => {
+            if (err.response) {
+                result = {
+                    error: true,
+                    message: err.response.data
+                }
+            } else if (err.request) {
+                console.log(err.request)
+            } else {
+                console.log('Error', err.message)
             }
         })
 

@@ -14,7 +14,7 @@ import Login from '../pages/Login/Login';
 import ResetPassword from '../pages/ResetPassword/ResetPassword';
 import Signup from '../pages/Signup/Signup';
 import Dashboard from '../pages/Dashboard/Dashboard';
-import AdoptionList from '../pages/AdoptionList/AdoptionList';
+import Adoption from '../pages/Adoption/Adoption';
 import NotFound from '../pages/NotFound/NotFound';
 
 // Route component
@@ -29,7 +29,7 @@ function RouteComponent() {
                     ?
                     <>
                         <Route exact path="/dashboard" element={<Dashboard />} />
-                        <Route exact path="/adoptionList" element={<AdoptionList />} />
+                        <Route exact path="/adoption" element={<Adoption />} />
                     </>
                     :
                     <>
