@@ -6,32 +6,35 @@ import { Link } from 'react-router-dom';
 
 // importing components
 import LoginForm from '../../components/LoginForm/LoginForm';
+import AuthFooter from '../../components/AuthFooter/AuthFooter';
 
 // login component
 function Login() {
     return (
-        <div className="login d-flex justify-content-center align-items-center">
-            <div className="login__container p-5 d-flex flex-column align-items-center">
-                <div className="login__container__header h1">
-                    Login Page
+        <div className="login d-flex flex-column justify-content-center align-items-center">
+            <div className="login__container my-5 p-5">
+                <div className="login__container__header mb-2">
+                    Login
                 </div>
 
                 <div className="login__container__subheader">
-                    {
-                        `Don't have an account? `
-                    }
-                    <Link to="/signup">Signup</Link>
+                    Hey, Enter your details to get sign in <br /> to your account
                 </div>
 
                 <div className="login__container__form mt-5">
                     <LoginForm />
                 </div>
 
-                <div className="login__from mt-3">
-                    <Link to="/resetPassword">
-                        Forgot Password?
-                    </Link>
+                <div className="login__container__footer text-center mt-4">
+                    {
+                        `Don't have an account? `
+                    }
+                    <Link className="link boldText" to="/signup">Register</Link>
                 </div>
+            </div>
+
+            <div>
+                <AuthFooter />
             </div>
         </div>
     )

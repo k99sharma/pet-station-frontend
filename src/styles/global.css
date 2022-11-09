@@ -25,3 +25,15 @@ code {
 .link:hover {
 	color: black;
 }
+
+.boldText {
+	font-weight: 500;
+}
+
+.passwordShowButton {
+	border: none;
+}
+
+.errorMessage {
+	color: red;
+}

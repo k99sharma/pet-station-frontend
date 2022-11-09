@@ -53,7 +53,7 @@ function CustomNavbar() {
                         }
                     </Nav>
 
-                    <Nav className="d-md-none">
+                    <Nav className="d-lg-none">
                         {
                             authCtx.isLoggedIn
                                 ?
@@ -84,7 +84,7 @@ function CustomNavbar() {
                     </Nav>
                 </Navbar.Collapse>
 
-                <Nav className="d-none d-md-flex">
+                <Nav className="d-none d-lg-flex">
                     {
                         authCtx.isLoggedIn
                             ?

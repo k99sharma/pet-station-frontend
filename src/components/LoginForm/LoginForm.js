@@ -1,6 +1,9 @@
+// import css
+import './LoginForm.css'
+
 // importing components
 import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
@@ -15,7 +18,6 @@ import AuthContext from '../../context/auth';
 function LoginForm() {
     // auth context
     const authCtx = useContext(AuthContext);
-
     const navigator = useNavigate();
 
     // form submit handler
@@ -65,18 +67,24 @@ function LoginForm() {
                 {({ isSubmitting }) => (
                     <Form autoComplete="off">
                         <div className="mb-2">
-                            <Field type="email" name="email" placeholder="Email Address" />
-                            <ErrorMessage name="email" component="div" />
+                            <Field className="inputField p-2" type="email" name="email" placeholder="Email Address" />
+                            <ErrorMessage className="errorMessage" name="email" component="div" />
                         </div>
 
                         <div className="mb-2">
-                            <Field type="password" name="password" placeholder="Password" />
-                            <ErrorMessage name="password" component="div" />
+                            <Field className="inputField p-1" type="password" name="password" placeholder="Password" />
+                            <ErrorMessage className="errorMessage" name="password" component="div" />
                         </div>
 
-                        <div className="mt-3">
-                            <button type="submit" disabled={isSubmitting}>
-                                Login
+                        <div className="login__container__resetPassword boldText mt-3">
+                            <Link className="link" to="/resetPassword">
+                                Having trouble signing in?
+                            </Link>
+                        </div>
+
+                        <div className="my-4">
+                            <button className="login__container__loginButton py-2 rounded" type="submit" disabled={isSubmitting}>
+                                Sign in
                             </button>
                         </div>
                     </Form>

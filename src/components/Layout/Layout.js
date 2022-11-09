@@ -1,6 +1,5 @@
 // importing components
 import { BrowserRouter as Router } from 'react-router-dom';
-import Footer from '../Footer/Footer';
 import CustomNavbar from '../Navbar/Navbar';
 
 
@@ -12,7 +11,6 @@ function Layout({ children }) {
             {
                 children
             }
-            <Footer />
         </Router>
     )
 }
