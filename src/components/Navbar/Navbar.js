@@ -35,7 +35,7 @@ function CustomNavbar() {
                 <Navbar.Toggle aria-controls="main-navbar" />
                 <Navbar.Collapse id="main-navbar">
                     <Nav className="me-auto">
-                        <Nav.Link>
+                        <Nav.Link className="span">
                             <Link className="link" to="/">
                                 Home
                             </Link>
@@ -43,7 +43,7 @@ function CustomNavbar() {
                         {
                             authCtx.isLoggedIn
                                 ?
-                                <Nav.Link>
+                                <Nav.Link className="span">
                                     <Link className="link" to="/adoption">
                                         Adoption
                                     </Link>
@@ -58,24 +58,24 @@ function CustomNavbar() {
                             authCtx.isLoggedIn
                                 ?
                                 <>
-                                    <Nav.Link>
+                                    <Nav.Link className="span">
                                         <Link className="link" to="/dashboard">
                                             Dashboard
                                         </Link>
                                     </Nav.Link>
 
-                                    <Nav.Link>
+                                    <Nav.Link className="span">
                                         <Link className="link" to="/settings">
                                             Settings
                                         </Link>
                                     </Nav.Link>
 
-                                    <Nav.Link>
+                                    <Nav.Link className="span">
                                         <Logout />
                                     </Nav.Link>
                                 </>
                                 :
-                                <Nav.Link>
+                                <Nav.Link className="span">
                                     <Link className="link font-weight-bold" to="/login">
                                         Log In
                                     </Link>
@@ -89,24 +89,26 @@ function CustomNavbar() {
                         authCtx.isLoggedIn
                             ?
                             <NavDropdown title={<img src="/assets/profile.png" height={30} width={30} alt="account" />} id="main-navbar-dropdown">
-                                <NavDropdown.Item>
+                                <NavDropdown.Item className="span">
                                     <Link className="link" to="/dashboard">
                                         Dashboard
                                     </Link>
-                                </NavDropdown.Item>
+                                </NavDropdown.Item >
 
-                                <NavDropdown.Item>
+                                <NavDropdown.Item className="span">
                                     <Link className="link" to="/settings">
                                         Settings
                                     </Link>
                                 </NavDropdown.Item>
+
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item>
+
+                                <NavDropdown.Item className="span">
                                     <Logout />
                                 </NavDropdown.Item>
                             </NavDropdown>
                             :
-                            <Nav.Link>
+                            <Nav.Link className="span">
                                 <Link className="link" to="/login">
                                     Log In
                                 </Link>
