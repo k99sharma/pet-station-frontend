@@ -1,8 +1,8 @@
-.userDashboard__header__user__introduction__name {
+.offcanvas__body__header__name {
 	font-size: 20px;
+	font-weight: 700;
 }
 
-.userDashboard__header__user__introduction__name__name {
-	font-weight: 500;
+.offcanvas__body__header__username {
 	color: #36454f;
 }

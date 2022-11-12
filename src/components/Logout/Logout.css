@@ -1,0 +1,8 @@
+.logout > button {
+	border: none;
+	background-color: white;
+	color: red;
+
+	font-size: 18px;
+	font-weight: 500;
+}

@@ -1,8 +1,9 @@
+// importing css
+import './Logout.css';
+
 // importing components
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-
-import Button from 'react-bootstrap/Button';
 
 // importing context
 import AuthContext from '../../context/auth';
@@ -18,10 +19,10 @@ function Logout() {
     }
 
     return (
-        <div className="d-flex align-items-center">
-            <Button variant="danger" onClick={handleLogout}>
+        <div className="logout d-flex align-items-center">
+            <button type="button" onClick={handleLogout}>
                 Logout
-            </Button>
+            </button>
         </div>
     )
 }

@@ -37,7 +37,7 @@ function Dashboard() {
                     ?
                     <AdminDashboard />
                     :
-                    <UserDashboard user={data.data} token={authCtx.token} />
+                    <UserDashboard user={data.data} token={authCtx.token} isLoggedIn={authCtx.isLoggedIn} />
             }
         </div>
     )
