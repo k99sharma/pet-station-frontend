@@ -1,17 +1,25 @@
 .signup__container {
-	min-width: 420px;
+	width: 80vw;
+	border-radius: 15px;
 	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-	border-radius: 30px;
 }
 
-.signup__container__header {
+.signup__container__illustration {
+	min-width: 50%;
+}
+
+.signup__container__form {
+	min-width: 50%;
+}
+
+.signup__container__illustration__svg {
+	max-width: 600px;
+	max-height: 600px;
+}
+
+.signup__container__form__header {
 	font-size: 40px;
 	font-weight: 500;
-	text-align: center;
-}
-
-.signup__container__subheader {
-	text-align: center;
 }
 
 .signup__container__footer {

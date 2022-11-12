@@ -14,7 +14,7 @@ function Login() {
         <div className="login d-flex flex-column justify-content-center align-items-center">
             <div className="login__container my-5 p-5">
                 <div className="login__container__header mb-2">
-                    Login
+                    Sign in
                 </div>
 
                 <div className="login__container__subheader">

@@ -86,60 +86,66 @@ function SignupForm() {
             >
                 {({ isSubmitting }) => (
                     <Form autoComplete="off">
-                        <div className="mb-3">
-                            <Field className="inputField" type="text" name="firstName" placeholder="First Name" />
-                            <ErrorMessage className="errorMessage" name="firstName" component="div" />
+                        <div className="mb-2 d-flex">
+                            <div className="mx-1">
+                                <Field className="inputField" type="text" name="firstName" placeholder="First Name" />
+                                <ErrorMessage className="errorMessage" name="firstName" component="div" />
+                            </div>
+
+                            <div className="mx-1">
+                                <Field className="inputField" type="text" name="lastName" placeholder="Last Name" />
+                                <ErrorMessage className="errorMessage" name="lastName" component="div" />
+                            </div>
                         </div>
 
-                        <div className="mb-3">
-                            <Field className="inputField" type="text" name="lastName" placeholder="Last Name" />
-                            <ErrorMessage className="errorMessage" name="lastName" component="div" />
+                        <div className="mb-2 d-flex">
+                            <div className="mx-1">
+                                <Field className="inputField" type="email" name="email" placeholder="Email Address" />
+                                <ErrorMessage className="errorMessage" name="email" component="div" />
+                            </div>
+
+                            <div>
+                                <Field className="inputField" as="select" name="gender">
+                                    <option value="">Gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="others">Others</option>
+                                </Field>
+                            </div>
                         </div>
 
-                        <div className="mb-3">
-                            <Field className="inputField" type="email" name="email" placeholder="Email Address" />
-                            <ErrorMessage className="errorMessage" name="email" component="div" />
-                        </div>
-
-                        <div className="mb-3">
-                            <Field className="inputField" as="select" name="gender">
-                                <option value="">Gender</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                                <option value="others">Others</option>
-                            </Field>
-                        </div>
-
-                        <div className="mb-3">
+                        <div className="mb-2 mx-1">
                             <Field className="inputField" type="password" name="password" placeholder="Password" />
                             <ErrorMessage className="errorMessage" name="password" component="div" />
                         </div>
 
-                        <div className="mb-3">
+                        <div className="mb-2 mx-1">
                             <Field className="inputField" type="password" name="passwordConfirmation" placeholder="Retype Password" />
                             <ErrorMessage className="errorMessage" name="passwordConfirmation" component="div" />
                         </div>
 
-                        <div className="mb-3">
+                        <div className="mb-2 mx-1">
                             <Field className="inputField" name="street" as="textarea" placeholder="Address" />
                             <ErrorMessage className="errorMessage" name="street" component="div" />
                         </div>
 
-                        <div className="mb-3">
-                            <Field className="inputField" name="region" as="select">
-                                <option value="">State</option>
-                                {
-                                    states.map((state) => <option key={state} value={state}>{state}</option>)
-                                }
-                            </Field>
+                        <div className="mb-2 d-flex justify-content-between">
+                            <div className="mx-1">
+                                <Field className="inputField" name="region" as="select">
+                                    <option value="">State</option>
+                                    {
+                                        states.map((state) => <option key={state} value={state}>{state}</option>)
+                                    }
+                                </Field>
+                            </div>
+
+                            <div>
+                                <Field className="inputField" type="text" name="postalZip" placeholder="Postal Zip" />
+                                <ErrorMessage className="errorMessage" name="postalZip" component="div" />
+                            </div>
                         </div>
 
-                        <div className="mb-3">
-                            <Field className="inputField" type="text" name="postalZip" placeholder="Postal Zip" />
-                            <ErrorMessage className="errorMessage" name="postalZip" component="div" />
-                        </div>
-
-                        <div className="mt-4">
+                        <div className="mt-4 mx-1">
 
                             <button className="signup__container__signupButton py-2 rounded" type="submit" disabled={isSubmitting}>
                                 {
