@@ -1,7 +1,6 @@
 .signup__container {
 	width: 80vw;
 	border-radius: 15px;
-	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .signup__container__illustration {
@@ -10,11 +9,8 @@
 
 .signup__container__form {
 	min-width: 50%;
-}
-
-.signup__container__illustration__svg {
-	max-width: 600px;
-	max-height: 600px;
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+	border-radius: 15px;
 }
 
 .signup__container__form__header {

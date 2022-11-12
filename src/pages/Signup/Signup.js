@@ -10,7 +10,7 @@ import AuthFooter from '../../components/AuthFooter/AuthFooter';
 // signup component
 function Signup() {
     return (
-        <div className="signup d-flex flex-column align-items-center justify-content-center my-5">
+        <div className="signup d-flex flex-column align-items-center justify-content-center my-3">
             <div className="signup__container d-flex">
                 <div className="d-none d-md-flex signup__container__illustration justify-content-center align-items-center">
                     <img
@@ -20,7 +20,7 @@ function Signup() {
                     />
                 </div>
 
-                <div className="signup__container__form d-flex align-items-center justify-content-center flex-column p-4">
+                <div className="signup__container__form d-flex align-items-center justify-content-center flex-column px-4 py-3">
                     <div className="signup__container__form__header">
                         Signup
                     </div>

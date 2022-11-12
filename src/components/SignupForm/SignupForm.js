@@ -100,11 +100,11 @@ function SignupForm() {
 
                         <div className="mb-2 d-flex">
                             <div className="mx-1">
-                                <Field className="inputField" type="email" name="email" placeholder="Email Address" />
+                                <Field className="inputField" type="email" name="email" placeholder="example@email.com" />
                                 <ErrorMessage className="errorMessage" name="email" component="div" />
                             </div>
 
-                            <div>
+                            <div className="mx-1">
                                 <Field className="inputField" as="select" name="gender">
                                     <option value="">Gender</option>
                                     <option value="male">Male</option>
@@ -120,12 +120,12 @@ function SignupForm() {
                         </div>
 
                         <div className="mb-2 mx-1">
-                            <Field className="inputField" type="password" name="passwordConfirmation" placeholder="Retype Password" />
+                            <Field className="inputField" type="password" name="passwordConfirmation" placeholder="Confirm Password" />
                             <ErrorMessage className="errorMessage" name="passwordConfirmation" component="div" />
                         </div>
 
                         <div className="mb-2 mx-1">
-                            <Field className="inputField" name="street" as="textarea" placeholder="Address" />
+                            <Field className="inputField" name="street" as="textarea" placeholder="Street Address" />
                             <ErrorMessage className="errorMessage" name="street" component="div" />
                         </div>
 
