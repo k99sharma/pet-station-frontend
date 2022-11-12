@@ -1,22 +1,49 @@
+// import css
+import './Signup.css'
+
 // importing components
 import { Link } from 'react-router-dom';
 
 import SignupForm from '../../components/SignupForm/SignupForm';
+import AuthFooter from '../../components/AuthFooter/AuthFooter';
 
 // signup component
 function Signup() {
     return (
-        <div className="signup container">
-            <div className="signup__header h1">
-                Signup Page
+        <div className="signup d-flex flex-column align-items-center justify-content-center my-3">
+            <div className="signup__container d-flex">
+                <div className="d-none d-md-flex signup__container__illustration justify-content-center align-items-center">
+                    <img
+                        className="img-fluid signup__container__illustration__svg"
+                        src="/assets/signup.svg"
+                        alt="signup"
+                    />
+                </div>
+
+                <div className="signup__container__form d-flex align-items-center justify-content-center flex-column px-4 py-3">
+                    <div className="signup__container__form__header">
+                        Signup
+                    </div>
+
+                    <div className="signup__container__form__subheader my-2">
+                        Hey, Enter your details to create a new account
+                    </div>
+
+                    <div className="signup__container__form__form my-3">
+                        <SignupForm />
+                    </div>
+
+                    <div className="signup__container__footer text-center">
+                        {
+                            `Already have an account? `
+                        }
+                        <Link className="link boldText" to="/login">Sign in</Link>
+                    </div>
+                </div>
             </div>
 
-            <div className="signup__subheader">
-                Already have an account? <Link to="/login">Login</Link>
-            </div>
-
-            <div className="signup__form mt-5">
-                <SignupForm />
+            <div className="mt-5">
+                <AuthFooter />
             </div>
         </div>
     )

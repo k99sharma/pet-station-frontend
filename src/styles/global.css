@@ -14,4 +14,26 @@ code {
 
 .App {
 	min-height: 100vh;
+	background-color: #f8f9fa;
+}
+
+.link {
+	text-decoration: none;
+	color: black;
+}
+
+.link:hover {
+	color: black;
+}
+
+.boldText {
+	font-weight: 500;
+}
+
+.passwordShowButton {
+	border: none;
+}
+
+.errorMessage {
+	color: red;
 }

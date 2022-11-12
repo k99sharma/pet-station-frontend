@@ -1,73 +1,121 @@
+// import css
+import './Navbar.css'
+
 // importing components
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 import Logout from '../Logout/Logout';
 
 // importing context
 import AuthContext from '../../context/auth';
 
 // navbar component
-function Navbar() {
+function CustomNavbar() {
     const authCtx = useContext(AuthContext);
 
     return (
-        <nav>
-            <div>
-                Pet Station
-            </div>
-            <ul>
-                <li>
-                    <Link to="/">
-                        Home
-                    </Link>
-                </li>
-                {
-                    authCtx.isLoggedIn
-                        ?
-                        <>
-                            <li>
-                                <Link to="/adoption">
-                                    Adoption
-                                </Link>
-                            </li>
-                            <li>
-                                Profile
+        <Navbar bg="light" variant="light" expand="lg">
+            <Container>
+                <Navbar.Brand className="d-flex justify-content-center align-items-center">
+                    <img
+                        src="/assets/logo.png"
+                        width="40"
+                        height="40"
+                        className="d-inline-block align-top"
+                        alt="pet station logo"
+                    />{' '}
+                    Pet Station
+                </Navbar.Brand>
 
-                                <ul>
-                                    <li>
-                                        <Link to="/dashboard">
+                <Navbar.Toggle aria-controls="main-navbar" />
+                <Navbar.Collapse id="main-navbar">
+                    <Nav className="me-auto">
+                        <Nav.Link>
+                            <Link className="link" to="/">
+                                Home
+                            </Link>
+                        </Nav.Link>
+                        {
+                            authCtx.isLoggedIn
+                                ?
+                                <Nav.Link>
+                                    <Link className="link" to="/adoption">
+                                        Adoption
+                                    </Link>
+                                </Nav.Link>
+                                :
+                                null
+                        }
+                    </Nav>
+
+                    <Nav className="d-lg-none">
+                        {
+                            authCtx.isLoggedIn
+                                ?
+                                <>
+                                    <Nav.Link>
+                                        <Link className="link" to="/dashboard">
                                             Dashboard
                                         </Link>
-                                    </li>
-                                    <li>
-                                        <Link to="/settings">
+                                    </Nav.Link>
+
+                                    <Nav.Link>
+                                        <Link className="link" to="/settings">
                                             Settings
                                         </Link>
-                                    </li>
-                                    <li>
-                                        <Logout />
-                                    </li>
-                                </ul>
-                            </li>
-                        </>
-                        :
-                        <>
-                            <li>
-                                <Link to="/login">
-                                    Login
-                                </Link>
-                            </li>
+                                    </Nav.Link>
 
-                            <li>
-                                <Link to="/signup">
-                                    Signup
+                                    <Nav.Link>
+                                        <Logout />
+                                    </Nav.Link>
+                                </>
+                                :
+                                <Nav.Link>
+                                    <Link className="link font-weight-bold" to="/login">
+                                        Log In
+                                    </Link>
+                                </Nav.Link>
+                        }
+                    </Nav>
+                </Navbar.Collapse>
+
+                <Nav className="d-none d-lg-flex">
+                    {
+                        authCtx.isLoggedIn
+                            ?
+                            <NavDropdown title={<img src="/assets/profile.png" height={30} width={30} alt="account" />} id="main-navbar-dropdown">
+                                <NavDropdown.Item>
+                                    <Link className="link" to="/dashboard">
+                                        Dashboard
+                                    </Link>
+                                </NavDropdown.Item>
+
+                                <NavDropdown.Item>
+                                    <Link className="link" to="/settings">
+                                        Settings
+                                    </Link>
+                                </NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item>
+                                    <Logout />
+                                </NavDropdown.Item>
+                            </NavDropdown>
+                            :
+                            <Nav.Link>
+                                <Link className="link" to="/login">
+                                    Log In
                                 </Link>
-                            </li>
-                        </>
-                }
-            </ul>
-        </nav>
+                            </Nav.Link>
+                    }
+                </Nav>
+            </Container>
+        </Navbar >
     )
 }
 
-export default Navbar;
+export default CustomNavbar;

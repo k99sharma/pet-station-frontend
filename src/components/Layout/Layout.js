@@ -1,18 +1,16 @@
 // importing components
 import { BrowserRouter as Router } from 'react-router-dom';
-import Footer from '../Footer/Footer';
-import Navbar from '../Navbar/Navbar';
+import CustomNavbar from '../Navbar/Navbar';
 
 
 // eslint-disable-next-line react/prop-types
 function Layout({ children }) {
     return (
         <Router>
-            <Navbar />
+            <CustomNavbar />
             {
                 children
             }
-            <Footer />
         </Router>
     )
 }

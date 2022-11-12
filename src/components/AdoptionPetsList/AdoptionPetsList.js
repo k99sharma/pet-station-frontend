@@ -1,6 +1,8 @@
 // importing components
 import { useQuery } from "react-query";
 
+import Loading from "../Loading/Loading";
+
 // importing utilities
 import { fetchAllPetsAvailableForAdoption } from "../../utils/helper";
 
@@ -14,7 +16,7 @@ function AdoptionPetsList(_props) {
     })
 
     if (isLoading)
-        return <div>...Loading</div>
+        return <Loading />
 
     if (error)
         return <div>Error</div>

@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { useQuery } from "react-query";
 
 import PetCard from "../PetCard/PetCard";
+import Loading from "../Loading/Loading";
 
 // importing utilities
 import { fetchAllUserPets } from "../../utils/helper";
@@ -20,7 +21,7 @@ function DashboardPetShow() {
     })
 
     if (isLoading)
-        return <div>...Loading</div>
+        return <Loading />
 
     if (error)
         return <div>Error</div>
