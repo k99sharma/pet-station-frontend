@@ -1,3 +1,8 @@
+.userDashboard__offcanvas__trigger {
+	border: none;
+	background-color: #f8f9fa;
+}
+
 .offcanvas__body__header__name {
 	font-size: 20px;
 	font-weight: 700;

@@ -11,6 +11,7 @@ import { useQuery } from 'react-query';
 import Loading from '../Loading/Loading';
 import ProfileIcon from '../ProfileIcon/ProfileIcon';
 import Logout from '../Logout/Logout';
+import Board from '../Board/Board';
 
 // importing utilities
 import { fetchUserData, titleCase } from '../../utils/helper';
@@ -44,6 +45,8 @@ function UserDashboard(_props) {
         }
     ]
 
+    const [view, setView] = useState('profile');
+
     // fetching user data
     const { isLoading, error, data } = useQuery('user', fetchUserData(user.userId, token))
 
@@ -58,9 +61,13 @@ function UserDashboard(_props) {
 
     return (
         <div className="userDashboard container py-3">
-            <div className="userDashboard__offcanvas__trigger" onClick={handleShow} role="button" tabIndex={0} onKeyDown={handleShow}>
-                <ProfileIcon width={80} height={80} onClick={handleShow} user={data} />
-            </div>
+            <button className="userDashboard__offcanvas__trigger" type="button" onClick={handleShow}>
+                <lord-icon
+                    className="lordIcon"
+                    src="https://cdn.lordicon.com/ofwpzftr.json"
+                    trigger="hover"
+                />
+            </button>
 
             <Offcanvas show={show} onHide={handleClose}>
                 <Offcanvas.Header closeButton>
@@ -88,7 +95,7 @@ function UserDashboard(_props) {
                         <div className="offcanvas__body__boards">
                             {
                                 boardsOption.map(option => (
-                                    <div className="offcanvas__body__boards d-flex align-items-center my-3" key={option.label}>
+                                    <div onClick={() => { setView(option.componentName); handleClose(); }} role="button" tabIndex={-1} onKeyDown={() => { setView(option.componentName); handleClose(); }} className="offcanvas__body__boards d-flex align-items-center my-3" key={option.label}>
                                         <div className="offcanvas__body__boards__icon">
                                             <lord-icon
                                                 className="lordIcon"
@@ -119,6 +126,10 @@ function UserDashboard(_props) {
                     </div>
                 </Offcanvas.Body>
             </Offcanvas>
+
+            <div className="userDashboard__boards">
+                <Board view={view} />
+            </div>
         </div >
     )
 }
