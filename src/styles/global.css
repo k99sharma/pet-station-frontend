@@ -37,3 +37,8 @@ code {
 .errorMessage {
 	color: red;
 }
+
+lord-icon {
+	width: 40px;
+	height: 40px;
+}

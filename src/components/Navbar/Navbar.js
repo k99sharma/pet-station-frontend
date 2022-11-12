@@ -88,7 +88,10 @@ function CustomNavbar() {
                     {
                         authCtx.isLoggedIn
                             ?
-                            <NavDropdown title={<img src="/assets/profile.png" height={30} width={30} alt="account" />} id="main-navbar-dropdown">
+                            <NavDropdown title={<lord-icon
+                                src="https://cdn.lordicon.com/hbvyhtse.json"
+                                trigger="hover"
+                            />} id="main-navbar-dropdown">
                                 <NavDropdown.Item className="span">
                                     <Link className="link" to="/dashboard">
                                         Dashboard
