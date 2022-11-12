@@ -16,6 +16,7 @@ import Signup from '../pages/Signup/Signup';
 import Dashboard from '../pages/Dashboard/Dashboard';
 import Adoption from '../pages/Adoption/Adoption';
 import NotFound from '../pages/NotFound/NotFound';
+import Settings from '../pages/Settings/Settings';
 
 // Route component
 function RouteComponent() {
@@ -30,6 +31,7 @@ function RouteComponent() {
                     <>
                         <Route exact path="/dashboard" element={<Dashboard />} />
                         <Route exact path="/adoption" element={<Adoption />} />
+                        <Route exact path="/settings" element={<Settings />} />
                     </>
                     :
                     <>
