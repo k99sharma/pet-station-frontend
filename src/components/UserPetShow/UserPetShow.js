@@ -1,3 +1,6 @@
+// importing css
+import './UserPetShow.css'
+
 // importing components
 import { useContext } from "react";
 import { useQuery } from "react-query";
@@ -12,7 +15,7 @@ import { fetchAllUserPets } from "../../utils/helper";
 import AuthContext from "../../context/auth";
 
 // dashboard pet show component
-function DashboardPetShow() {
+function UserPetShow() {
     const authCtx = useContext(AuthContext)
 
     const { isLoading, error, data } = useQuery('pet', () => {
@@ -30,26 +33,35 @@ function DashboardPetShow() {
         return <div>Error data</div>
 
     return (
-        <div className="dashboardPetShow">
-            <div className="dashboardPetShow__header h6 mb-4">
-                Available Pets
-            </div>
-
+        <div className="userPetShow">
             {
                 data.data.length !== 0
                     ?
-                    <div className="dashboardPetShow__cards d-flex">
+                    <div className="userPetShow__cards d-flex p-2 rounded">
                         {
                             data.data.map(pet => <div key={pet.name}><PetCard data={pet} token={authCtx.token} /></div>)
                         }
                     </div>
                     :
-                    <div className="dashboardPetShow__noPets">
-                        No pets available.
+                    <div className="userPetShow__noPet d-flex justify-content-center align-items-center">
+                        <div className="userPetShow__noPet__card rounded p-3">
+                            <div className="userPetShow__noPet__card__illustration text-center">
+                                <img
+                                    width={150}
+                                    height={150}
+                                    src="/assets/notFound1.svg"
+                                    alt="not found"
+                                />
+                            </div>
+
+                            <div className="userPetShow__noPet__card__text text-center h6">
+                                No Pet Available
+                            </div>
+                        </div>
                     </div>
             }
         </div>
     )
 }
 
-export default DashboardPetShow;
+export default UserPetShow;

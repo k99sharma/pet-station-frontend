@@ -3,6 +3,8 @@ import './Profile.css'
 
 // importing components
 import CreateNewPet from '../CreateNewPet/CreateNewPet';
+import UserPetShow from '../UserPetShow/UserPetShow';
+
 
 // profile component
 function Profile() {
@@ -34,6 +36,10 @@ function Profile() {
 
                 <div className="profile__pets__new my-4">
                     <CreateNewPet />
+                </div>
+
+                <div className="profile__pets__show my-4">
+                    <UserPetShow />
                 </div>
             </div>
         </div>
