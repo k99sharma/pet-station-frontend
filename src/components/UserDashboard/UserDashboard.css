@@ -22,3 +22,8 @@
 .offcanvas__body__boards__button:hover {
 	background-color: #e5e4e2;
 }
+
+.userDashboard__title {
+	font-size: 30px;
+	font-weight: 500;
+}

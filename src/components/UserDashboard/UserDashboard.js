@@ -69,6 +69,10 @@ function UserDashboard(_props) {
                 />
             </button>
 
+            <div className="userDashboard__title mx-2">
+                Pet Station Dashboard
+            </div>
+
             <Offcanvas show={show} onHide={handleClose}>
                 <Offcanvas.Header closeButton>
                     <ProfileIcon width={50} height={50} user={data} />

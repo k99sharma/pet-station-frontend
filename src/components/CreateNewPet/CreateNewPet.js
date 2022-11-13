@@ -36,14 +36,23 @@ function CreateNewPet() {
         setShow(false);
     }
 
+    const clearStates = () => {
+        setName('')
+        setPicture('')
+        setCategory('')
+        setBreed('')
+        setAge(0)
+        setWeight(0)
+        setGender('')
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();     // prevent default behavior
-
-        setShow(false);     // set modal show state
 
         const payload = {
             name,
             breed,
+            imageUrl: String(picture.url),
             category,
             age: String(age),
             weight: String(weight),
@@ -51,14 +60,16 @@ function CreateNewPet() {
             gender
         }
 
-        console.log(picture)
-
         const response = await createNewPet(payload, authCtx.token)
 
         if (response.error) {
             alert('Unable to create new pet.')
+            setShow(false);     // set modal show state
+            clearStates();
         } else {
             alert('New pet is created.')
+            setShow(false);     // set modal show state
+            clearStates();
         }
     }
 
@@ -145,7 +156,7 @@ function CreateNewPet() {
                     </Modal.Body>
 
                     <Modal.Footer>
-                        <Button variant="success" type="submit">
+                        <Button disabled={picture === ''} variant="success" type="submit">
                             Create
                         </Button>
 
