@@ -19,9 +19,17 @@ function Logout() {
     }
 
     return (
-        <div className="logout d-flex align-items-center">
-            <button type="button" onClick={handleLogout}>
-                Logout
+        <div className="logout">
+            <button className="d-flex align-items-center" type="button" onClick={handleLogout}>
+                <lord-icon
+                    src="https://cdn.lordicon.com/mxzuvjjs.json"
+                    trigger="hover"
+                    colors="primary:#e83a30"
+                    className="lordIcon" />
+
+                <div>
+                    Logout
+                </div>
             </button>
         </div>
     )

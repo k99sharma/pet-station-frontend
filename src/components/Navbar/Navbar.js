@@ -1,6 +1,3 @@
-// import css
-import './Navbar.css'
-
 // importing components
 import { useContext } from 'react';
 import { Link } from 'react-router-dom'

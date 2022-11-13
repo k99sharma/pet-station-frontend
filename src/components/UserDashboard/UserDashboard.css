@@ -11,3 +11,14 @@
 .offcanvas__body__header__username {
 	color: #36454f;
 }
+
+.offcanvas__body__boards__button {
+	width: 100%;
+	border: none;
+	background-color: white;
+	color: #181936;
+}
+
+.offcanvas__body__boards__button:hover {
+	background-color: #e5e4e2;
+}

@@ -60,12 +60,12 @@ function UserDashboard(_props) {
         return <div>ERror message</div>
 
     return (
-        <div className="userDashboard container py-3">
+        <div className="userDashboard container mt-3">
             <button className="userDashboard__offcanvas__trigger" type="button" onClick={handleShow}>
                 <lord-icon
-                    className="lordIcon"
                     src="https://cdn.lordicon.com/ofwpzftr.json"
                     trigger="hover"
+                    className="lordIcon"
                 />
             </button>
 
@@ -95,8 +95,12 @@ function UserDashboard(_props) {
                         <div className="offcanvas__body__boards">
                             {
                                 boardsOption.map(option => (
-                                    <div onClick={() => { setView(option.componentName); handleClose(); }} role="button" tabIndex={-1} onKeyDown={() => { setView(option.componentName); handleClose(); }} className="offcanvas__body__boards d-flex align-items-center my-3" key={option.label}>
-                                        <div className="offcanvas__body__boards__icon">
+                                    <button
+                                        type="button"
+                                        onClick={() => { setView(option.componentName); handleClose(); }}
+                                        className="offcanvas__body__boards__button d-flex align-items-center my-3"
+                                        key={option.label}>
+                                        <div className="offcanvas__body__boards__button__icon">
                                             <lord-icon
                                                 className="lordIcon"
                                                 src={option.icon}
@@ -104,12 +108,12 @@ function UserDashboard(_props) {
                                             />
                                         </div>
 
-                                        <div className="offcanvas__body__boards__button h4 mx-3">
+                                        <div className="offcanvas__body__boards__button__label h4 mx-3">
                                             {
                                                 option.label
                                             }
                                         </div>
-                                    </div>
+                                    </button>
                                 ))
                             }
                         </div>
@@ -127,7 +131,7 @@ function UserDashboard(_props) {
                 </Offcanvas.Body>
             </Offcanvas>
 
-            <div className="userDashboard__boards">
+            <div className="userDashboard__boards my-5">
                 <Board view={view} />
             </div>
         </div >

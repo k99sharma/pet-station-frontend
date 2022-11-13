@@ -1,6 +1,12 @@
+// importing css
+import './CreateNewPet.css'
+
 // importing components
 import { useContext, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import FormImageUpload from '../FormImageUpload/FormImageUpload';
 
 // importing context
 import AuthContext from '../../context/auth';
@@ -19,6 +25,7 @@ function CreateNewPet() {
 
     // form states
     const [name, setName] = useState('')
+    const [picture, setPicture] = useState('')
     const [category, setCategory] = useState('')
     const [breed, setBreed] = useState('')
     const [age, setAge] = useState(0)
@@ -44,6 +51,8 @@ function CreateNewPet() {
             gender
         }
 
+        console.log(picture)
+
         const response = await createNewPet(payload, authCtx.token)
 
         if (response.error) {
@@ -59,35 +68,44 @@ function CreateNewPet() {
                 onClick={() => {
                     setShow(true);
                 }}
-
+                className="createNewButton px-4 py-2"
                 type="button">
-                Create
+                New Pet
             </button>
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>
-                        Create New Pet
+                        New Pet
                     </Modal.Title>
                 </Modal.Header>
 
-                <form autoComplete="off" onSubmit={handleSubmit}>
+                <Form autoComplete="off" onSubmit={handleSubmit}>
                     <Modal.Body>
-                        <div className="mb-2">
-                            <input type="text" onChange={e => setName(e.target.value)} placeholder="Name" required />
-                        </div>
+                        <Form.Group className="mb-3" controlId="name">
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control
+                                onChange={e => setName(e.target.value)}
+                                type="text"
+                                placeholder="Name"
+                            />
+                        </Form.Group>
 
-                        <div className="mb-2">
-                            <select onChange={e => setCategory(e.target.value)}>
-                                <option value="">Category</option>
+                        <FormImageUpload setImageData={setPicture} />
+
+                        <Form.Group className="mb-3" controlId="category">
+                            <Form.Label>Category</Form.Label>
+                            <Form.Select onChange={e => setCategory(e.target.value)}>
+                                <option value="">Select Category</option>
                                 <option value="cat">Cat</option>
                                 <option value="dog">Dog</option>
-                            </select>
-                        </div>
+                            </Form.Select>
+                        </Form.Group>
 
-                        <div className="mb-2">
-                            <select disabled={category === ""} onChange={e => setBreed(e.target.value)}>
-                                <option value="">Breed</option>
+                        <Form.Group className="mb-3" controlId="breed">
+                            <Form.Label>Breed</Form.Label>
+                            <Form.Select disabled={category === ""} onChange={e => setBreed(e.target.value)}>
+                                <option value="">Select Breed</option>
                                 {
                                     category === "dog"
                                         ?
@@ -95,39 +113,47 @@ function CreateNewPet() {
                                         :
                                         catBreed.map(cat => <option key={cat} value={cat}>{cat}</option>)
                                 }
-                            </select>
-                        </div>
+                            </Form.Select>
+                        </Form.Group>
 
-                        <div className="mb-2">
-                            <input type="number" onChange={e => setAge(e.target.value)} placeholder="Age" required />
-                        </div>
+                        <Form.Group className="mb-3" controlId="age">
+                            <Form.Label>Age</Form.Label>
+                            <Form.Control
+                                onChange={e => setAge(e.target.value)}
+                                type="number"
+                                placeholder="Age"
+                            />
+                        </Form.Group>
 
+                        <Form.Group className="mb-3" controlId="weight">
+                            <Form.Label>Weight (in kgs)</Form.Label>
+                            <Form.Control
+                                onChange={e => setWeight(e.target.value)}
+                                type="number"
+                                placeholder="Weight"
+                            />
+                        </Form.Group>
 
-                        <div className="mb-2">
-                            <input type="number" onChange={e => setWeight(e.target.value)} placeholder="Weight" required />
-                        </div>
-
-
-                        <div className="mb-2">
-                            <select onChange={e => setGender(e.target.value)}>
-                                <option value="">Gender</option>
+                        <Form.Group className="mb-3" controlId="gender">
+                            <Form.Label>Gender</Form.Label>
+                            <Form.Select onChange={e => setGender(e.target.value)}>
+                                <option value="">Select Gender</option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
-                            </select>
-                        </div>
-
-
+                            </Form.Select>
+                        </Form.Group>
                     </Modal.Body>
 
                     <Modal.Footer>
-                        <div className="mb-2">
-                            <button type="submit">
-                                Submit
-                            </button>
-                        </div>
-                    </Modal.Footer>
-                </form>
+                        <Button variant="success" type="submit">
+                            Create
+                        </Button>
 
+                        <Button variant="danger" onClick={handleClose}>
+                            Cancel
+                        </Button>
+                    </Modal.Footer>
+                </Form>
             </Modal>
         </>
     )
