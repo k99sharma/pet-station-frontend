@@ -4,6 +4,7 @@ import './Profile.css'
 // importing components
 import CreateNewPet from '../CreateNewPet/CreateNewPet';
 import UserPetShow from '../UserPetShow/UserPetShow';
+import UserPetForAdoption from '../UserPetForAdoption/UserPetForAdoption';
 
 
 // profile component
@@ -40,6 +41,30 @@ function Profile() {
 
                 <div className="profile__pets__show my-4">
                     <UserPetShow />
+                </div>
+            </div>
+
+            <div className="profile__adoption__new my-5">
+                <div className="profile__adoption__title h3 d-flex align-items-center">
+                    <div>
+                        <lord-icon
+                            className="lordIcon"
+                            src="https://cdn.lordicon.com/qeberlkz.json"
+                            trigger="hover"
+                        />
+                    </div>
+
+                    <div className="mx-2">
+                        Adoption
+                    </div>
+                </div>
+
+                <div className="profile__adoption__button my-4">
+                    <UserPetForAdoption />
+                </div>
+
+                <div className="profile__pets__show my-4">
+                    Adoption
                 </div>
             </div>
         </div>

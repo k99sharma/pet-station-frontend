@@ -1,7 +1,11 @@
+// importing css
+import './UserPetForAdoption.css';
+
 // importing components
 import { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { useQuery } from 'react-query';
+import Button from 'react-bootstrap/Button';
 
 import Loading from "../Loading/Loading"
 
@@ -24,23 +28,23 @@ function BrickOption(_props) {
 
     return (
         <div className="brickOption d-flex m-2 p-2 align-items-center justify-content-between">
-            <div className="brickOption__label">
+            <div className="brickOption__label h5">
                 {
                     pet.name
                 }
             </div>
 
             <div className="brickOption__button">
-                <button onClick={handleClick} type="button">
+                <Button variant="success" onClick={handleClick} type="button">
                     Add
-                </button>
+                </Button>
             </div>
         </div>
     )
 }
 
 // dashboard add pet for adoption button component
-function DashboardAddPetForAdoptionButton(_props) {
+function UserPetForAdoption(_props) {
     const { user, token } = _props;
 
     // modal states
@@ -68,15 +72,15 @@ function DashboardAddPetForAdoptionButton(_props) {
 
     return (
         <div className="addForAdoptionButton">
-            <div className="addForAdoptionButton__button">
-                <button type="button" onClick={() => setShow(true)}>
+            <div>
+                <button className="addForAdoptionButton__button px-4 py-2" type="button" onClick={() => setShow(true)}>
                     Add Pet
                 </button>
 
                 <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>
-                            Add Pet
+                            Adoption
                         </Modal.Title>
                     </Modal.Header>
 
@@ -100,4 +104,4 @@ function DashboardAddPetForAdoptionButton(_props) {
     )
 }
 
-export default DashboardAddPetForAdoptionButton;
+export default UserPetForAdoption;
