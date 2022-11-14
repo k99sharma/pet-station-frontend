@@ -5,6 +5,8 @@ import './Profile.css'
 import CreateNewPet from '../CreateNewPet/CreateNewPet';
 import UserPetShow from '../UserPetShow/UserPetShow';
 import UserPetForAdoption from '../UserPetForAdoption/UserPetForAdoption';
+import UserPetAdoption from '../UserPetAdoption/UserPetAdoption';
+import AuthFooter from '../AuthFooter/AuthFooter';
 
 
 // profile component
@@ -64,8 +66,12 @@ function Profile() {
                 </div>
 
                 <div className="profile__pets__show my-4">
-                    Adoption
+                    <UserPetAdoption />
                 </div>
+            </div>
+
+            <div className="mt-5 text-center">
+                <AuthFooter />
             </div>
         </div>
     )

@@ -95,7 +95,7 @@ function UserPetForAdoption(_props) {
                                     null
                                 )
                                 :
-                                <div>No pet available.</div>
+                                <div className="text-center h6">No pet available.</div>
                         }
                     </Modal.Body>
                 </Modal>

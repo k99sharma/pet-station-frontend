@@ -27,7 +27,7 @@ function AdoptionPetCard(_props) {
 
             <div>
                 <button type="button" onClick={handleClick}>
-                    Adopt
+                    Complete Adoption
                 </button>
             </div>
         </div>
@@ -35,7 +35,7 @@ function AdoptionPetCard(_props) {
 }
 
 // dashboard user pets for adoption component
-function DashboardUserPetForAdoption(_props) {
+function UserPetAdoption(_props) {
     const { user, token } = _props;
 
     const { isLoading, error, data } = useQuery('pet', () => {
@@ -55,21 +55,32 @@ function DashboardUserPetForAdoption(_props) {
 
     return (
         <div className="dashboardUserPetForAdoption">
-            <div className="dashboardUserPetForAdoption__header h6">
-                Pets Put On Adoption
-            </div>
-
             <div className="dashboardUserPetForAdoption__pet">
                 {
                     data.data.length !== 0
                         ?
-                        data.data.map(pet => <div key={pet.name}><AdoptionPetCard pet={pet} token={token} /></div>)
+                        data.data.map(pet => <AdoptionPetCard key={pet.name} pet={pet} token={token} />)
                         :
-                        <div>No pet is available</div>
+                        <div className="userPetShow__noPet d-flex justify-content-center align-items-center">
+                            <div className="userPetShow__noPet__card rounded p-3">
+                                <div className="userPetShow__noPet__card__illustration text-center">
+                                    <img
+                                        width={150}
+                                        height={150}
+                                        src="/assets/notFound1.svg"
+                                        alt="not found"
+                                    />
+                                </div>
+
+                                <div className="userPetShow__noPet__card__text text-center h6">
+                                    No Pet Available
+                                </div>
+                            </div>
+                        </div>
                 }
             </div>
         </div>
     )
 }
 
-export default DashboardUserPetForAdoption;
+export default UserPetAdoption;
