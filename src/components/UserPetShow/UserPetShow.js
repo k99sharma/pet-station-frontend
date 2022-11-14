@@ -37,9 +37,9 @@ function UserPetShow() {
             {
                 data.data.length !== 0
                     ?
-                    <div className="userPetShow__cards d-flex p-2 rounded">
+                    <div className="userPetShow__cardShow row row-cols-1 row-cols-md-3 row-cols-lg-4 p-3 rounded">
                         {
-                            data.data.map(pet => <div key={pet.name}><PetCard data={pet} token={authCtx.token} /></div>)
+                            data.data.map(pet => <PetCard key={pet.name} data={pet} token={authCtx.token} />)
                         }
                     </div>
                     :

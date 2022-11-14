@@ -50,7 +50,7 @@ function FormImageUpload(_props) {
                 <Form.Control onChange={e => setImage(e.target.files[0])} type="file" />
             </Form.Group>
 
-            <Button disabled={isActive || isSubmitting} variant="primary" type="button" onClick={handleUpload}>
+            <Button disabled={isActive || isSubmitting || image === null} variant="primary" type="button" onClick={handleUpload}>
                 {
                     !isSubmitting
                         ?

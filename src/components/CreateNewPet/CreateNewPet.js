@@ -6,6 +6,7 @@ import { useContext, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { FloatingLabel } from 'react-bootstrap';
 import FormImageUpload from '../FormImageUpload/FormImageUpload';
 
 // importing context
@@ -26,6 +27,7 @@ function CreateNewPet() {
     // form states
     const [name, setName] = useState('')
     const [picture, setPicture] = useState('')
+    const [description, setDescription] = useState('')
     const [category, setCategory] = useState('')
     const [breed, setBreed] = useState('')
     const [age, setAge] = useState(0)
@@ -39,6 +41,7 @@ function CreateNewPet() {
     const clearStates = () => {
         setName('')
         setPicture('')
+        setDescription('')
         setCategory('')
         setBreed('')
         setAge(0)
@@ -52,6 +55,7 @@ function CreateNewPet() {
         const payload = {
             name,
             breed,
+            description,
             imageUrl: String(picture.url),
             category,
             age: String(age),
@@ -143,6 +147,17 @@ function CreateNewPet() {
                                 type="number"
                                 placeholder="Weight"
                             />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3" controlId="description">
+                            <FloatingLabel controlId="floatingTextarea2" label="Description">
+                                <Form.Control
+                                    onChange={e => setDescription(e.target.value)}
+                                    as="textarea"
+                                    placeholder="Describe your pet"
+                                    style={{ height: '100px' }}
+                                />
+                            </FloatingLabel>
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="gender">
