@@ -6,11 +6,14 @@ import { useQuery } from 'react-query';
 
 // importing utilities
 import { Spinner } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button'
 import { titleCase, fetchUserData } from "../../utils/helper";
 
 // pet card component
 function AdoptionPetCard(_props) {
     const { pet, token } = _props;
+
+
 
     const { error, isLoading, data } = useQuery('user', () => {
         const response = fetchUserData(pet.ownerId, token);
@@ -98,8 +101,14 @@ function AdoptionPetCard(_props) {
 
             <div className="adoptionPetCard__ownerDetails mb-2 p-2">
                 {
-                    `Owner Id: ${data.data.firstName}`
+                    console.log(data.data.firstName)
                 }
+            </div>
+
+            <div className="adoptionPetCard__contact mb-2 p-2">
+                <Button type="button" variant="primary">
+                    Contact
+                </Button>
             </div>
         </div>
     )

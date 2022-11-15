@@ -10,7 +10,7 @@ import { fetchAllPetsAvailableForAdoption } from "../../utils/helper";
 
 // adoption pets list
 function AdoptionPetsList(_props) {
-    const { token } = _props;
+    const { user, token } = _props;
 
     const { isLoading, error, data } = useQuery('adoptionPet', async () => {
         const response = await fetchAllPetsAvailableForAdoption(token)
@@ -29,14 +29,15 @@ function AdoptionPetsList(_props) {
     return (
         <div className="adoptionPetsList">
             {
-                console.log(data.data)
-            }
-            {
                 data.data.length !== 0
                     ?
                     <div className="userPetShow__cardShow row row-cols-1 row-cols-md-3 row-cols-lg-4 p-3 rounded">
                         {
-                            data.data.map(pet => <AdoptionPetCard token={token} key={pet.data.name} pet={pet.data} />)
+                            data.data.map(pet => (
+                                user.userId !== pet.data.ownerId
+                                &&
+                                <AdoptionPetCard token={token} key={pet.data.name} pet={pet.data} />
+                            ))
                         }
                     </div>
                     :

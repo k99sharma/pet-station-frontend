@@ -1,6 +1,7 @@
 // importing components
 import { useContext } from 'react'
 import AdoptionPetList from '../AdoptionPetsList/AdoptionPetsList'
+import AuthFooter from '../AuthFooter/AuthFooter'
 
 import AuthContext from '../../context/auth';
 
@@ -34,7 +35,11 @@ function Adoption() {
             </div>
 
             <div className="adoption__view">
-                <AdoptionPetList token={authCtx.token} />
+                <AdoptionPetList user={authCtx.user} token={authCtx.token} />
+            </div>
+
+            <div className="mt-5 text-center">
+                <AuthFooter />
             </div>
         </div>
     )

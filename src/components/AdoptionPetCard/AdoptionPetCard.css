@@ -62,3 +62,7 @@
 	font-size: 14px;
 	font-weight: 500;
 }
+
+.adoptionPetCard__ownerName {
+	width: 100%;
+}
