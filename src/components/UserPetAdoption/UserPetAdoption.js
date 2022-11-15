@@ -38,7 +38,7 @@ function AdoptionPetCard(_props) {
 function UserPetAdoption(_props) {
     const { user, token } = _props;
 
-    const { isLoading, error, data } = useQuery('pet', () => {
+    const { isLoading, error, data } = useQuery('userPetAdoption', () => {
         const response = fetchAllUserPetsForAdoption(user.userId, token)
 
         return response;

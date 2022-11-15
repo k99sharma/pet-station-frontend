@@ -2,15 +2,19 @@
 import './Profile.css'
 
 // importing components
+import { useContext } from 'react';
 import CreateNewPet from '../CreateNewPet/CreateNewPet';
 import UserPetShow from '../UserPetShow/UserPetShow';
 import UserPetForAdoption from '../UserPetForAdoption/UserPetForAdoption';
 import UserPetAdoption from '../UserPetAdoption/UserPetAdoption';
 import AuthFooter from '../AuthFooter/AuthFooter';
+import AuthContext from '../../context/auth';
 
 
 // profile component
 function Profile() {
+    const authCtx = useContext(AuthContext);
+
     return (
         <div className="profile">
             <div className="profile__header rounded py-2 px-5">
@@ -62,11 +66,11 @@ function Profile() {
                 </div>
 
                 <div className="profile__adoption__button my-4">
-                    <UserPetForAdoption />
+                    <UserPetForAdoption token={authCtx.token} />
                 </div>
 
                 <div className="profile__pets__show my-4">
-                    <UserPetAdoption />
+                    <UserPetAdoption user={authCtx.user} token={authCtx.token} />
                 </div>
             </div>
 

@@ -1,6 +1,8 @@
 // importing components
 import { useQuery } from "react-query";
 
+import AdoptionPetCard from '../AdoptionPetCard/AdoptionPetCard'
+
 import Loading from "../Loading/Loading";
 
 // importing utilities
@@ -27,9 +29,16 @@ function AdoptionPetsList(_props) {
     return (
         <div className="adoptionPetsList">
             {
+                console.log(data.data)
+            }
+            {
                 data.data.length !== 0
                     ?
-                    data.data.map(pet => <div key={pet.data.name}>{pet.data.name}</div>)
+                    <div className="userPetShow__cardShow row row-cols-1 row-cols-md-3 row-cols-lg-4 p-3 rounded">
+                        {
+                            data.data.map(pet => <AdoptionPetCard token={token} key={pet.data.name} pet={pet.data} />)
+                        }
+                    </div>
                     :
                     <div>None</div>
             }

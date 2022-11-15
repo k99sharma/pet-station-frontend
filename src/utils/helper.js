@@ -202,6 +202,8 @@ export async function addPetForAdoption(petId, token) {
             }
         })
 
+    console.log(result);
+
     return result;
 }
 
@@ -209,7 +211,7 @@ export async function addPetForAdoption(petId, token) {
 export async function fetchAllUserPetsForAdoption(ownerId, token) {
     let result;
 
-    await axios.post(`${CONFIGS.API_URL}/adoption/get/allUserPetsForAdoption/${ownerId}`, {
+    await axios.get(`${CONFIGS.API_URL}/adoption/get/allUserPetsForAdoption/${ownerId}`, {
         headers: {
             'x-auth-token': token
         }
