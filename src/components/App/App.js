@@ -1,4 +1,5 @@
-function App() {
+// App component
+export default function App() {
   return (
     <div className="app">
       App
@@ -6,4 +7,4 @@ function App() {
   );
 }
 
-export default App;
+
