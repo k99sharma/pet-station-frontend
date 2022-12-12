@@ -92,7 +92,7 @@ export default function HomePage() {
 
                         <div className='homePage__left__content my-5'>
                             <Link to="/login">
-                                <button className='homePage__left__content__button' type="button">
+                                <button className='homePage__left__content__button shadow-lg' type="button">
                                     Get Started
                                 </button>
                             </Link>
