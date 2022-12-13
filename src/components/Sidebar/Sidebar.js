@@ -54,11 +54,13 @@ export default function Sidebar(props) {
 
     return (
         <div className='sidebar'>
-            <Button onClick={() => { setOpen(!open) }}>
-                <FaAlignLeft
-                    className="h-6 w-6"
-                />
-            </Button>
+            <div className="p-5">
+                <Button onClick={() => { setOpen(!open) }}>
+                    <FaAlignLeft
+                        className="h-6 w-6"
+                    />
+                </Button>
+            </div>
 
             <Drawer
                 anchor='left'
