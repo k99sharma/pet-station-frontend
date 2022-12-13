@@ -105,7 +105,7 @@ export default function Sidebar(props) {
                     <div className="sidebar-options">
                         {
                             boardOptions.map(board => (
-                                <div className={`${option === board.label ? 'bg-blue-100' : null} hover:bg-blue-100 p-2 my-5`}>
+                                <div key={board.label} className={`${option === board.label ? 'bg-blue-100' : null} hover:bg-blue-100 p-2 my-5`}>
                                     <button onClick={() => { handleBoardSelection(board.label); }} className="sidebar-options-option flex items-center justify-center" type="button">
                                         <div className="sidebar-options-option-image">
                                             <img

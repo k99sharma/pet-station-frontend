@@ -56,3 +56,10 @@ export function titleCase(str) {
     }
     return transformedStr.join(' ');
 }
+
+// function to upload image
+export function uploadImage() {
+    return 'Hello';
+}
+
+// function to upload video 
