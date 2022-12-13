@@ -4,18 +4,24 @@ import './Login.css';
 // importing components
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { Checkbox, TextField, FormControlLabel, FormControl } from '@mui/material';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Checkbox, TextField, FormControlLabel, FormControl, CircularProgress } from '@mui/material';
+import { useContext, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 import Banner from '../../components/Banner/Banner';
+
+// importing helper functions
+import { handleLogin } from '../../utilities/helper';
+
+// importing context
+import AuthContext from '../../context/auth';
 
 // validation schema
 const validationSchema = Yup.object({
     email: Yup
-        .string('Enter your email.')
-        .email('Enter a valid email.')
-        .required('Email is required.'),
+        .string('Enter your email')
+        .email('Enter a valid email')
+        .required('Email is required'),
     password: Yup
         .string('Enter your password')
         .min(8, 'Password should be minimum of 8 characters.')
@@ -24,14 +30,29 @@ const validationSchema = Yup.object({
 
 // login form component
 function LoginForm() {
+    // state
+    const [showPassword, setShowPassword] = useState(false);
+    const authCtx = useContext(AuthContext);    // context
+    const navigator = useNavigate();
+
     // handle form submission
-    const handleSubmit = (values) => {
-        console.log(values);
+    const handleSubmit = async (values, { resetForm }) => {
+        // login user 
+        const res = await handleLogin(values);
+
+        if (res.status === 'error' || res.status === 'fail') {
+            alert(res.message);
+
+            resetForm();
+        } else {
+            alert(res.data.msg);
+
+            authCtx.login(res.data.token);    // login user
+            navigator('/', { replace: true });
+        }
     }
 
-    // checkbox state
-    const [showPassword, setShowPassword] = useState(false);
-
+    // formik state
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -39,7 +60,7 @@ function LoginForm() {
         },
         validationSchema,
         onSubmit: handleSubmit
-    })
+    });
 
     return (
         <div className="loginForm flex flex-col items-center my-10">
@@ -96,11 +117,17 @@ function LoginForm() {
                     <div className="loginForm-form-loginButton my-5">
                         <button
                             onClick={formik.handleSubmit}
-                            className="loginForm-form-submitButton hover:shadow-2xl"
+                            className="loginForm-form-submitButton hover:shadow-2xl p-2"
                             type="submit"
                             disabled={formik.isSubmitting}
                         >
-                            Login
+                            {
+                                formik.isSubmitting
+                                    ?
+                                    <CircularProgress color='inherit' />
+                                    :
+                                    'Login'
+                            }
                         </button>
                     </div>
                 </FormControl>
