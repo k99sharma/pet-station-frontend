@@ -2,6 +2,7 @@
 // importing components
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FaAlignLeft } from 'react-icons/fa';
 
 import { Drawer, Button, Avatar, Divider } from "@mui/material";
 import Banner from "../Banner/Banner";
@@ -26,6 +27,7 @@ export default function Sidebar(props) {
     // function to handle board selection
     const handleBoardSelection = (value) => {
         setOption(value);   // set option
+        setOpen(false);
     }
 
     // options
@@ -52,7 +54,12 @@ export default function Sidebar(props) {
 
     return (
         <div className='sidebar'>
-            <Button onClick={() => { setOpen(!open) }}>Open</Button>
+            <Button onClick={() => { setOpen(!open) }}>
+                <FaAlignLeft
+                    className="h-6 w-6"
+                />
+            </Button>
+
             <Drawer
                 anchor='left'
                 open={open}
