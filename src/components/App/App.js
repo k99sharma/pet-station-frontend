@@ -1,9 +1,13 @@
 // importing libraries
+import { useContext } from 'react';
 import {
   Route,
   Routes,
   BrowserRouter as Router
 } from 'react-router-dom';
+
+// importing context
+import AuthContext from '../../context/auth';
 
 // importing pages
 import Page404 from '../../pages/404/404';
@@ -14,13 +18,22 @@ import SignupPage from '../../pages/Signup/Signup';
 
 // App component
 export default function App() {
+  const authCtx = useContext(AuthContext);  // context
+
   return (
     <Router>
       <Routes>
         <Route exact path="/" element={<HomePage />} />
-        <Route exact path="/login" element={<LoginPage />} />
-        <Route exact path="/signup" element={<SignupPage />} />
-        <Route exact path="/dashboard" element={<DashboardPage />} />
+        {
+          authCtx.isLoggedIn
+            ?
+            <Route exact path="/dashboard" element={<DashboardPage />} />
+            :
+            <>
+              <Route exact path="/login" element={<LoginPage />} />
+              <Route exact path="/signup" element={<SignupPage />} />
+            </>
+        }
 
         {/* not found */}
         <Route exact path="*" element={<Page404 />} />

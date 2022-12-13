@@ -2,8 +2,12 @@
 import './Home.css';
 
 // importing components
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Banner from '../../components/Banner/Banner';
+
+// importing context
+import AuthContext from '../../context/auth';
 
 function HomeFeatures() {
     const features = [
@@ -47,6 +51,10 @@ function HomeFeatures() {
 
 // Home component
 export default function HomePage() {
+    // context
+    const authCtx = useContext(AuthContext);
+
+    // available links
     const socialLink = [
         {
             id: 1,
@@ -91,8 +99,8 @@ export default function HomePage() {
                         </div>
 
                         <div className='homePage__left__content my-5'>
-                            <Link to="/login">
-                                <button className='homePage__left__content__button' type="button">
+                            <Link to={authCtx.isLoggedIn ? '/dashboard' : '/login'}>
+                                <button className='homePage__left__content__button shadow-lg' type="button">
                                     Get Started
                                 </button>
                             </Link>
@@ -168,7 +176,7 @@ export default function HomePage() {
                             <div className='homePage__footer__right__links flex'>
                                 {
                                     socialLink.map(social => (
-                                        <div className='mr-5'>
+                                        <div key={social.description} className='mr-5'>
                                             <a href={social.link}>
                                                 <img
                                                     height={25}
