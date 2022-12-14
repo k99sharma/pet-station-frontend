@@ -57,9 +57,59 @@ export function titleCase(str) {
     return transformedStr.join(' ');
 }
 
-// function to upload image
-export function uploadImage() {
-    return 'Hello';
+// function to create new pet
+export async function createNewPetHelper(payload, token) {
+    const config = {
+        headers: {
+            'x-auth-token': token
+        }
+    };
+
+    const response = axios.post(`${process.env.REACT_APP_SERVER}/pet/create`, payload, config)
+        .then(res => {
+            const { data } = res;
+            return data;
+        })
+        .catch(err => {
+            const { data } = err.response;
+            return data;
+        })
+
+    return response;
 }
 
-// function to upload video 
+// function to fetch pet
+export async function fetchPetsData(token) {
+    const options = {
+        method: 'GET',
+        headers: {
+            'x-auth-token': token
+        }
+    };
+
+    const response = await fetch(`${process.env.REACT_APP_SERVER}/pet/get-all`, options);
+
+    return response.json();
+}
+
+
+// function to delete pet using pet Id
+export async function deletePet(petId, token) {
+    const config = {
+        headers: {
+            'x-auth-token': token
+        }
+    };
+
+    const response = axios.delete(`${process.env.REACT_APP_SERVER}/pet/delete/${petId}`, config)
+        .then(res => {
+            const { data } = res;
+            return data;
+        })
+        .catch(err => {
+            const { data } = err.response;
+            return data;
+        })
+
+    return response;
+}

@@ -1,8 +1,12 @@
+/* eslint-disable react/prop-types */
 // importing components
-import NewPet from "../NewPet/NewPet"
+import NewPet from "../NewPet/NewPet";
+import PetsDisplay from "../PetsDisplay/PetsDisplay";
 
 // adoption component
-export default function Profile() {
+export default function Profile(props) {
+    const { authCtx } = props;
+
     return (
         <div className="profile p-5">
             <div className="profile-header flex items-center mb-5">
@@ -37,9 +41,13 @@ export default function Profile() {
                         </div>
 
                         <div className="profile-pets-header-content-newPet my-3">
-                            <NewPet />
+                            <NewPet authCtx={authCtx} />
                         </div>
                     </div>
+                </div>
+
+                <div className="profile-pets-display-pets">
+                    <PetsDisplay authCtx={authCtx} />
                 </div>
             </div>
         </div>

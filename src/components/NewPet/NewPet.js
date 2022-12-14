@@ -13,6 +13,9 @@ import FileUpload from '../FileUpload/FileUpload';
 // importing form helper
 import { dogBreed, catBreed } from '../../utilities/formHelper';
 
+// importing helper function
+import { createNewPetHelper } from '../../utilities/helper';
+
 // validation schema
 const validationSchema = Yup.object().shape({
     name: Yup
@@ -41,14 +44,26 @@ const validationSchema = Yup.object().shape({
 
 // new pet form component
 function NewPetForm(props) {
-    const { handleClose } = props;
+    const { handleClose, token } = props;
 
     // state
     const [imageUrl, setImageUrl] = useState(null);
 
     // function to handle submit
-    const handleSubmit = (values) => {
-        console.log(values);
+    const handleSubmit = async (values) => {
+        const payload = {
+            ...values,
+            imageUrl
+        };
+
+        const res = await createNewPetHelper(payload, token);
+
+        if (res.error) {
+            alert('Pet cannot be created.');
+        } else {
+            alert(res.data);
+            handleClose(false);
+        }
     }
 
     // formik 
@@ -218,7 +233,10 @@ const style = {
 };
 
 // New Pet button component
-export default function NewPet() {
+export default function NewPet(props) {
+    // props
+    const { authCtx } = props;
+
     // states
     const [open, setOpen] = useState(false);
 
@@ -239,7 +257,7 @@ export default function NewPet() {
                 aria-describedby="new pet form"
             >
                 <Box className='rounded-lg' sx={style}>
-                    <NewPetForm handleClose={handleClose} />
+                    <NewPetForm token={authCtx.token} handleClose={handleClose} />
                 </Box>
             </Modal>
         </div>
