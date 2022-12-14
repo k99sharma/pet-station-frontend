@@ -56,3 +56,116 @@ export function titleCase(str) {
     }
     return transformedStr.join(' ');
 }
+
+// function to create new pet
+export async function createNewPetHelper(payload, token) {
+    const config = {
+        headers: {
+            'x-auth-token': token
+        }
+    };
+
+    const response = axios.post(`${process.env.REACT_APP_SERVER}/pet/create`, payload, config)
+        .then(res => {
+            const { data } = res;
+            return data;
+        })
+        .catch(err => {
+            const { data } = err.response;
+            return data;
+        })
+
+    return response;
+}
+
+// function to fetch pet
+export async function fetchPetsData(token) {
+    const options = {
+        method: 'GET',
+        headers: {
+            'x-auth-token': token
+        }
+    };
+
+    const response = await fetch(`${process.env.REACT_APP_SERVER}/pet/get-all`, options);
+
+    return response.json();
+}
+
+
+// function to delete pet using pet Id
+export async function deletePet(petId, token) {
+    const config = {
+        headers: {
+            'x-auth-token': token
+        }
+    };
+
+    const response = axios.delete(`${process.env.REACT_APP_SERVER}/pet/delete/${petId}`, config)
+        .then(res => {
+            const { data } = res;
+            return data;
+        })
+        .catch(err => {
+            const { data } = err.response;
+            return data;
+        })
+
+    return response;
+}
+
+// function to put pet for adoption
+export async function putPetOnAdoption(petId, token) {
+    const config = {
+        headers: {
+            'x-auth-token': token
+        }
+    };
+
+    const response = axios.post(`${process.env.REACT_APP_SERVER}/adoption/put-pet-on-adoption/${petId}`, {}, config)
+        .then(res => {
+            const { data } = res;
+            return data;
+        })
+        .catch(err => {
+            const { data } = err.response;
+            return data;
+        })
+
+    return response;
+}
+
+// function to remove pet from adoption
+export async function removePetFromAdoption(petId, token) {
+    const config = {
+        headers: {
+            'x-auth-token': token
+        }
+    };
+
+    const response = axios.delete(`${process.env.REACT_APP_SERVER}/adoption/delete/${petId}`, config)
+        .then(res => {
+            const { data } = res;
+            return data;
+        })
+        .catch(err => {
+            const { data } = err.response;
+            return data;
+        })
+
+    return response;
+}
+
+// function to fetch adoption history
+export async function fetchAdoptionHistory(token) {
+    const options = {
+        method: 'GET',
+        headers: {
+            'x-auth-token': token
+        }
+    };
+
+    const response = await fetch(`${process.env.REACT_APP_SERVER}/adoption/record`, options);
+
+    return response.json();
+}
