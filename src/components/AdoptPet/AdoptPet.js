@@ -23,6 +23,7 @@ function AdoptPetForm(props) {
 
         else {
             alert('Pet is put for adoption.');
+            handleClose();
         }
     }
 

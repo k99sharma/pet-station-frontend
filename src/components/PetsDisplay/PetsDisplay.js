@@ -25,7 +25,7 @@ function PetCard(props) {
         <div className="petCard flex bg-white p-2 rounded-md items-center shadow-2xl m-3">
             <div className="petCard-image w-2/5">
                 <img
-                    className="rounded-lg"
+                    className="rounded-full"
                     src={pet.imageUrl}
                     alt={pet.name}
                 />
@@ -54,7 +54,7 @@ function PetCard(props) {
                     }
                 </div>
 
-                <div className="pet-content-breed text-center my-3 bg-slate-800 rounded-md p-1 text-white">
+                <div className="pet-content-breed text-sm text-center my-3 bg-slate-800 rounded-md p-1 text-white">
                     {
                         pet.breed
                     }

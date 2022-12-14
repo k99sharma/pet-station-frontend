@@ -1,26 +1,11 @@
 /* eslint-disable react/prop-types */
 // importing components
-import { useQuery } from "react-query";
-
 import AdoptionPetsDisplay from "../AdoptionPetsDisplay/AdoptionPetsDisplay";
 import AdoptPet from "../AdoptPet/AdoptPet";
 
-// importing helper functions
-import { fetchPetsData } from "../../utilities/helper";
-
 export default function UserPetAdoptionSection(props) {
     // props
-    const { token } = props;
-
-    // fetch pet information
-    const { isLoading, error, data } = useQuery('pet', () => fetchPetsData(token));
-
-    if (isLoading)
-        return <div>Loading ...</div>
-
-    if (error)
-        return <div>Normal Error</div>
-
+    const { token, pets } = props;
 
     return (
         <div className="userPetAdoptionSection">
@@ -43,7 +28,7 @@ export default function UserPetAdoptionSection(props) {
 
                     <div className="profile-petsAdoption-header-content-newPet  my-3">
                         <AdoptPet
-                            pets={data.data.data.pets}
+                            pets={pets}
                             token={token}
                         />
                     </div>
@@ -52,7 +37,7 @@ export default function UserPetAdoptionSection(props) {
 
             <div className="profile-petsAdoption-display-pets">
                 <AdoptionPetsDisplay
-                    pets={data.data.data.pets}
+                    pets={pets}
                     token={token}
                 />
             </div>

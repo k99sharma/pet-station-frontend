@@ -4,12 +4,15 @@ import { useState, useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { MdDelete } from "react-icons/md";
 
+import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+
 // importing helper functions
 import { fetchPetsData, removePetFromAdoption } from "../../utilities/helper";
 
 function PetCard(props) {
     const { pet, token } = props;
 
+    // function to handle adoption removal
     const handleRemoveFromAdoption = async () => {
         const res = await removePetFromAdoption(pet.petId, token);
 
@@ -25,11 +28,16 @@ function PetCard(props) {
         }
     }
 
+    // function to complete adoption 
+    const handleCompleteAdoption = async () => {
+        console.log('Complete')
+    }
+
     return (
         <div className="petCard flex bg-white p-2 rounded-md items-center shadow-2xl m-3">
             <div className="petCard-image w-2/5">
                 <img
-                    className="rounded-lg"
+                    className="rounded-full"
                     src={pet.imageUrl}
                     alt={pet.name}
                 />
@@ -52,38 +60,33 @@ function PetCard(props) {
                     </div>
                 </div>
 
-                <div className="pet-content-breed text-center my-3 bg-slate-800 rounded-md p-1 text-white">
+                <div className="pet-content-breed text-sm text-center my-3 bg-slate-800 rounded-md p-1 text-white">
                     {
                         pet.breed
                     }
                 </div>
 
-                <div className="pet-content-attributes flex items-center justify-around">
-                    <div className="pet-content-attributes-weight flex flex-col items-center bg-red-200 p-2 rounded-md shadow-md w-15">
-                        <div className="pet-content-attributes-weight-value font-lighter">
+                <div className="pet-content-complete">
+                    <FormControl fullWidth>
+                        <InputLabel id="complete">Complete</InputLabel>
+                        <Select
+                            disabled={pet.adoptionRequest.length === 0}
+                            labelId="complete"
+                            id="complete"
+                            label="Complete"
+                            onChange={handleCompleteAdoption}
+                        >
                             {
-                                `${pet.weight} kg`
+                                pet.adoptionRequest.map(data =>
+                                    <MenuItem value={data.userId}>
+                                        {
+                                            `${data.firstName} ${data.lastName}`
+                                        }
+                                    </MenuItem>
+                                )
                             }
-                        </div>
-
-                        <div className="pet-content-attributes-weight-label">
-                            Weight
-                        </div>
-                    </div>
-
-                    <div className="pet-content-attributes-age">
-                        <div className="pet-content-attributes-age flex flex-col items-center bg-blue-200 p-2 rounded-md shadow-md w-16">
-                            <div className="pet-content-attributes-age-value ">
-                                {
-                                    `${pet.age} yr`
-                                }
-                            </div>
-
-                            <div className="pet-content-attributes-age-label">
-                                Age
-                            </div>
-                        </div>
-                    </div>
+                        </Select>
+                    </FormControl>
                 </div>
             </div>
         </div>
