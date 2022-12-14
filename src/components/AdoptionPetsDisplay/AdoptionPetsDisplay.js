@@ -1,9 +1,11 @@
 /* eslint-disable react/prop-types */
 // importing components
+import { useState, useEffect } from 'react';
+import { useQuery } from 'react-query';
 import { MdDelete } from "react-icons/md";
 
 // importing helper functions
-import { deletePet } from "../../utilities/helper";
+import { fetchPetsData, deletePet } from "../../utilities/helper";
 
 function PetCard(props) {
     const { pet, token } = props;
@@ -38,7 +40,6 @@ function PetCard(props) {
                             pet.name
                         }
                     </div>
-
                     {
                         pet.adoptionStatus === 'none'
                             ?
@@ -92,16 +93,40 @@ function PetCard(props) {
     )
 }
 
-export default function PetsDisplay(props) {
+export default function AdoptionPetsDisplay(props) {
     // props
-    const { pets, authCtx } = props;
+    const { authCtx } = props;
+
+    // state
+    const [pets, setPets] = useState([]);
+
+    // fetch pet information
+    const { isLoading, error, data } = useQuery('pet', () => fetchPetsData(authCtx.token));
+
+    if (isLoading)
+        return <div>Loading ...</div>
+
+    if (error)
+        return <div>Normal Error</div>
+
+    useEffect(() => {
+        const arr = [];
+
+        // eslint-disable-next-line no-restricted-syntax
+        for (const pet of data.data.data.pets) {
+            if (pet.adoptionStatus === 'pending')
+                arr.push(pet);
+        }
+
+        setPets(arr);
+    }, [])
 
     return (
         <div className="petsDisplay my-10 rounded-md bg-neutral-300 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
             {
                 pets.length !== 0
                     ?
-                    pets.map(pet => (
+                    pets.filter(pet => pet.adoptionStatus === 'pending').map(pet => (
                         <PetCard key={pet.petId} token={authCtx.token} pet={pet} />
                     ))
                     :
