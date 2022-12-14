@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 // importing components
 import PetSection from "../PetSection/PetSection";
+import AdoptionHistory from "../AdoptionHistory/AdoptionHistory";
 
 // adoption component
 export default function Profile(props) {
@@ -25,6 +26,16 @@ export default function Profile(props) {
 
             <div className="profile-petSection">
                 <PetSection token={authCtx.token} />
+            </div>
+
+            <div className="profile-adoptionHistory">
+                <AdoptionHistory token={authCtx.token} />
+            </div>
+
+            <div className="profile-copyright font-lighter text-xs text-center text-neutral-800 mt-10">
+                {
+                    `Copyright © ${new Date().getFullYear()} Pet Station. All rights reserved.`
+                }
             </div>
         </div>
     )

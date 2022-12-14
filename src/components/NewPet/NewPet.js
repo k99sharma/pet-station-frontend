@@ -4,6 +4,8 @@ import './NewPet.css';
 
 // importing components
 import { useState } from 'react';
+
+import { GrClose } from "react-icons/gr";
 import { Modal, Box, Divider, TextField, FormControl, InputLabel, Select, MenuItem, CircularProgress } from '@mui/material';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -82,8 +84,14 @@ function NewPetForm(props) {
 
     return (
         <div className="newPetForm">
-            <div className="newPetForm-header text-2xl">
-                New Pet
+            <div className="newPetForm-header flex items-center justify-around my-2">
+                <div className="adoptPetForm-header-title text-xl font-bold">
+                    New Pet
+                </div>
+
+                <button type="button" onClick={handleClose} className="adoptPetForm-header-close">
+                    <GrClose />
+                </button>
             </div>
 
             <div className="my-2">

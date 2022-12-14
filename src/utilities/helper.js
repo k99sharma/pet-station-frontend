@@ -155,3 +155,17 @@ export async function removePetFromAdoption(petId, token) {
 
     return response;
 }
+
+// function to fetch adoption history
+export async function fetchAdoptionHistory(token) {
+    const options = {
+        method: 'GET',
+        headers: {
+            'x-auth-token': token
+        }
+    };
+
+    const response = await fetch(`${process.env.REACT_APP_SERVER}/adoption/record`, options);
+
+    return response.json();
+}
