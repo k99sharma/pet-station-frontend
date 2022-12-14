@@ -94,7 +94,7 @@ function PetCard(props) {
 
 export default function PetsDisplay(props) {
     // props
-    const { pets, authCtx } = props;
+    const { pets, token } = props;
 
     return (
         <div className="petsDisplay my-10 rounded-md bg-neutral-300 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
@@ -102,7 +102,7 @@ export default function PetsDisplay(props) {
                 pets.length !== 0
                     ?
                     pets.map(pet => (
-                        <PetCard key={pet.petId} token={authCtx.token} pet={pet} />
+                        <PetCard key={pet.petId} token={token} pet={pet} />
                     ))
                     :
                     <div className="petDisplay-empty p-3 font-bold text-neutral-800">

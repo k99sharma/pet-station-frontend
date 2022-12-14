@@ -2,6 +2,7 @@
 // importing components
 import { useState } from 'react';
 import { Modal, Box, Divider } from '@mui/material';
+import { GrClose } from "react-icons/gr";
 
 // importing helper function
 import { putPetOnAdoption } from '../../utilities/helper';
@@ -9,7 +10,7 @@ import { putPetOnAdoption } from '../../utilities/helper';
 // adopt pet form component
 function AdoptPetForm(props) {
     // token
-    const { pets, token } = props;
+    const { pets, token, handleClose } = props;
 
     // put pet for adoption
     const handlePutOnAdopt = async (petId) => {
@@ -27,8 +28,14 @@ function AdoptPetForm(props) {
 
     return (
         <div className="adoptPetForm">
-            <div className="adoptPetForm-header font-bold text-xl text-center">
-                Available Pets
+            <div className="adoptPetForm-header flex items-center justify-around">
+                <div className="adoptPetForm-header-title text-xl font-bold">
+                    Available Pets
+                </div>
+
+                <button type="button" onClick={handleClose} className="adoptPetForm-header-close">
+                    <GrClose />
+                </button>
             </div>
 
             <div className="my-3">
@@ -39,14 +46,30 @@ function AdoptPetForm(props) {
                 {
                     pets.filter(pet => pet.adoptionStatus === 'none').map(pet =>
                         <div key={pet.petId} className="adoptPetForm-option flex items-center justify-around mb-2">
-                            <div className="adoptPetForm-option-label font-bold text-lg">
-                                {
-                                    pet.name
-                                }
+                            <div className="adoptPetForm-option font-bold text-lg flex items-center">
+                                <div className="adoptPetForm-option-img">
+                                    <img
+                                        className="rounded-full"
+                                        src={pet.imageUrl}
+                                        width={50}
+                                        height={50}
+                                        alt={pet.name}
+                                    />
+                                </div>
+
+                                <div className="adoptPetForm-option-name mx-2">
+                                    {
+                                        pet.name
+                                    }
+                                </div>
                             </div>
 
                             <div className="adoptPetForm-option-button">
-                                <button onClick={() => handlePutOnAdopt(pet.petId)} className="bg-green-600 text-white px-4 py-1 rounded-md" type="button">
+                                <button
+                                    onClick={() => handlePutOnAdopt(pet.petId)}
+                                    className="bg-green-600 text-white px-4 py-1 rounded-md"
+                                    type="button"
+                                >
                                     Add
                                 </button>
                             </div>
@@ -72,7 +95,7 @@ const style = {
 
 export default function AdoptPet(props) {
     // props
-    const { pets, authCtx } = props;
+    const { pets, token } = props;
 
     // states
     const [open, setOpen] = useState(false);
@@ -83,7 +106,11 @@ export default function AdoptPet(props) {
 
     return (
         <div className="adoptPet">
-            <button onClick={() => { setOpen(true); }} className="adoptPet-button font-light py-2 px-4 bg-gradient-to-b from-orange-400 to-orange-700 text-white rounded-md" type="button">
+            <button
+                onClick={() => { setOpen(true); }}
+                className="adoptPet-button font-light py-2 px-4 bg-gradient-to-b from-orange-400 to-orange-700 text-white rounded-md"
+                type="button"
+            >
                 Put For Adoption
             </button>
 
@@ -93,8 +120,15 @@ export default function AdoptPet(props) {
                 aria-labelledby="new pet button"
                 aria-describedby="new pet form"
             >
-                <Box className='rounded-lg' sx={style}>
-                    <AdoptPetForm pets={pets} token={authCtx.token} handleClose={handleClose} />
+                <Box
+                    className='rounded-lg'
+                    sx={style}
+                >
+                    <AdoptPetForm
+                        pets={pets}
+                        token={token}
+                        handleClose={handleClose}
+                    />
                 </Box>
             </Modal>
         </div>

@@ -24,7 +24,7 @@ export default function Profile(props) {
             </div>
 
             <div className="profile-petSection">
-                <PetSection authCtx={authCtx} />
+                <PetSection token={authCtx.token} />
             </div>
         </div>
     )

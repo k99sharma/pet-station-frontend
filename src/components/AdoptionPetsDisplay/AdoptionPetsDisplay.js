@@ -5,21 +5,23 @@ import { useQuery } from 'react-query';
 import { MdDelete } from "react-icons/md";
 
 // importing helper functions
-import { fetchPetsData, deletePet } from "../../utilities/helper";
+import { fetchPetsData, removePetFromAdoption } from "../../utilities/helper";
 
 function PetCard(props) {
     const { pet, token } = props;
 
-    const handleDelete = async () => {
-        const res = await deletePet(pet.petId, token);
+    const handleRemoveFromAdoption = async () => {
+        const res = await removePetFromAdoption(pet.petId, token);
+
+        console.log(res);
 
         if (res.status === 'fail' || res.status === 'error') {
             console.log(res);
-            alert('Pet cannot be deleted.');
+            alert('Pet cannot be removed from adoption.');
         }
 
         else {
-            alert('Pet deleted.');
+            alert('Pet removed from adoption.');
         }
     }
 
@@ -40,19 +42,14 @@ function PetCard(props) {
                             pet.name
                         }
                     </div>
-                    {
-                        pet.adoptionStatus === 'none'
-                            ?
-                            <div className="petCard-content-delete">
-                                <button type="button">
-                                    <MdDelete
-                                        onClick={handleDelete}
-                                    />
-                                </button>
-                            </div>
-                            :
-                            null
-                    }
+
+                    <div className="petCard-content-delete">
+                        <button type="button">
+                            <MdDelete
+                                onClick={handleRemoveFromAdoption}
+                            />
+                        </button>
+                    </div>
                 </div>
 
                 <div className="pet-content-breed text-center my-3 bg-slate-800 rounded-md p-1 text-white">
@@ -95,13 +92,13 @@ function PetCard(props) {
 
 export default function AdoptionPetsDisplay(props) {
     // props
-    const { authCtx } = props;
+    const { token } = props;
 
     // state
     const [pets, setPets] = useState([]);
 
     // fetch pet information
-    const { isLoading, error, data } = useQuery('pet', () => fetchPetsData(authCtx.token));
+    const { isLoading, error, data } = useQuery('pet', () => fetchPetsData(token));
 
     if (isLoading)
         return <div>Loading ...</div>
@@ -127,7 +124,7 @@ export default function AdoptionPetsDisplay(props) {
                 pets.length !== 0
                     ?
                     pets.filter(pet => pet.adoptionStatus === 'pending').map(pet => (
-                        <PetCard key={pet.petId} token={authCtx.token} pet={pet} />
+                        <PetCard key={pet.petId} token={token} pet={pet} />
                     ))
                     :
                     <div className="petDisplay-empty p-3 font-bold text-neutral-800">

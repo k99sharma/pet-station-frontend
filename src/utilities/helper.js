@@ -134,3 +134,24 @@ export async function putPetOnAdoption(petId, token) {
 
     return response;
 }
+
+// function to remove pet from adoption
+export async function removePetFromAdoption(petId, token) {
+    const config = {
+        headers: {
+            'x-auth-token': token
+        }
+    };
+
+    const response = axios.delete(`${process.env.REACT_APP_SERVER}/adoption/delete/${petId}`, config)
+        .then(res => {
+            const { data } = res;
+            return data;
+        })
+        .catch(err => {
+            const { data } = err.response;
+            return data;
+        })
+
+    return response;
+}

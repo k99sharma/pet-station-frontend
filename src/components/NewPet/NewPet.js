@@ -235,7 +235,7 @@ const style = {
 // New Pet button component
 export default function NewPet(props) {
     // props
-    const { authCtx } = props;
+    const { token } = props;
 
     // states
     const [open, setOpen] = useState(false);
@@ -257,7 +257,7 @@ export default function NewPet(props) {
                 aria-describedby="new pet form"
             >
                 <Box className='rounded-lg' sx={style}>
-                    <NewPetForm token={authCtx.token} handleClose={handleClose} />
+                    <NewPetForm token={token} handleClose={handleClose} />
                 </Box>
             </Modal>
         </div>
