@@ -92,6 +92,19 @@ export async function fetchPetsData(token) {
     return response.json();
 }
 
+// function to fetch pets available for adoption
+export async function fetchPetsForAdoptionData(token) {
+    const options = {
+        method: 'GET',
+        headers: {
+            'x-auth-token': token
+        }
+    };
+
+    const response = await fetch(`${process.env.REACT_APP_SERVER}/adoption/get-all-pets`, options);
+    return response.json();
+}
+
 
 // function to delete pet using pet Id
 export async function deletePet(petId, token) {
@@ -168,4 +181,93 @@ export async function fetchAdoptionHistory(token) {
     const response = await fetch(`${process.env.REACT_APP_SERVER}/adoption/record`, options);
 
     return response.json();
+}
+
+// function to send adoption request
+export async function sendAdoptionRequest(petId, token) {
+    const config = {
+        headers: {
+            'x-auth-token': token
+        }
+    };
+
+    const response = axios.post(`${process.env.REACT_APP_SERVER}/adoption/request-adoption/${petId}`, {}, config)
+        .then(res => {
+            const { data } = res;
+            return data;
+        })
+        .catch(err => {
+            const { data } = err.response;
+            return data;
+        })
+
+    return response;
+}
+
+// function to cancel adoption request
+export async function cancelAdoptionRequest(petId, token) {
+    const config = {
+        headers: {
+            'x-auth-token': token
+        }
+    };
+
+    const response = axios.post(`${process.env.REACT_APP_SERVER}/adoption/cancel-adoption-request/${petId}`, {}, config)
+        .then(res => {
+            const { data } = res;
+            return data;
+        })
+        .catch(err => {
+            const { data } = err.response;
+            return data;
+        })
+
+    return response;
+}
+
+// function to get all adoption request
+export async function getAdoptionRequest(petId, token) {
+    const config = {
+        headers: {
+            'x-auth-token': token
+        }
+    };
+
+    const response = axios.get(`${process.env.REACT_APP_SERVER}/adoption/get/pet-adoption-request/${petId}`, config)
+        .then(res => {
+            const { data } = res;
+            return data;
+        })
+        .catch(err => {
+            const { data } = err.response;
+            return data;
+        })
+
+    return response;
+}
+
+// function to get all adoption request
+export async function completeAdoption(userId, petId, token) {
+    const body = {
+        petId,
+        userWhoAdoptedPet: userId
+    };
+
+    const config = {
+        headers: {
+            'x-auth-token': token
+        }
+    };
+
+    const response = axios.post(`${process.env.REACT_APP_SERVER}/adoption/complete-adoption`, body, config)
+        .then(res => {
+            const { data } = res;
+            return data;
+        })
+        .catch(err => {
+            const { data } = err.response;
+            return data;
+        })
+
+    return response;
 }

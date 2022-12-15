@@ -4,33 +4,95 @@ import { useState, useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { MdDelete } from "react-icons/md";
 
-import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { FormControl, InputLabel, Select, MenuItem, CircularProgress } from '@mui/material';
 
 // importing helper functions
-import { fetchPetsData, removePetFromAdoption } from "../../utilities/helper";
+import { fetchPetsData, removePetFromAdoption, getAdoptionRequest, completeAdoption } from "../../utilities/helper";
 
+function AdoptionRequest(props) {
+    const { petId, token } = props;
+    const [requests, setRequests] = useState([]);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    useEffect(() => {
+        getAdoptionRequest(petId, token)
+            .then(res => setRequests(res.data.requests))
+            .catch(err => console.log(err))
+    }, [])
+
+    // function to complete adoption 
+    const handleCompleteAdoption = async (e) => {
+        setIsSubmitting(true);
+
+        const userId = e.target.value;
+
+        const res = await completeAdoption(userId, petId, token);
+
+        if (res.status === 'fail' || res.status === 'error') {
+            alert('Pet adoption cannot be completed.');
+            setIsSubmitting(false);
+        }
+
+        else {
+            alert('Pet adoption complete.');
+        }
+    }
+
+    return (
+        <FormControl fullWidth>
+            {
+                isSubmitting
+                    ?
+                    <CircularProgress />
+                    :
+                    <>
+                        <InputLabel id="complete">Complete</InputLabel>
+                        <Select
+                            disabled={requests.length === 0}
+                            labelId="complete"
+                            id="complete"
+                            label="Complete"
+                            defaultValue=""
+                            onChange={handleCompleteAdoption}
+                        >
+                            {
+                                requests.map(request =>
+                                    <MenuItem key={request.userId} value={request.userId}>
+                                        {
+                                            request.name
+                                        }
+                                    </MenuItem>
+                                )
+                            }
+                        </Select>
+                    </>
+            }
+        </FormControl>
+    )
+}
+
+// pet card component
 function PetCard(props) {
+    // props
     const { pet, token } = props;
+
+    // state
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     // function to handle adoption removal
     const handleRemoveFromAdoption = async () => {
+        setIsSubmitting(true);
         const res = await removePetFromAdoption(pet.petId, token);
 
-        console.log(res);
-
         if (res.status === 'fail' || res.status === 'error') {
-            console.log(res);
             alert('Pet cannot be removed from adoption.');
         }
 
         else {
             alert('Pet removed from adoption.');
         }
-    }
 
-    // function to complete adoption 
-    const handleCompleteAdoption = async () => {
-        console.log('Complete')
+        setIsSubmitting(false);
     }
 
     return (
@@ -52,11 +114,17 @@ function PetCard(props) {
                     </div>
 
                     <div className="petCard-content-delete">
-                        <button type="button">
-                            <MdDelete
-                                onClick={handleRemoveFromAdoption}
-                            />
-                        </button>
+                        {
+                            isSubmitting
+                                ?
+                                <CircularProgress />
+                                :
+                                <button type="button">
+                                    <MdDelete
+                                        onClick={handleRemoveFromAdoption}
+                                    />
+                                </button>
+                        }
                     </div>
                 </div>
 
@@ -67,26 +135,10 @@ function PetCard(props) {
                 </div>
 
                 <div className="pet-content-complete">
-                    <FormControl fullWidth>
-                        <InputLabel id="complete">Complete</InputLabel>
-                        <Select
-                            disabled={pet.adoptionRequest.length === 0}
-                            labelId="complete"
-                            id="complete"
-                            label="Complete"
-                            onChange={handleCompleteAdoption}
-                        >
-                            {
-                                pet.adoptionRequest.map(data =>
-                                    <MenuItem value={data.userId}>
-                                        {
-                                            `${data.firstName} ${data.lastName}`
-                                        }
-                                    </MenuItem>
-                                )
-                            }
-                        </Select>
-                    </FormControl>
+                    <AdoptionRequest
+                        petId={pet.petId}
+                        token={token}
+                    />
                 </div>
             </div>
         </div>

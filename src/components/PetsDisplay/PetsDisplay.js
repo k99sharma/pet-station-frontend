@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
 // importing components
+import { CircularProgress } from '@mui/material';
+import { useState } from 'react';
 import { MdDelete } from "react-icons/md";
 
 // importing helper functions
@@ -8,7 +10,11 @@ import { deletePet } from "../../utilities/helper";
 function PetCard(props) {
     const { pet, token } = props;
 
+    // state
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
     const handleDelete = async () => {
+        setIsSubmitting(true);
         const res = await deletePet(pet.petId, token);
 
         if (res.status === 'fail' || res.status === 'error') {
@@ -19,6 +25,8 @@ function PetCard(props) {
         else {
             alert('Pet deleted.');
         }
+
+        setIsSubmitting(false);
     }
 
     return (
@@ -43,11 +51,17 @@ function PetCard(props) {
                         pet.adoptionStatus === 'none'
                             ?
                             <div className="petCard-content-delete">
-                                <button type="button">
-                                    <MdDelete
-                                        onClick={handleDelete}
-                                    />
-                                </button>
+                                {
+                                    isSubmitting
+                                        ?
+                                        <CircularProgress />
+                                        :
+                                        <button type="button">
+                                            <MdDelete
+                                                onClick={handleDelete}
+                                            />
+                                        </button>
+                                }
                             </div>
                             :
                             null

@@ -6,7 +6,7 @@ import './NewPet.css';
 import { useState } from 'react';
 
 import { GrClose } from "react-icons/gr";
-import { Modal, Box, Divider, TextField, FormControl, InputLabel, Select, MenuItem, CircularProgress } from '@mui/material';
+import { Modal, Button, Box, Divider, TextField, FormControl, InputLabel, Select, MenuItem, CircularProgress } from '@mui/material';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
@@ -84,7 +84,7 @@ function NewPetForm(props) {
 
     return (
         <div className="newPetForm">
-            <div className="newPetForm-header flex items-center justify-around my-2">
+            <div className="newPetForm-header flex items-center justify-between my-2">
                 <div className="adoptPetForm-header-title text-xl font-bold">
                     New Pet
                 </div>
@@ -99,7 +99,7 @@ function NewPetForm(props) {
             </div>
 
             <div className="newPetForm-form">
-                <FormControl>
+                <FormControl fullWidth>
                     <div className="newPetForm-form-inputField mb-3">
                         <TextField
                             fullWidth
@@ -199,28 +199,34 @@ function NewPetForm(props) {
                         />
                     </div>
 
-                    <div className="newPetForm-form mt-5">
-                        {
-                            !formik.isSubmitting
-                                ?
-                                <button
-                                    disabled={imageUrl === null}
-                                    className="bg-gradient-to-b from-green-400 to-green-600 p-2 rounded-md text-white hover:shadow-xl"
-                                    onClick={formik.handleSubmit}
-                                    type="submit"
-                                >
-                                    Submit
-                                </button>
-                                :
-                                <CircularProgress />
-                        }
-                        <button
-                            className="bg-gradient-to-b from-red-400 to-red-600 p-2 rounded-md text-white hover:shadow-xl mx-3"
-                            onClick={handleClose}
-                            type="button"
-                        >
-                            Close
-                        </button>
+                    <div className="newPetForm-form mt-5 flex items-center">
+                        <div className="newPetForm-form-submit-button">
+                            {
+                                !formik.isSubmitting
+                                    ?
+                                    <Button
+                                        variant="contained"
+                                        color="success"
+                                        disabled={imageUrl === null}
+                                        onClick={formik.handleSubmit}
+
+                                    >
+                                        Submit
+                                    </Button>
+                                    :
+                                    <CircularProgress />
+                            }
+                        </div>
+
+                        <div className="newPetForm-form-submit-close mx-3">
+                            <Button
+                                variant="contained"
+                                color="error"
+                                onClick={handleClose}
+                            >
+                                Close
+                            </Button>
+                        </div>
                     </div>
                 </FormControl>
             </div>
@@ -254,9 +260,10 @@ export default function NewPet(props) {
 
     return (
         <div className="newPet">
-            <button onClick={() => { setOpen(true); }} className="newPet-button p-2" type="button">
+            <Button onClick={() => { setOpen(true); }} variant="contained">
                 New Pet
-            </button>
+            </Button>
+
 
             <Modal
                 open={open}
