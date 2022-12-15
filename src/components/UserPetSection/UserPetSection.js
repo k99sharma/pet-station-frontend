@@ -3,6 +3,8 @@
 import NewPet from "../NewPet/NewPet";
 import PetsDisplay from "../PetsDisplay/PetsDisplay";
 
+// importing helper function 
+
 export default function UserPetSection(props) {
     // props
     const { token, pets } = props;
@@ -25,13 +27,18 @@ export default function UserPetSection(props) {
                     </div>
 
                     <div className="profile-pets-header-content-newPet my-3">
-                        <NewPet token={token} />
+                        <NewPet
+                            token={token}
+                        />
                     </div>
                 </div>
             </div>
 
             <div className="profile-pets-display-pets">
-                <PetsDisplay pets={pets} token={token} />
+                <PetsDisplay
+                    pets={pets}
+                    token={token}
+                />
             </div>
         </div>
     )

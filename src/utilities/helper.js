@@ -92,6 +92,20 @@ export async function fetchPetsData(token) {
     return response.json();
 }
 
+// function to fetch pet
+export async function fetchUserPetsForAdoptionData(token) {
+    const options = {
+        method: 'GET',
+        headers: {
+            'x-auth-token': token
+        }
+    };
+
+    const response = await fetch(`${process.env.REACT_APP_SERVER}/pet/get-all-adoption`, options);
+
+    return response.json();
+}
+
 
 // function to delete pet using pet Id
 export async function deletePet(petId, token) {

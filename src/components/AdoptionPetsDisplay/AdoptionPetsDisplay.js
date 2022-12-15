@@ -4,28 +4,32 @@ import { useState, useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { MdDelete } from "react-icons/md";
 
-import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { FormControl, InputLabel, Select, MenuItem, CircularProgress } from '@mui/material';
 
 // importing helper functions
 import { fetchPetsData, removePetFromAdoption } from "../../utilities/helper";
 
 function PetCard(props) {
+    // props
     const { pet, token } = props;
+
+    // state
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     // function to handle adoption removal
     const handleRemoveFromAdoption = async () => {
+        setIsSubmitting(true);
         const res = await removePetFromAdoption(pet.petId, token);
 
-        console.log(res);
-
         if (res.status === 'fail' || res.status === 'error') {
-            console.log(res);
             alert('Pet cannot be removed from adoption.');
         }
 
         else {
             alert('Pet removed from adoption.');
         }
+
+        setIsSubmitting(false);
     }
 
     // function to complete adoption 
@@ -52,11 +56,17 @@ function PetCard(props) {
                     </div>
 
                     <div className="petCard-content-delete">
-                        <button type="button">
-                            <MdDelete
-                                onClick={handleRemoveFromAdoption}
-                            />
-                        </button>
+                        {
+                            isSubmitting
+                                ?
+                                <CircularProgress />
+                                :
+                                <button type="button">
+                                    <MdDelete
+                                        onClick={handleRemoveFromAdoption}
+                                    />
+                                </button>
+                        }
                     </div>
                 </div>
 
@@ -74,6 +84,7 @@ function PetCard(props) {
                             labelId="complete"
                             id="complete"
                             label="Complete"
+                            defaultValue=""
                             onChange={handleCompleteAdoption}
                         >
                             {
