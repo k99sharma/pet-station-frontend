@@ -94,6 +94,7 @@ function AdoptPetForm(props) {
                 {
                     pets.filter(pet => pet.adoptionStatus === 'none').map(pet =>
                         <OptionBrick
+                            key={pet.petId}
                             token={token}
                             handleClose={handleClose}
                             pet={pet}

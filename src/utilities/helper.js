@@ -92,8 +92,8 @@ export async function fetchPetsData(token) {
     return response.json();
 }
 
-// function to fetch pet
-export async function fetchUserPetsForAdoptionData(token) {
+// function to fetch pets available for adoption
+export async function fetchPetsForAdoptionData(token) {
     const options = {
         method: 'GET',
         headers: {
@@ -101,8 +101,7 @@ export async function fetchUserPetsForAdoptionData(token) {
         }
     };
 
-    const response = await fetch(`${process.env.REACT_APP_SERVER}/pet/get-all-adoption`, options);
-
+    const response = await fetch(`${process.env.REACT_APP_SERVER}/adoption/get-all-pets`, options);
     return response.json();
 }
 

@@ -5,7 +5,7 @@ import { useQuery } from 'react-query';
 import { FormControl, Select, MenuItem, InputLabel } from "@mui/material";
 
 // importing helper function
-import { fetchPetsData } from '../../utilities/helper';
+import { fetchPetsForAdoptionData } from '../../utilities/helper';
 
 // importing context
 import AuthContext from '../../context/auth';
@@ -32,25 +32,15 @@ function AdoptionFilter(props) {
     )
 }
 
-// adoption component
-export default function Adoption() {
-    // context
-    const authCtx = useContext(AuthContext);
-
-    // fetch pet information
-    const { isLoading, error, data } = useQuery('pet', () => fetchPetsData(authCtx.token));
-
-    if (isLoading)
-        return <div>Loading ...</div>
-
-    if (error)
-        return <div>Normal Error</div>
+function AdoptionSection(props) {
+    // props
+    const { pets } = props;
 
     // state
     const [filter, setFilter] = useState('dog');
 
     return (
-        <div className="adoption p-5">
+        <div className="adoptionSection">
             <div className="adoption-header flex items-center justify-around">
                 <div className="adoption-header-banner flex items-center">
                     <div className="adoption-header-banner-img">
@@ -80,10 +70,32 @@ export default function Adoption() {
 
             <div className="adoption-pets-list">
                 <AdoptionPetsList
-                    petsList={data.data.data.pets}
+                    petsList={pets}
                     filter={filter}
                 />
             </div>
+        </div>
+    )
+}
+
+// adoption component
+export default function Adoption() {
+    // context
+    const authCtx = useContext(AuthContext);
+
+    // fetch pet information
+    const { isLoading, error, data } = useQuery('adoptionPet', () => fetchPetsForAdoptionData(authCtx.token));
+
+    if (isLoading)
+        return <div>Loading ...</div>
+
+    if (error)
+        return <div>Normal Error</div>
+
+
+    return (
+        <div className="adoption p-5">
+            <AdoptionSection pets={data.data.pets} />
         </div>
     )
 }
