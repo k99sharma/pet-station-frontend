@@ -137,7 +137,7 @@ export default function PetCard(props) {
                     </div>
                 </div>
 
-                <div className="petCard-content-adoptionButton">
+                <div className="petCard-content-adoptionButton px-2">
                     {
                         // eslint-disable-next-line no-nested-ternary
                         pet.adoptionRequest.includes(authCtx.user.userId)

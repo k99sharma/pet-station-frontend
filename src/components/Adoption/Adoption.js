@@ -74,6 +74,12 @@ function AdoptionSection(props) {
                     filter={filter}
                 />
             </div>
+
+            <div className="profile-copyright font-lighter text-xs text-center text-neutral-800 mt-10">
+                {
+                    `Copyright © ${new Date().getFullYear()} Pet Station. All rights reserved.`
+                }
+            </div>
         </div>
     )
 }
