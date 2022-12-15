@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-no-constructed-context-values */
+/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import jwt from 'jwt-decode';
 
@@ -27,6 +27,7 @@ export function AuthContextProvider({ children }) {
 
     const loginHandler = (tkn) => {
         setToken(tkn);
+
         // saving token in local storage
         alert('Logged In');
         localStorage.setItem('token', tkn);
@@ -44,8 +45,8 @@ export function AuthContextProvider({ children }) {
         user: userData,
         isLoggedIn: userIsLoggedIn,
         login: loginHandler,
-        logout: logoutHandler,
-    }
+        logout: logoutHandler
+    };
 
     return (
         <AuthContext.Provider value={contextValue}>
@@ -53,6 +54,5 @@ export function AuthContextProvider({ children }) {
         </AuthContext.Provider>
     );
 }
-
 
 export default AuthContext;
