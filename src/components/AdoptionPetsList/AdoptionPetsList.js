@@ -18,7 +18,7 @@ export default function AdoptionPetsList(props) {
                     :
                     <div className="adoptionPetsList-display grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 p-5 bg-stone-200 rounded-md">
                         {
-                            petsList.filter(pet => pet.category === filter).map(pet => <PetCard pet={pet} />)
+                            petsList.filter(pet => pet.category === filter).map(pet => <PetCard key={pet.petId} pet={pet} />)
                         }
                     </div>
             }

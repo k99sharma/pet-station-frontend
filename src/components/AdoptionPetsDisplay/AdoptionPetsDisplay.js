@@ -7,8 +7,71 @@ import { MdDelete } from "react-icons/md";
 import { FormControl, InputLabel, Select, MenuItem, CircularProgress } from '@mui/material';
 
 // importing helper functions
-import { fetchPetsData, removePetFromAdoption } from "../../utilities/helper";
+import { fetchPetsData, removePetFromAdoption, getAdoptionRequest, completeAdoption } from "../../utilities/helper";
 
+function AdoptionRequest(props) {
+    const { petId, token } = props;
+    const [requests, setRequests] = useState([]);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    useEffect(() => {
+        getAdoptionRequest(petId, token)
+            .then(res => setRequests(res.data.requests))
+            .catch(err => console.log(err))
+    }, [])
+
+    // function to complete adoption 
+    const handleCompleteAdoption = async (e) => {
+        setIsSubmitting(true);
+
+        const userId = e.target.value;
+
+        const res = await completeAdoption(userId, petId, token);
+
+        if (res.status === 'fail' || res.status === 'error') {
+            alert('Pet adoption cannot be completed.');
+            setIsSubmitting(false);
+        }
+
+        else {
+            alert('Pet adoption complete.');
+        }
+    }
+
+    return (
+        <FormControl fullWidth>
+            {
+                isSubmitting
+                    ?
+                    <CircularProgress />
+                    :
+                    <>
+                        <InputLabel id="complete">Complete</InputLabel>
+                        <Select
+                            disabled={requests.length === 0}
+                            labelId="complete"
+                            id="complete"
+                            label="Complete"
+                            defaultValue=""
+                            onChange={handleCompleteAdoption}
+                        >
+                            {
+                                requests.map(request =>
+                                    <MenuItem key={request.userId} value={request.userId}>
+                                        {
+                                            request.name
+                                        }
+                                    </MenuItem>
+                                )
+                            }
+                        </Select>
+                    </>
+            }
+        </FormControl>
+    )
+}
+
+// pet card component
 function PetCard(props) {
     // props
     const { pet, token } = props;
@@ -30,11 +93,6 @@ function PetCard(props) {
         }
 
         setIsSubmitting(false);
-    }
-
-    // function to complete adoption 
-    const handleCompleteAdoption = async () => {
-        console.log('Complete')
     }
 
     return (
@@ -77,27 +135,10 @@ function PetCard(props) {
                 </div>
 
                 <div className="pet-content-complete">
-                    <FormControl fullWidth>
-                        <InputLabel id="complete">Complete</InputLabel>
-                        <Select
-                            disabled={pet.adoptionRequest.length === 0}
-                            labelId="complete"
-                            id="complete"
-                            label="Complete"
-                            defaultValue=""
-                            onChange={handleCompleteAdoption}
-                        >
-                            {
-                                pet.adoptionRequest.map(data =>
-                                    <MenuItem value={data.userId}>
-                                        {
-                                            `${data.firstName} ${data.lastName}`
-                                        }
-                                    </MenuItem>
-                                )
-                            }
-                        </Select>
-                    </FormControl>
+                    <AdoptionRequest
+                        petId={pet.petId}
+                        token={token}
+                    />
                 </div>
             </div>
         </div>

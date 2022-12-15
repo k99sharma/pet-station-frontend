@@ -1,13 +1,62 @@
 /* eslint-disable react/prop-types */
 
-import { Button, Divider } from "@mui/material";
+// importing components
+import { useContext, useState } from "react";
+
+import { Button, Divider, CircularProgress } from "@mui/material";
+
+// importing context
+import AuthContext from '../../context/auth';
+
+// importing helper function
+import { sendAdoptionRequest, cancelAdoptionRequest } from "../../utilities/helper";
 
 // pet card component
 export default function PetCard(props) {
     const { pet } = props;
 
+    // state
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    // context
+    const authCtx = useContext(AuthContext);
+
+    // handle adoption cancel
+    const handleAdoptionRequest = async (petId) => {
+        setIsSubmitting(true);
+
+        const res = await sendAdoptionRequest(petId, authCtx.token);
+
+        if (res.status === 'fail' || res.status === 'error') {
+            alert('Adoption request is not sent.');
+        }
+
+        else {
+            alert('Adoption request is sent.');
+        }
+
+        setIsSubmitting(false);
+    }
+
+    // handle cancel adoption
+    const handleCancelAdoption = async (petId) => {
+        setIsSubmitting(true);
+
+        const res = await cancelAdoptionRequest(petId, authCtx.token);
+
+        if (res.status === 'fail' || res.status === 'error') {
+            alert('Unable to sent cancel adoption request.');
+        }
+
+        else {
+            alert('Sent adoption cancel request.');
+        }
+
+        setIsSubmitting(false);
+    }
+
     return (
-        <div className="petCard flex flex-col items-center bg-white rounded-2xl p-5">
+        <div className="petCard flex flex-col items-center bg-white rounded-2xl p-5 m-3">
             <div className="petCard-image w-3/5 mb-3">
                 <img
                     className="rounded-full"
@@ -89,12 +138,34 @@ export default function PetCard(props) {
                 </div>
 
                 <div className="petCard-content-adoptionButton">
-                    <Button
-                        color="success"
-                        variant="contained"
-                    >
-                        Adopt
-                    </Button>
+                    {
+                        // eslint-disable-next-line no-nested-ternary
+                        pet.adoptionRequest.includes(authCtx.user.userId)
+                            ?
+                            isSubmitting
+                                ?
+                                <CircularProgress />
+                                :
+                                <Button
+                                    onClick={() => handleCancelAdoption(pet.petId)}
+                                    color="error"
+                                    variant="contained"
+                                >
+                                    Cancel
+                                </Button>
+                            :
+                            isSubmitting
+                                ?
+                                <CircularProgress />
+                                :
+                                <Button
+                                    onClick={() => handleAdoptionRequest(pet.petId)}
+                                    color="success"
+                                    variant="contained"
+                                >
+                                    Adopt
+                                </Button>
+                    }
                 </div>
             </div>
         </div>
