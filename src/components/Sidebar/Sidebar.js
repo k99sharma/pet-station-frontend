@@ -4,7 +4,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaAlignLeft } from 'react-icons/fa';
 
-import { Drawer, Button, Avatar, Divider } from "@mui/material";
+import { Drawer, Button, Divider } from "@mui/material";
+import UserAvatar from '../UserAvatar/UserAvatar';
 import Banner from "../Banner/Banner";
 
 // importing utility function
@@ -74,13 +75,10 @@ export default function Sidebar(props) {
 
                     <div className='sidebar-header flex items-center'>
                         <div className='sidebar-header-avatar'>
-                            <Avatar
-                                sx={{ width: 50, height: 50 }}
-                            >
-                                {
-                                    user.firstName.charAt(0)
-                                }
-                            </Avatar>
+                            <UserAvatar
+                                profilePictureUrl={user.profilePictureUrl}
+                                name={user.firstName}
+                            />
                         </div>
 
                         <div className='sidebar-header-content mx-5'>
