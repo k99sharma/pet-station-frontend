@@ -8,6 +8,7 @@ import { FormControl, InputLabel, Select, MenuItem, CircularProgress } from '@mu
 
 // importing helper functions
 import { fetchPetsData, removePetFromAdoption, getAdoptionRequest, completeAdoption } from "../../utilities/helper";
+import Empty from '../Empty/Empty';
 
 function AdoptionRequest(props) {
     const { petId, token } = props;
@@ -174,16 +175,23 @@ export default function AdoptionPetsDisplay(props) {
     }, [])
 
     return (
-        <div className="petsDisplay my-10 rounded-md bg-neutral-300 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
+        <div className="petsDisplay my-10">
             {
                 pets.length !== 0
                     ?
-                    pets.filter(pet => pet.adoptionStatus === 'pending').map(pet => (
-                        <PetCard key={pet.petId} token={token} pet={pet} />
-                    ))
+                    <div className="rounded-md bg-neutral-300 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
+                        {
+                            pets.filter(pet => pet.adoptionStatus === 'pending').map(pet => (
+                                <PetCard key={pet.petId} token={token} pet={pet} />
+                            ))
+                        }
+                    </div>
                     :
-                    <div className="petDisplay-empty p-3 font-bold text-neutral-800">
-                        No pets available.
+                    <div className="petDisplay-empty">
+                        <Empty
+                            image="/assets/empty3.gif"
+                            label="Help make room for more animals in need by adopting from us."
+                        />
                     </div>
             }
         </div>

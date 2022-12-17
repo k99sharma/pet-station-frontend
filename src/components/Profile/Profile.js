@@ -9,8 +9,8 @@ export default function Profile(props) {
     const { authCtx } = props;
 
     return (
-        <div className="profile flex flex-col justify-center items-center">
-            <div className="profile-content box-container rounded-2xl md:w-4/5">
+        <div className="profile box-container rounded-2xl md:w-4/5">
+            <div className="profile-content">
                 <div className="profile-header mb-5">
                     <Heading
                         sticker="/assets/profile1.png"
@@ -26,12 +26,6 @@ export default function Profile(props) {
                 <div className="profile-adoptionHistory">
                     <AdoptionHistory token={authCtx.token} />
                 </div>
-            </div>
-
-            <div className="profile-copyright font-lighter text-xs text-center text-neutral-800 my-10">
-                {
-                    `Copyright © ${new Date().getFullYear()} Pet Station. All rights reserved.`
-                }
             </div>
         </div>
     )

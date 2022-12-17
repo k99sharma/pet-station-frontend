@@ -4,6 +4,8 @@ import { CircularProgress } from '@mui/material';
 import { useState } from 'react';
 import { MdDelete } from "react-icons/md";
 
+import Empty from '../Empty/Empty';
+
 // importing helper functions
 import { deletePet } from "../../utilities/helper";
 
@@ -111,16 +113,23 @@ export default function PetsDisplay(props) {
     const { pets, token } = props;
 
     return (
-        <div className="petsDisplay my-10 rounded-md bg-neutral-300 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
+        <div className="petsDisplay my-10">
             {
                 pets.length !== 0
                     ?
-                    pets.map(pet => (
-                        <PetCard key={pet.petId} token={token} pet={pet} />
-                    ))
+                    <div className="petsDisplay-cards rounded-md bg-neutral-300 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
+                        {
+                            pets.map(pet => (
+                                <PetCard key={pet.petId} token={token} pet={pet} />
+                            ))
+                        }
+                    </div>
                     :
-                    <div className="petDisplay-empty p-3 font-bold text-neutral-800">
-                        No pets available.
+                    <div className="petDisplay-empty">
+                        <Empty
+                            image="/assets/empty2.gif"
+                            label="When you adopt a pet, you are giving a second chance to an animal in need and providing them with a loving home."
+                        />
                     </div>
             }
         </div>
