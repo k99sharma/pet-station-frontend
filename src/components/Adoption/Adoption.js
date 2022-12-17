@@ -74,12 +74,6 @@ function AdoptionSection(props) {
                     filter={filter}
                 />
             </div>
-
-            <div className="profile-copyright font-lighter text-xs text-center text-neutral-800 mt-10">
-                {
-                    `Copyright © ${new Date().getFullYear()} Pet Station. All rights reserved.`
-                }
-            </div>
         </div>
     )
 }
@@ -100,7 +94,7 @@ export default function Adoption() {
 
 
     return (
-        <div className="adoption p-5">
+        <div className="adoption box-container md:w-4/5 rounded-2xl p-5">
             <AdoptionSection pets={data.data.pets} />
         </div>
     )

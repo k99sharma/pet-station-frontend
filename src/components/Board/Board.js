@@ -10,47 +10,56 @@ export default function Board(props) {
     const { option, authCtx, user } = props;
 
     return (
-        <div className='board'>
-            {
-                option === 'profile'
-                    ?
-                    <Profile
-                        authCtx={authCtx}
-                        user={user}
-                    />
-                    :
-                    null
-            }
-            {
-                option === 'adoption'
-                    ?
-                    <Adoption
-                        authCtx={authCtx}
-                        user={user}
-                    />
-                    :
-                    null
-            }
-            {
-                option === 'messages'
-                    ?
-                    <Messages
-                        authCtx={authCtx}
-                        user={user}
-                    />
-                    :
-                    null
-            }
-            {
-                option === 'settings'
-                    ?
-                    <Settings
-                        authCtx={authCtx}
-                        user={user}
-                    />
-                    :
-                    null
-            }
-        </div>
+        <>
+            <div className='board flex items-center justify-center'>
+                {
+                    option === 'profile'
+                        ?
+                        <Profile
+                            authCtx={authCtx}
+                            user={user}
+                        />
+                        :
+                        null
+                }
+                {
+                    option === 'adoption'
+                        ?
+                        <Adoption
+                            authCtx={authCtx}
+                            user={user}
+                        />
+                        :
+                        null
+                }
+                {
+                    option === 'messages'
+                        ?
+                        <Messages
+                            authCtx={authCtx}
+                            user={user}
+                        />
+                        :
+                        null
+                }
+                {
+                    option === 'settings'
+                        ?
+                        <Settings
+                            authCtx={authCtx}
+                            user={user}
+                        />
+                        :
+                        null
+                }
+            </div>
+
+
+            <div className="profile-copyright font-lighter text-xs text-center text-neutral-800 my-10">
+                {
+                    `Copyright © ${new Date().getFullYear()} Pet Station. All rights reserved.`
+                }
+            </div>
+        </>
     )
 }
