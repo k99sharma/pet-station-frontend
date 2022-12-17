@@ -1,10 +1,9 @@
-/* eslint-disable react/prop-types */
 // importing components
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaAlignLeft } from 'react-icons/fa';
-
 import { Drawer, Button, Divider } from "@mui/material";
+import { HiOutlineUser, HiOutlineHome, HiOutlineMail, HiOutlineCog, HiOutlineLogout } from "react-icons/hi";
 import UserAvatar from '../UserAvatar/UserAvatar';
 import Banner from "../Banner/Banner";
 
@@ -15,8 +14,9 @@ import { titleCase } from '../../utilities/helper';
 export default function Sidebar(props) {
     // props
     const { user, authCtx, option, setOption } = props;
-    const navigator = useNavigate();
+    const navigator = useNavigate();    // page navigator
 
+    // state to open or close sidebar
     const [open, setOpen] = useState(false);
 
     // function to handle logout
@@ -34,22 +34,22 @@ export default function Sidebar(props) {
     // options
     const boardOptions = [{
         id: 1,
-        img: 'profile.png',
+        icon: <HiOutlineUser className="h-6 w-6 mr-5" />,
         label: 'profile'
     },
     {
         id: 2,
-        img: 'adoption.png',
+        icon: <HiOutlineHome className="h-6 w-6 mr-5" />,
         label: 'adoption'
     },
     {
         id: 3,
-        img: 'messages.png',
+        icon: <HiOutlineMail className="h-6 w-6 mr-5" />,
         label: 'messages'
     },
     {
         id: 4,
-        img: 'settings.png',
+        icon: <HiOutlineCog className="h-6 w-6 mr-5" />,
         label: 'settings'
     }];
 
@@ -69,10 +69,12 @@ export default function Sidebar(props) {
                 onClose={() => { setOpen(false) }}
             >
                 <div className='sidebar p-5'>
+                    {/* banner */}
                     <div className='sidebar-banner mb-5'>
                         <Banner />
                     </div>
 
+                    {/* user information */}
                     <div className='sidebar-header flex items-center'>
                         <div className='sidebar-header-avatar'>
                             <UserAvatar
@@ -100,19 +102,20 @@ export default function Sidebar(props) {
                         <Divider />
                     </div>
 
+                    {/* sidebar options */}
                     <div className="sidebar-options">
                         {
                             boardOptions.map(board => (
                                 <div key={board.label} className={`${option === board.label ? 'bg-blue-100 rounded-md' : null} hover:bg-blue-100 hover:rounded-md p-2 my-5`}>
-                                    <button onClick={() => { handleBoardSelection(board.label); }} className="sidebar-options-option flex items-center justify-center" type="button">
+                                    <button
+                                        onClick={() => { handleBoardSelection(board.label); }}
+                                        className="sidebar-options-option flex items-center justify-center"
+                                        type="button"
+                                    >
                                         <div className="sidebar-options-option-image">
-                                            <img
-                                                className="mx-2"
-                                                src={`/assets/${board.img}`}
-                                                height={20}
-                                                width={20}
-                                                alt={board.label}
-                                            />
+                                            {
+                                                board.icon
+                                            }
                                         </div>
 
                                         <div className="sidebar-options-option-label text-lg">
@@ -130,16 +133,10 @@ export default function Sidebar(props) {
                         <Divider />
                     </div>
 
-                    <div className="sidebar-logout my-20">
-                        <button className="flex justify-center items-center" onClick={handleLogout} type="button">
-                            <div className="sidebar-logout-image">
-                                <img
-                                    className="mx-2"
-                                    src='/assets/logout.png'
-                                    height={20}
-                                    width={20}
-                                    alt='Logout'
-                                />
+                    <div className="sidebar-logout flex mx-3 my-20">
+                        <button className="flex items-center justify-center" onClick={handleLogout} type="button">
+                            <div className="sidebar-logout-icon">
+                                <HiOutlineLogout className="w-6 h-6 mr-5" />
                             </div>
 
                             <div className="sidebar-logout-label text-lg">
