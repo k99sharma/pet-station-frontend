@@ -6,6 +6,7 @@ import { useQuery } from "react-query"
 // importing helper functions
 import { fetchAdoptionHistory } from "../../utilities/helper";
 import Heading from "../Heading/Heading";
+import Empty from "../Empty/Empty";
 
 function Contract(props) {
     const { contract } = props;
@@ -65,8 +66,11 @@ function AdoptionCard(props) {
             {
                 contracts.length === 0
                     ?
-                    <div className="adoptionCard-contract-empty p-3 font-bold text-neutral-800">
-                        No adoption history.
+                    <div className="adoptionCard-contract-empty">
+                        <Empty
+                            image="/assets/empty4.gif"
+                            label="By adopting a pet, you are not only enriching your own life, but you are also helping to make the world a better place for all animals."
+                        />
                     </div>
                     :
                     <div className="adoptionCard-contract-display p-3 bg-neutral-300 rounded-md grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
@@ -103,7 +107,7 @@ export default function AdoptionHistory(props) {
                 />
             </div>
 
-            <div className="adoptionHistory-content bg-neutral-300 rounded-md">
+            <div className="adoptionHistory-content">
                 <AdoptionCard data={data.data} />
             </div>
         </div>
