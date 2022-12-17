@@ -2,6 +2,7 @@
 // importing components
 import AdoptionPetsDisplay from "../AdoptionPetsDisplay/AdoptionPetsDisplay";
 import AdoptPet from "../AdoptPet/AdoptPet";
+import Heading from "../Heading/Heading";
 
 export default function UserPetAdoptionSection(props) {
     // props
@@ -9,30 +10,17 @@ export default function UserPetAdoptionSection(props) {
 
     return (
         <div className="userPetAdoptionSection">
-            <div className="profile-petsAdoption-header flex items-center">
-                <div className="profile-petsAdoption-header-image">
-                    <img
-                        src="/assets/profile3.png"
-                        height={100}
-                        width={100}
-                        alt="pet section header"
+            <div className="profile-petsAdoption-header">
+                <Heading
+                    sticker="/assets/profile3.png"
+                    heading={`Your Pet's Adoption`}
+                    subheading="Find a new family for your pets"
+                >
+                    <AdoptPet
+                        pets={pets}
+                        token={token}
                     />
-                </div>
-
-                <div className="profile-petsAdoption-header-content mx-10">
-                    <div className="profile-petsAdoption-header-content-heading text-2xl font-lighter">
-                        {
-                            `Your Pet's Adoption`
-                        }
-                    </div>
-
-                    <div className="profile-petsAdoption-header-content-newPet  my-3">
-                        <AdoptPet
-                            pets={pets}
-                            token={token}
-                        />
-                    </div>
-                </div>
+                </Heading>
             </div>
 
             <div className="profile-petsAdoption-display-pets">

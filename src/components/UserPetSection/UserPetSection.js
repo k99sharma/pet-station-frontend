@@ -3,6 +3,8 @@
 import NewPet from "../NewPet/NewPet";
 import PetsDisplay from "../PetsDisplay/PetsDisplay";
 
+import Heading from '../Heading/Heading';
+
 // importing helper function 
 
 export default function UserPetSection(props) {
@@ -12,26 +14,13 @@ export default function UserPetSection(props) {
     return (
         <div className="userPetSection">
             <div className="profile-pets-header flex items-center">
-                <div className="profile-pets-header-image">
-                    <img
-                        src="/assets/profile2.png"
-                        height={100}
-                        width={100}
-                        alt="pet section header"
-                    />
-                </div>
-
-                <div className="profile-pets-header-content mx-10">
-                    <div className="profile-pets-header-content-heading text-2xl font-lighter">
-                        Your Pets
-                    </div>
-
-                    <div className="profile-pets-header-content-newPet my-3">
-                        <NewPet
-                            token={token}
-                        />
-                    </div>
-                </div>
+                <Heading
+                    sticker="/assets/profile2.png"
+                    heading="Your Pets"
+                    subheading="Checkout your pets below"
+                >
+                    <NewPet />
+                </Heading>
             </div>
 
             <div className="profile-pets-display-pets">
