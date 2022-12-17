@@ -5,6 +5,7 @@ import { useQuery } from "react-query"
 
 // importing helper functions
 import { fetchAdoptionHistory } from "../../utilities/helper";
+import Heading from "../Heading/Heading";
 
 function Contract(props) {
     const { contract } = props;
@@ -94,25 +95,12 @@ export default function AdoptionHistory(props) {
 
     return (
         <div className="adoptionHistory">
-            <div className="adoptionHistory-header mb-10 flex items-center">
-                <div className="adoptionHistory-header-img">
-                    <img
-                        src="/assets/profile4.png"
-                        height={100}
-                        width={100}
-                        alt="adoption history"
-                    />
-                </div>
-
-                <div className="adoptionHistory-header-content">
-                    <div className="adoptionHistory-header-content-title text-2xl mx-10 mb-1 font-lighter">
-                        Adoption History
-                    </div>
-
-                    <div className="adoptionHistory-header-content-subtitle mx-10 font-bold">
-                        Your previous pet adoption history
-                    </div>
-                </div>
+            <div className="adoptionHistory-header mb-10">
+                <Heading
+                    sticker="/assets/profile4.png"
+                    heading="Adoption History"
+                    subheading="Your previous pet adoption history"
+                />
             </div>
 
             <div className="adoptionHistory-content bg-neutral-300 rounded-md">
