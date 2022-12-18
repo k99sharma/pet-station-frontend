@@ -176,20 +176,22 @@ function SignupForm() {
                     </div>
 
                     <div className="signupForm-form-loginButton my-5">
-                        <button
-                            onClick={formik.handleSubmit}
-                            className="signupForm-form-submitButton hover:shadow-2xl p-2"
-                            type="submit"
-                            disabled={formik.isSubmitting}
-                        >
-                            {
-                                formik.isSubmitting
-                                    ?
-                                    <CircularProgress color='inherit' />
-                                    :
-                                    'Sign up'
-                            }
-                        </button>
+
+                        {
+                            formik.isSubmitting
+                                ?
+                                <CircularProgress color='inherit' />
+                                :
+                                <button
+                                    onClick={formik.handleSubmit}
+                                    className="signupForm-form-submitButton hover:shadow-2xl p-2"
+                                    type="submit"
+                                    disabled={formik.isSubmitting}
+                                >
+                                    Sign up
+                                </button>
+
+                        }
                     </div>
                 </FormControl>
             </div>
