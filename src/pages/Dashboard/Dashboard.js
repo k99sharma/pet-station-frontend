@@ -32,7 +32,7 @@ export default function DashboardPage() {
         return <div>Error</div>
 
     return (
-        <div className='dashboardPage'>
+        <div className='dashboardPage peach-color min-h-screen'>
             <div className='dashboard-sidebar'>
                 <Sidebar
                     user={data.data.data}
