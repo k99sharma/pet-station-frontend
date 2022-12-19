@@ -56,7 +56,7 @@ export default function Sidebar(props) {
     return (
         <div className='sidebar'>
             <div className="p-5">
-                <Button onClick={() => { setOpen(!open) }}>
+                <Button color="inherit" onClick={() => { setOpen(!open) }}>
                     <FaAlignLeft
                         className="h-6 w-6"
                     />
