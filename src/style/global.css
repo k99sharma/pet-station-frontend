@@ -24,12 +24,12 @@ code {
 	--secondary-font: 'Roboto', sans-serif;
 }
 
-body {
+.peach-color {
 	background-color: #e2dfd2;
 }
 
 .box-container {
-	background-color: #fffff0;
+	background-color: white;
 	padding: 2rem;
 	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }

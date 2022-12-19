@@ -2,8 +2,10 @@
 import { useContext, useState } from "react";
 import { useQuery } from "react-query";
 
+// importing custom components
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Board from "../../components/Board/Board";
+import { FullScreenLoading } from '../../components/Loading/Loading';
 
 // importing context
 import AuthContext from '../../context/auth';
@@ -23,7 +25,7 @@ export default function DashboardPage() {
     const { isLoading, error, data } = useQuery('user', () => fetchUserData(authCtx.token));
 
     if (isLoading)
-        return <div>Loading...</div>
+        return <FullScreenLoading />
 
     if (error)
         return <div>Normal Error</div>
@@ -32,7 +34,7 @@ export default function DashboardPage() {
         return <div>Error</div>
 
     return (
-        <div className='dashboardPage'>
+        <div className='dashboardPage peach-color min-h-screen'>
             <div className='dashboard-sidebar'>
                 <Sidebar
                     user={data.data.data}

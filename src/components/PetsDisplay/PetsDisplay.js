@@ -1,15 +1,19 @@
-/* eslint-disable react/prop-types */
 // importing components
 import { CircularProgress } from '@mui/material';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { useQuery } from 'react-query';
 import { MdDelete } from "react-icons/md";
 
+// importing custom components
 import Empty from '../Empty/Empty';
 
-// importing helper functions
-import { deletePet } from "../../utilities/helper";
+// importing context
+import AuthContext from '../../context/auth';
 
-function PetCard(props) {
+// importing helper functions
+import { deletePet, fetchPetsData } from "../../utilities/helper";
+
+export function PetCard(props) {
     const { pet, token } = props;
 
     // state
@@ -108,19 +112,33 @@ function PetCard(props) {
     )
 }
 
-export default function PetsDisplay(props) {
-    // props
-    const { pets, token } = props;
+// pets display component
+export default function PetsDisplay() {
+    // context
+    const authCtx = useContext(AuthContext);
+
+    // query
+    const { isLoading, error, data } = useQuery('pets', () => fetchPetsData(authCtx.token));
+
+    if (isLoading)
+        return <div>...Loading</div>
+
+    if (error)
+        return <div>Error</div>
 
     return (
         <div className="petsDisplay my-10">
             {
-                pets.length !== 0
+                data.data.data.pets.length !== 0
                     ?
-                    <div className="petsDisplay-cards rounded-md bg-neutral-300 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
+                    <div className="petsDisplay-cards rounded-md bg-neutral-300 grid grid-cols-1 md:grid-cols-3">
                         {
-                            pets.map(pet => (
-                                <PetCard key={pet.petId} token={token} pet={pet} />
+                            data.data.data.pets.map(pet => (
+                                <PetCard
+                                    key={pet.petId}
+                                    token={authCtx.token}
+                                    pet={pet}
+                                />
                             ))
                         }
                     </div>
@@ -133,5 +151,5 @@ export default function PetsDisplay(props) {
                     </div>
             }
         </div>
-    )
+    );
 }
