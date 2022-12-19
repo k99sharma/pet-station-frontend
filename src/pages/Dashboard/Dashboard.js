@@ -2,6 +2,7 @@
 import { useContext, useState } from "react";
 import { useQuery } from "react-query";
 
+// importing custom components
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Board from "../../components/Board/Board";
 
@@ -23,7 +24,7 @@ export default function DashboardPage() {
     const { isLoading, error, data } = useQuery('user', () => fetchUserData(authCtx.token));
 
     if (isLoading)
-        return <div>Loading...</div>
+        return <div>Loading ...</div>
 
     if (error)
         return <div>Normal Error</div>
