@@ -54,6 +54,7 @@ export default function Board(props) {
                 }
             </div>
 
+
             <div className="profile-copyright font-lighter text-xs text-center text-neutral-800 py-10">
                 {
                     `Copyright © ${new Date().getFullYear()} Pet Station. All rights reserved.`

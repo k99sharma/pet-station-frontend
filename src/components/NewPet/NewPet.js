@@ -1,16 +1,29 @@
-/* eslint-disable react/prop-types */
 // importing css
 import './NewPet.css';
 
 // importing components
-import { useState } from 'react';
-
+import { useState, useContext } from 'react';
 import { GrClose } from "react-icons/gr";
-import { Modal, Button, Box, Divider, TextField, FormControl, InputLabel, Select, MenuItem, CircularProgress } from '@mui/material';
+import {
+    Modal,
+    Button,
+    Box,
+    Divider,
+    TextField,
+    FormControl,
+    InputLabel,
+    Select,
+    MenuItem,
+    CircularProgress
+} from '@mui/material';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
+// importing custom components
 import FileUpload from '../FileUpload/FileUpload';
+
+// importing context
+import AuthContext from '../../context/auth';
 
 // importing form helper
 import { dogBreed, catBreed } from '../../utilities/formHelper';
@@ -247,13 +260,14 @@ const style = {
 };
 
 // New Pet button component
-export default function NewPet(props) {
-    // props
-    const { token } = props;
+export default function NewPet() {
+    // context
+    const authCtx = useContext(AuthContext);
 
     // states
     const [open, setOpen] = useState(false);
 
+    // helper to close modal
     const handleClose = () => {
         setOpen(false);
     }
@@ -264,7 +278,6 @@ export default function NewPet(props) {
                 New Pet
             </Button>
 
-
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -272,7 +285,7 @@ export default function NewPet(props) {
                 aria-describedby="new pet form"
             >
                 <Box className='rounded-lg' sx={style}>
-                    <NewPetForm token={token} handleClose={handleClose} />
+                    <NewPetForm token={authCtx.token} handleClose={handleClose} />
                 </Box>
             </Modal>
         </div>
