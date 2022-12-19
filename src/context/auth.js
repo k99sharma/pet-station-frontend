@@ -29,14 +29,13 @@ export function AuthContextProvider({ children }) {
         setToken(tkn);
 
         // saving token in local storage
-        alert('Logged In');
         localStorage.setItem('token', tkn);
     }
 
     const logoutHandler = () => {
         setToken(null);
+
         // set token in local storage as null
-        alert('Logged Out!');
         localStorage.clear('token');
     }
 
