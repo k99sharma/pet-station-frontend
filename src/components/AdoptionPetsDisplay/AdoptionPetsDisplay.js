@@ -1,15 +1,27 @@
-/* eslint-disable react/prop-types */
 // importing components
 import { useState, useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { MdDelete } from "react-icons/md";
+import { 
+    FormControl, 
+    InputLabel, 
+    Select, 
+    MenuItem, 
+    CircularProgress 
+} from '@mui/material';
 
-import { FormControl, InputLabel, Select, MenuItem, CircularProgress } from '@mui/material';
-
-// importing helper functions
-import { fetchPetsData, removePetFromAdoption, getAdoptionRequest, completeAdoption } from "../../utilities/helper";
+// importing custom components
 import Empty from '../Empty/Empty';
 
+// importing helper functions
+import {  
+    removePetFromAdoption, 
+    getAdoptionRequest, 
+    completeAdoption,
+    fetchPetsData
+} from "../../utilities/helper";
+
+// adoption request component
 function AdoptionRequest(props) {
     const { petId, token } = props;
     const [requests, setRequests] = useState([]);
@@ -69,7 +81,7 @@ function AdoptionRequest(props) {
                     </>
             }
         </FormControl>
-    )
+    );
 }
 
 // pet card component
@@ -143,18 +155,16 @@ function PetCard(props) {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
+// adoption pets display component
 export default function AdoptionPetsDisplay(props) {
     // props
     const { token } = props;
 
-    // state
-    const [pets, setPets] = useState([]);
-
     // fetch pet information
-    const { isLoading, error, data } = useQuery('pet', () => fetchPetsData(token));
+    const { isLoading, error, data } = useQuery('pets', () => fetchPetsData(token));
 
     if (isLoading)
         return <div>Loading ...</div>
@@ -162,28 +172,14 @@ export default function AdoptionPetsDisplay(props) {
     if (error)
         return <div>Normal Error</div>
 
-    useEffect(() => {
-        const arr = [];
-
-        // eslint-disable-next-line no-restricted-syntax
-        for (const pet of data.data.data.pets) {
-            if (pet.adoptionStatus === 'pending')
-                arr.push(pet);
-        }
-
-        setPets(arr);
-    }, [])
-
     return (
         <div className="petsDisplay my-10">
             {
-                pets.length !== 0
+                    data.data.data.count !== 0
                     ?
                     <div className="rounded-md bg-neutral-300 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
                         {
-                            pets.filter(pet => pet.adoptionStatus === 'pending').map(pet => (
-                                <PetCard key={pet.petId} token={token} pet={pet} />
-                            ))
+                            data.data.data.pets.filter(pet => pet.adoptionStatus === 'pending').map(pet => <PetCard key={pet.petId} token={token} pet={pet} />)
                         }
                     </div>
                     :
@@ -195,5 +191,5 @@ export default function AdoptionPetsDisplay(props) {
                     </div>
             }
         </div>
-    )
+    );
 }

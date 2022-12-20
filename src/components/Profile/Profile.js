@@ -4,6 +4,7 @@ import AdoptionHistory from "../AdoptionHistory/AdoptionHistory";
 
 import Heading from "../Heading/Heading";
 import UserPets from '../UserPets/UserPets';
+import UserPetsAdoption from '../UserPetsAdoption/UserPetsAdoption';
 
 // adoption component
 export default function Profile(props) {
@@ -25,12 +26,8 @@ export default function Profile(props) {
                 </div>
 
                 <div className="profile-userPetsAdoption">
-                    User 2
+                    <UserPetsAdoption />
                 </div>
-
-                {/* <div className="profile-petSection">
-                    <PetSection token={authCtx.token} />
-                </div> */}
 
                 <div className="profile-adoptionHistory">
                     <AdoptionHistory token={authCtx.token} />
