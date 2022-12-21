@@ -246,7 +246,7 @@ export async function getAdoptionRequest(petId, token) {
     return response;
 }
 
-// function to get all adoption request
+// function to complete adoption
 export async function completeAdoption(userId, petId, token) {
     const body = {
         petId,
@@ -270,4 +270,18 @@ export async function completeAdoption(userId, petId, token) {
         })
 
     return response;
+}
+
+// function to get all pets of owner available for adoption
+export async function getUserPetsForAdoption(ownerId, token){
+    const options = {
+        method: 'GET',
+        headers: {
+            'x-auth-token': token
+        }
+    };
+
+    const response = await fetch(`${process.env.REACT_APP_SERVER}/adoption/get/allUserPetsForAdoption/${ownerId}`, options);
+
+    return response.json();
 }

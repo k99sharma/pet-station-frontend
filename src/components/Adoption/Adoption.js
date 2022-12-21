@@ -1,101 +1,92 @@
-/* eslint-disable react/prop-types */
 // importing components
 import { useState, useContext } from 'react';
 import { useQuery } from 'react-query';
-import { FormControl, Select, MenuItem, InputLabel } from "@mui/material";
+import { FormControl, Select, MenuItem, InputLabel } from '@mui/material';
+
+// importing custom components
+import AdoptionPetsList from '../AdoptionPetsList/AdoptionPetsList';
+import Heading from '../Heading/Heading';
+import { DisplayLoading } from '../Loading/Loading';
 
 // importing helper function
 import { fetchPetsForAdoptionData } from '../../utilities/helper';
 
 // importing context
 import AuthContext from '../../context/auth';
-import AdoptionPetsList from '../AdoptionPetsList/AdoptionPetsList';
 
 // filter component
 function AdoptionFilter(props) {
-    const { setFilter } = props;
+	const { setFilter } = props;
 
-    return (
-        <div className="adoptionFilter">
-            <FormControl fullWidth>
-                <InputLabel>Filter</InputLabel>
-                <Select
-                    label="Filter"
-                    defaultValue="dog"
-                    onChange={e => setFilter(e.target.value)}
-                >
-                    <MenuItem value="cat">Cat</MenuItem>
-                    <MenuItem value="dog">Dog</MenuItem>
-                </Select>
-            </FormControl>
-        </div>
-    )
+	return (
+		<div className="adoptionFilter">
+			<FormControl fullWidth>
+				<InputLabel>Filter</InputLabel>
+				<Select
+					label="Filter"
+					defaultValue="dog"
+					onChange={(e) => setFilter(e.target.value)}
+				>
+					<MenuItem value="cat">Cat</MenuItem>
+					<MenuItem value="dog">Dog</MenuItem>
+				</Select>
+			</FormControl>
+		</div>
+	);
 }
 
 function AdoptionSection(props) {
-    // props
-    const { pets } = props;
+	// props
+	const { filter } = props;
 
-    // state
-    const [filter, setFilter] = useState('dog');
+	// context
+	const authCtx = useContext(AuthContext);
 
-    return (
-        <div className="adoptionSection">
-            <div className="adoption-header flex items-center justify-around">
-                <div className="adoption-header-banner flex items-center">
-                    <div className="adoption-header-banner-img">
-                        <img
-                            src="/assets/adoption1.png"
-                            height={60}
-                            width={60}
-                            alt="adoption header"
-                        />
-                    </div>
+	// query
+	const { isLoading, error, data } = useQuery('adoptionPet', () =>
+		fetchPetsForAdoptionData(authCtx.token)
+	);
 
-                    <div className="adoption-header-banner-title mx-5">
-                        <div className="adoption-header-banner-content-title font-semibold text-xl">
-                            Adoption
-                        </div>
+	if (isLoading) return <DisplayLoading />;
 
-                        <div className="adoption-header-banner-content-subtitle">
-                            Nice and Easy
-                        </div>
-                    </div>
-                </div>
+	if (error) return <div>Normal Error</div>;
 
-                <div className="adoption-header-filter w-24">
-                    <AdoptionFilter setFilter={setFilter} />
-                </div>
-            </div>
-
-            <div className="adoption-pets-list">
-                <AdoptionPetsList
-                    petsList={pets}
-                    filter={filter}
-                />
-            </div>
-        </div>
-    )
+	return (
+		<div className="adoptionSection">
+			{/* filter */}
+			<div className="adoption-pets-list">
+				<AdoptionPetsList petsList={data.data.pets} filter={filter} />
+			</div>
+		</div>
+	);
 }
 
 // adoption component
 export default function Adoption() {
-    // context
-    const authCtx = useContext(AuthContext);
+	// state
+	const [filter, setFilter] = useState('dog');
 
-    // fetch pet information
-    const { isLoading, error, data } = useQuery('adoptionPet', () => fetchPetsForAdoptionData(authCtx.token));
+	return (
+		<div className="adoption box-container md:w-4/5 rounded-2xl p-5">
+			{/* heading */}
+			<div className="adoption-header flex justify-around items-center">
+				<div className="adoption-header-heading">
+					<Heading
+						sticker="/assets/adoption1.png"
+						heading="Adoption"
+						subheading="Nice and Easy"
+					/>
+				</div>
 
-    if (isLoading)
-        return <div>Loading ...</div>
+				<div className="adoption-header-filter w-24">
+					<AdoptionFilter setFilter={setFilter} />
+				</div>
+			</div>
 
-    if (error)
-        return <div>Normal Error</div>
-
-
-    return (
-        <div className="adoption box-container md:w-4/5 rounded-2xl p-5">
-            <AdoptionSection pets={data.data.pets} />
-        </div>
-    )
+			{/* content */}
+			<div className="adoption-content">
+				<AdoptionSection filter={filter} />
+			</div>
+		</div>
+	);
 }

@@ -1,11 +1,11 @@
-/* eslint-disable react/prop-types */
 // importing components
 import { useState } from 'react';
+import { useQuery } from 'react-query';
 import { Modal, Button, CircularProgress, Box, Divider } from '@mui/material';
 import { GrClose } from "react-icons/gr";
 
 // importing helper function
-import { putPetOnAdoption } from '../../utilities/helper';
+import { fetchPetsData, putPetOnAdoption } from '../../utilities/helper';
 
 // option brick component
 function OptionBrick(props) {
@@ -66,16 +66,26 @@ function OptionBrick(props) {
                 }
             </div>
         </div>
-    )
+    );
 }
 
 // adopt pet form component
 function AdoptPetForm(props) {
     // token
-    const { pets, token, handleClose } = props;
+    const { token, handleClose } = props;
+    
+    // query
+    const { isLoading, error, data } = useQuery('pets', () => fetchPetsData(token));
+
+    if(isLoading)
+        return <div>... Loading</div>
+
+    if(error)
+        return <div>... Error</div>
 
     return (
         <div className="adoptPetForm">
+            {/* header */}
             <div className="adoptPetForm-header flex items-center justify-between px-5">
                 <div className="adoptPetForm-header-title text-xl font-bold">
                     Available Pets
@@ -90,9 +100,10 @@ function AdoptPetForm(props) {
                 <Divider />
             </div>
 
+            {/* available pets modal  */}
             <div className="adoptPetForm-header-options">
                 {
-                    pets.filter(pet => pet.adoptionStatus === 'none').map(pet =>
+                    data.data.data.pets.filter(pet => pet.adoptionStatus === 'none').map(pet =>
                         <OptionBrick
                             key={pet.petId}
                             token={token}
@@ -103,7 +114,7 @@ function AdoptPetForm(props) {
                 }
             </div>
         </div>
-    )
+    );
 }
 
 // style
@@ -118,13 +129,15 @@ const style = {
     p: 2,
 };
 
-export default function AdoptPet(props) {
+// User Put for Adoption Pet Button
+export default function PutForAdoption(props) {
     // props
-    const { pets, token } = props;
+    const { token } = props;
 
     // states
     const [open, setOpen] = useState(false);
 
+    // function to close modal
     const handleClose = () => {
         setOpen(false);
     }
@@ -149,12 +162,11 @@ export default function AdoptPet(props) {
                     sx={style}
                 >
                     <AdoptPetForm
-                        pets={pets}
                         token={token}
                         handleClose={handleClose}
                     />
                 </Box>
             </Modal>
         </div>
-    )
+    );
 }
