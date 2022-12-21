@@ -3,10 +3,13 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query"
 
+// importing custom component
+import Empty from "../Empty/Empty";
+import Heading from "../Heading/Heading";
+import { DisplayLoading } from '../Loading/Loading';
+
 // importing helper functions
 import { fetchAdoptionHistory } from "../../utilities/helper";
-import Heading from "../Heading/Heading";
-import Empty from "../Empty/Empty";
 
 function Contract(props) {
     const { contract } = props;
@@ -92,7 +95,7 @@ export default function AdoptionHistory(props) {
     const { isLoading, error, data } = useQuery('adoptionHistory', () => fetchAdoptionHistory(token));
 
     if (isLoading)
-        return <div>Loading ...</div>
+        return <DisplayLoading />
 
     if (error)
         return <div>Normal Error</div>

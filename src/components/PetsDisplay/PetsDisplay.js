@@ -6,6 +6,7 @@ import { MdDelete } from "react-icons/md";
 
 // importing custom components
 import Empty from '../Empty/Empty';
+import { DisplayLoading } from '../Loading/Loading';
 
 // importing context
 import AuthContext from '../../context/auth';
@@ -121,7 +122,7 @@ export default function PetsDisplay() {
     const { isLoading, error, data } = useQuery('pets', () => fetchPetsData(authCtx.token));
 
     if (isLoading)
-        return <div>...Loading</div>
+        return <DisplayLoading />
 
     if (error)
         return <div>Error</div>

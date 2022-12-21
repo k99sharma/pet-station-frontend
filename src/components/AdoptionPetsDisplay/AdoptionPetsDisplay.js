@@ -12,6 +12,7 @@ import {
 
 // importing custom components
 import Empty from '../Empty/Empty';
+import { DisplayLoading } from '../Loading/Loading';
 
 // importing helper functions
 import {  
@@ -167,7 +168,7 @@ export default function AdoptionPetsDisplay(props) {
     const { isLoading, error, data } = useQuery('pets', () => fetchPetsData(token));
 
     if (isLoading)
-        return <div>Loading ...</div>
+        return <DisplayLoading />
 
     if (error)
         return <div>Normal Error</div>
