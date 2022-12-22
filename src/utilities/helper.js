@@ -366,10 +366,7 @@ export async function updatePassword(payload, token) {
 			payload,
 			config
 		)
-		.then((res) => {
-			const { data } = res;
-			return data;
-		})
+		.then((res) => res)
 		.catch((err) => {
 			const { data } = err.response;
 			return data;
