@@ -9,10 +9,10 @@ export default function UserAvatar(props) {
 	return (
 		<div className="avatar">
 			{profilePictureUrl === null ? (
-				<Avatar sx={{ width: 100, height: 100 }}>{name.charAt(0)}</Avatar>
+				<Avatar sx={{ width: 60, height: 60 }}>{name.charAt(0)}</Avatar>
 			) : (
 				<Avatar
-					sx={{ width: 100, height: 100 }}
+					sx={{ width: 60, height: 60 }}
 					src={profilePictureUrl}
 					alt={name}
 				/>
