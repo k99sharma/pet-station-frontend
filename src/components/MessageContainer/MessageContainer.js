@@ -40,8 +40,16 @@ export default function MessageContainer() {
 				</div>
 
 				{/* message box */}
-				<div className="messageContainer-section-messageBox hidden md:block md:w-3/5">
-					<MessageBox currentBrick={currentBrick} />
+				<div className="messageContainer-section-messageBox hidden md:flex md:items-center md:justify-center md:w-3/5">
+					{currentBrick === null ? (
+						<img
+							className="messageContainer h-full"
+							src="/assets/message1.gif"
+							alt="svg"
+						/>
+					) : (
+						<MessageBox currentBrick={currentBrick} />
+					)}
 				</div>
 			</div>
 		</div>

@@ -5,8 +5,10 @@ import { IoMdSend } from 'react-icons/io';
 
 // message input component
 function MessageInput() {
+	// state
 	const [message, setMessage] = useState('');
 
+	// send message handler
 	const sendMessage = () => {
 		console.log(message);
 	};
@@ -37,14 +39,18 @@ function MessageInput() {
 
 // message output component
 function MessageOutput() {
-	return <div className="messageOutput">Message Output</div>;
+	return (
+		<div className="messageOutput bg-slate-200 h-full rounded-lg p-3">
+			Message Output
+		</div>
+	);
 }
 
 // message box component
 export default function MessageBox() {
 	return (
-		<div className="messageBox flex flex-col">
-			<div className="messageBox-output">
+		<div className="messageBox flex flex-col h-full w-full">
+			<div className="messageBox-output p-1 flex-grow">
 				<MessageOutput />
 			</div>
 

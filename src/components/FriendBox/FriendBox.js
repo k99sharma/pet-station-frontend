@@ -21,7 +21,7 @@ function FriendBrick(props) {
 			onClick={handleClick}
 			className={`friendBrick h-22 p-3 cursor-pointer flex ${
 				currentBrick === friend.userId
-					? 'bg-gradient-to-b from-blue-300 to-blue-500 rounded-lg'
+					? 'bg-gradient-to-b from-blue-300 to-blue-400 rounded-lg'
 					: ''
 			}`}
 		>
