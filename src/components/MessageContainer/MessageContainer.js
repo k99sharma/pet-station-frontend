@@ -9,13 +9,16 @@ import Heading from '../Heading/Heading';
 import FriendBox from '../FriendBox/FriendBox';
 import MessageBox from '../MessageBox/MessageBox';
 
+// importing friend list
+import friends from '../../utilities/friendSeed';
+
 // message container component
 export default function MessageContainer() {
 	// state
 	const [currentBrick, setCurrentBrick] = useState(null);
 
 	return (
-		<div className="messageContainer box-container md:w-4/5 rounded-md">
+		<div className="messageContainer box-container md:w-4/5 rounded-2xl">
 			{/* header */}
 			<div className="messageContainer-header mb-5">
 				<Heading
@@ -26,12 +29,13 @@ export default function MessageContainer() {
 			</div>
 
 			{/* message section */}
-			<div className="messageContainer-section flex">
+			<div className="messageContainer-section rounded-lg flex">
 				{/* friend box */}
-				<div className="messageContainer-section-friendBox md:w-2/5">
+				<div className="messageContainer-section-friendBox w-full md:w-2/5">
 					<FriendBox
 						currentBrick={currentBrick}
 						setCurrentBrick={setCurrentBrick}
+						friends={friends}
 					/>
 				</div>
 
