@@ -3,14 +3,26 @@ import { useState } from 'react';
 import { Button, TextField } from '@mui/material';
 import { IoMdSend } from 'react-icons/io';
 
+// importing message store class
+import MessageStore from './MessageStore';
+
+import socket from '../../websocket/socketio';
+
+// message store instance
+const messageStore = new MessageStore(socket);
+
 // message input component
-function MessageInput() {
+function MessageInput(props) {
+	// props
+	const { currentChat } = props;
+
 	// state
 	const [message, setMessage] = useState('');
 
 	// send message handler
 	const sendMessage = () => {
-		console.log(message);
+		// add this in messages
+		messageStore.sendMessage(currentChat, message);
 	};
 
 	return (
@@ -41,21 +53,24 @@ function MessageInput() {
 function MessageOutput() {
 	return (
 		<div className="messageOutput bg-slate-200 h-full rounded-lg p-3">
-			Message Output
+			Messages
 		</div>
 	);
 }
 
 // message box component
-export default function MessageBox() {
+export default function MessageBox(props) {
+	// props
+	const { currentBrick } = props;
+
 	return (
 		<div className="messageBox flex flex-col h-full w-full">
 			<div className="messageBox-output p-1 flex-grow">
-				<MessageOutput />
+				<MessageOutput currentChat={currentBrick} />
 			</div>
 
 			<div className="messageBox-input">
-				<MessageInput />
+				<MessageInput currentChat={currentBrick} />
 			</div>
 		</div>
 	);

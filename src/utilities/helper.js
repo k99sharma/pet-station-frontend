@@ -374,3 +374,13 @@ export async function updatePassword(payload, token) {
 
 	return response;
 }
+
+// function to get session id
+export function getSocketSessionId() {
+	return localStorage.getItem('socketSessionId');
+}
+
+// function to set session id
+export function setSocketSessionId(id) {
+	localStorage.setItem('socketSessionId', id);
+}
