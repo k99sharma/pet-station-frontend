@@ -1,10 +1,14 @@
 // importing components
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, TextField } from '@mui/material';
 import { IoMdSend } from 'react-icons/io';
+import Message from '../Message/Message';
 
 // importing message store class
 import MessageStore from './MessageStore';
+
+// importing helper functions
+import { getTime } from '../../utilities/helper';
 
 import socket from '../../websocket/socketio';
 
@@ -14,7 +18,7 @@ const messageStore = new MessageStore(socket);
 // message input component
 function MessageInput(props) {
 	// props
-	const { currentChat } = props;
+	const { currentChat, setIsMessageSent } = props;
 
 	// state
 	const [message, setMessage] = useState('');
@@ -23,6 +27,8 @@ function MessageInput(props) {
 	const sendMessage = () => {
 		// add this in messages
 		messageStore.sendMessage(currentChat, message);
+		setMessage('');
+		setIsMessageSent(true);
 	};
 
 	return (
@@ -50,10 +56,43 @@ function MessageInput(props) {
 }
 
 // message output component
-function MessageOutput() {
+// socket
+socket.on('message', (res)=>{
+	const { from, content } = res;
+	const payload = {
+		message: content,
+		type: 'received',
+		time: getTime(new Date())
+	}
+	messageStore.saveMessage(from, payload);
+});
+
+function MessageOutput(props) {
+	// props
+	const { currentChat } = props;
+
+	let messages = [];
+
+	// function to fetch messages
+	const fetchMessages = () => {
+		const temp = messageStore.getMessages(currentChat);		// getting stored messages using username
+		messages = temp;
+	}
+	fetchMessages();
+
 	return (
-		<div className="messageOutput bg-slate-200 h-full rounded-lg p-3">
-			Messages
+		<div className="messageOutput bg-neutral-300 h-full rounded-lg p-3">
+			{
+				messages !== undefined && messages.length !== 0
+				?
+				<div className="messageOutput-messages">
+					{
+						messages.map((message) => <Message content={message.message} type={message.type} time={message.time} />)
+					}
+				</div>
+				:
+				null
+			}
 		</div>
 	);
 }
@@ -63,6 +102,12 @@ export default function MessageBox(props) {
 	// props
 	const { currentBrick } = props;
 
+	const [isMessageSent, setIsMessageSent] = useState(false);
+
+	useEffect(() => {
+		setIsMessageSent(false);
+	}, [isMessageSent])
+
 	return (
 		<div className="messageBox flex flex-col h-full w-full">
 			<div className="messageBox-output p-1 flex-grow">
@@ -70,7 +115,7 @@ export default function MessageBox(props) {
 			</div>
 
 			<div className="messageBox-input">
-				<MessageInput currentChat={currentBrick} />
+				<MessageInput setIsMessageSent={setIsMessageSent} currentChat={currentBrick} />
 			</div>
 		</div>
 	);

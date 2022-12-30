@@ -384,3 +384,17 @@ export function getSocketSessionId() {
 export function setSocketSessionId(id) {
 	localStorage.setItem('socketSessionId', id);
 }
+
+
+// function to generate time
+export function getTime(date) {
+	// in indian time zone
+	const offset = 330; // Time zone offset for India in minutes
+	const currentTime = new Date(date.getTime() + offset*60*1000);
+	const hours = currentTime.getHours();
+	let minutes = currentTime.getMinutes();
+	if (minutes < 10) {
+	minutes = `0${minutes}`;
+	}
+	return `${hours}:${minutes}`;
+}
