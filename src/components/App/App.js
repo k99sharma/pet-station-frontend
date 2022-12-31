@@ -1,5 +1,5 @@
 // importing components
-import { StrictMode, useContext, useEffect } from 'react';
+import { StrictMode, useContext } from 'react';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 
 // importing socket
@@ -18,16 +18,6 @@ import DashboardPage from '../../pages/Dashboard/Dashboard';
 // App component
 export default function App() {
 	const authCtx = useContext(AuthContext); // auth context
-
-	useEffect(() => {
-		// function to make socket connection
-		function socketConnection() {
-			socket.connect();
-			localStorage.setItem('userId', authCtx.user.userId);
-		}
-
-		socketConnection(); // invoke socket connection
-	}, []);
 
 	return (
 		<StrictMode>
