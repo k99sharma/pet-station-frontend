@@ -1,5 +1,5 @@
 // importing helper functions
-import { getTime, generateUniqueId } from '../../utilities/helper';
+import { getTime } from '../../utilities/helper';
 
 // message store class
 export default class MessageStore {
@@ -11,7 +11,7 @@ export default class MessageStore {
 	sendMessage(username, message) {
 		// save message
 		const payload = {
-			id: generateUniqueId,
+			id: new Date().getTime().toString(),
 			message,
 			type: 'sent',
 			time: getTime(new Date()),
