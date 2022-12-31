@@ -8,7 +8,7 @@ import Message from '../Message/Message';
 import MessageStore from './MessageStore';
 
 // importing helper functions
-import { generateUniqueId, getTime } from '../../utilities/helper';
+import { getTime } from '../../utilities/helper';
 
 import socket from '../../websocket/socketio';
 
@@ -60,7 +60,7 @@ function MessageInput(props) {
 socket.on('message', (res) => {
 	const { from, content } = res;
 	const payload = {
-		id: generateUniqueId,
+		id: new Date().getTime().toString(),
 		message: content,
 		type: 'received',
 		time: getTime(new Date()),
