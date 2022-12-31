@@ -1,6 +1,6 @@
 const friends = [
 	{
-		userId: 1,
+		userId: 'user1',
 		profilePictureUrl:
 			'https://dvyvvujm9h0uq.cloudfront.net/com/articles/1525891879-379720-warren-wong-242286-unsplashjpg.jpg',
 		label: 'Jon Doe',
@@ -9,7 +9,7 @@ const friends = [
 		time: '11:49',
 	},
 	{
-		userId: 2,
+		userId: 'user2',
 		profilePictureUrl:
 			'https://dvyvvujm9h0uq.cloudfront.net/com/articles/1525891879-379720-warren-wong-242286-unsplashjpg.jpg',
 		label: 'Jon Doe',
@@ -18,7 +18,7 @@ const friends = [
 		time: '11:49',
 	},
 	{
-		userId: 3,
+		userId: 'user3',
 		profilePictureUrl:
 			'https://dvyvvujm9h0uq.cloudfront.net/com/articles/1525891879-379720-warren-wong-242286-unsplashjpg.jpg',
 		label: 'Jon Doe',
@@ -27,7 +27,7 @@ const friends = [
 		time: '11:49',
 	},
 	{
-		userId: 4,
+		userId: 'user4',
 		profilePictureUrl:
 			'https://dvyvvujm9h0uq.cloudfront.net/com/articles/1525891879-379720-warren-wong-242286-unsplashjpg.jpg',
 		label: 'Jon Doe',
@@ -36,7 +36,7 @@ const friends = [
 		time: '11:49',
 	},
 	{
-		userId: 5,
+		userId: 'user5',
 		profilePictureUrl:
 			'https://dvyvvujm9h0uq.cloudfront.net/com/articles/1525891879-379720-warren-wong-242286-unsplashjpg.jpg',
 		label: 'Jon Doe',
@@ -45,7 +45,7 @@ const friends = [
 		time: '11:49',
 	},
 	{
-		userId: 6,
+		userId: 'user6',
 		profilePictureUrl:
 			'https://dvyvvujm9h0uq.cloudfront.net/com/articles/1525891879-379720-warren-wong-242286-unsplashjpg.jpg',
 		label: 'Jon Doe',
@@ -54,7 +54,7 @@ const friends = [
 		time: '11:49',
 	},
 	{
-		userId: 7,
+		userId: 'user7',
 		profilePictureUrl:
 			'https://dvyvvujm9h0uq.cloudfront.net/com/articles/1525891879-379720-warren-wong-242286-unsplashjpg.jpg',
 		label: 'Jon Doe',

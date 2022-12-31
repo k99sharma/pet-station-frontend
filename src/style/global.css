@@ -39,7 +39,7 @@ code {
 		rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
-.truncate-text{
+.truncate-text {
 	width: 220px;
 	white-space: nowrap;
 	overflow: hidden;

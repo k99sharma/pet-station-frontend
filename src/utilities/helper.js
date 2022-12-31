@@ -2,6 +2,7 @@
 
 // importing libraries
 import axios from 'axios';
+import { sha256 } from 'crypto-js';
 
 // handle user login
 export function handleLogin(payload) {
@@ -375,12 +376,66 @@ export async function updatePassword(payload, token) {
 	return response;
 }
 
-// function to get session id
-export function getSocketSessionId() {
-	return localStorage.getItem('socketSessionId');
+// function to generate time
+export function getTime(date) {
+	// in indian time zone
+	const offset = 330; // Time zone offset for India in minutes
+	const currentTime = new Date(date.getTime() + offset * 60 * 1000);
+	const hours = currentTime.getHours();
+	let minutes = currentTime.getMinutes();
+	if (minutes < 10) {
+		minutes = `0${minutes}`;
+	}
+	return `${hours}:${minutes}`;
 }
 
-// function to set session id
-export function setSocketSessionId(id) {
-	localStorage.setItem('socketSessionId', id);
+// function to add user friend
+export function addUserFriend(friendId, token) {
+	const config = {
+		headers: {
+			'x-auth-token': token,
+		},
+	};
+
+	const response = axios
+		.post(
+			`${process.env.REACT_APP_SERVER}/user/friend/add/${friendId}`,
+			{},
+			config
+		)
+		.then((res) => {
+			const { data } = res;
+			return data;
+		})
+		.catch((err) => {
+			const { data } = err.response;
+			return data;
+		});
+
+	return response;
+}
+
+// function to get user friend
+export async function getUserFriend(token) {
+	const options = {
+		method: 'GET',
+		headers: {
+			'x-auth-token': token,
+		},
+	};
+
+	const response = await fetch(
+		`${process.env.REACT_APP_SERVER}/user/friend/get`,
+		options
+	);
+
+	return response.json();
+}
+
+// function to generate unique hash
+export function generateUniqueId() {
+	// create a unique hash by combining the current time with a random number
+	const hashInput = Date.now().toString() + Math.random().toString();
+	// generate a SHA-256 hash of the input
+	return sha256(hashInput).toString();
 }

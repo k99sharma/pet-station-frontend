@@ -40,6 +40,8 @@ function LoginForm() {
         // login user 
         const res = await handleLogin(values);
 
+        console.log(res);
+
         if (res.status === 'error' || res.status === 'fail') {
             alert(res.message);
 
