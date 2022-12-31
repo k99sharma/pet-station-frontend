@@ -1,5 +1,5 @@
 // importing components
-import { Typography } from '@mui/material';
+import { Typography, CircularProgress } from '@mui/material';
 import { useQuery } from 'react-query';
 import { useContext } from 'react';
 import UserAvatar from '../UserAvatar/UserAvatar';
@@ -13,12 +13,12 @@ import { getUserFriend } from '../../utilities/helper';
 // friend brick component
 function FriendBrick(props) {
 	// props
-	const { friend, currentBrick, setCurrentBrick } = props;
+	const { friend, currentChat, setCurrentChat } = props;
 
 	// function to select receiver
 	const handleClick = () => {
 		const { userId } = friend;
-		setCurrentBrick(userId);
+		setCurrentChat(userId);
 	};
 
 	return (
@@ -26,9 +26,7 @@ function FriendBrick(props) {
 		<div
 			onClick={handleClick}
 			className={`friendBrick h-22 p-3 cursor-pointer flex ${
-				currentBrick === friend.userId
-					? 'bg-gradient-to-b from-blue-300 to-blue-400 rounded-lg'
-					: ''
+				currentChat === friend.userId ? 'bg-blue-200 rounded-lg' : ''
 			}`}
 		>
 			{/* content */}
@@ -48,17 +46,7 @@ function FriendBrick(props) {
 					<Typography variant="h6" className="friendBrick-content-title-label">
 						{friend.name}
 					</Typography>
-
-					{/* last message */}
-					<div className="friendBrick-content-title-message text-sm truncate-text">
-						{friend.lastMessage}
-					</div>
 				</div>
-			</div>
-
-			{/* time */}
-			<div className="friendBrick-time text-xs font-bold w-1/5">
-				{friend.time}
 			</div>
 		</div>
 	);
@@ -67,7 +55,7 @@ function FriendBrick(props) {
 // friend box component
 export default function FriendBox(props) {
 	// props
-	const { currentBrick, setCurrentBrick } = props;
+	const { currentChat, setCurrentChat } = props;
 	const authCtx = useContext(AuthContext);
 
 	// fetch data
@@ -75,18 +63,23 @@ export default function FriendBox(props) {
 		getUserFriend(authCtx.token)
 	);
 
-	if (isLoading) return <div>Loading ...</div>;
+	if (isLoading)
+		return (
+			<div className="flex items-center justify-center">
+				<CircularProgress />
+			</div>
+		);
 
 	if (error) return <div>error</div>;
 
 	return (
-		<div className="friendBox overflow-auto p-2 h-full w-full">
+		<div className="friendBox rounded-lg overflow-auto p-2 h-full w-full">
 			{data.data.friends.map((friend) => (
 				<FriendBrick
 					key={friend.userId}
-					currentBrick={currentBrick}
+					currentChat={currentChat}
 					friend={friend}
-					setCurrentBrick={setCurrentBrick}
+					setCurrentChat={setCurrentChat}
 				/>
 			))}
 		</div>

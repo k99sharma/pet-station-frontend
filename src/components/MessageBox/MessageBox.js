@@ -8,7 +8,7 @@ import Message from '../Message/Message';
 import MessageStore from './MessageStore';
 
 // importing helper functions
-import { getTime } from '../../utilities/helper';
+import { generateUniqueId, getTime } from '../../utilities/helper';
 
 import socket from '../../websocket/socketio';
 
@@ -60,6 +60,7 @@ function MessageInput(props) {
 socket.on('message', (res) => {
 	const { from, content } = res;
 	const payload = {
+		id: generateUniqueId,
 		message: content,
 		type: 'received',
 		time: getTime(new Date()),
@@ -81,18 +82,16 @@ function MessageOutput(props) {
 	fetchMessages();
 
 	return (
-		<div className="messageOutput bg-neutral-300 h-full rounded-lg p-3">
-			{messages !== undefined && messages.length !== 0 ? (
-				<div className="messageOutput-messages overflow-auto h-full flex flex-col">
-					{messages.map((message) => (
+		<div className="messageOutput bg-neutral-200 h-full overflow-auto rounded-lg p-3">
+			{messages !== undefined && messages.length !== 0
+				? messages.map((message) => (
 						<Message
+							key={message.id}
 							content={message.message}
 							type={message.type}
-							time={message.time}
 						/>
-					))}
-				</div>
-			) : null}
+				  ))
+				: null}
 		</div>
 	);
 }
@@ -100,7 +99,7 @@ function MessageOutput(props) {
 // message box component
 export default function MessageBox(props) {
 	// props
-	const { currentBrick } = props;
+	const { currentChat } = props;
 
 	const [isMessageSent, setIsMessageSent] = useState(false);
 
@@ -109,15 +108,15 @@ export default function MessageBox(props) {
 	}, [isMessageSent]);
 
 	return (
-		<div className="messageBox flex flex-col h-full w-full">
-			<div className="messageBox-output p-1 flex-grow">
-				<MessageOutput currentChat={currentBrick} />
+		<div className="messageBox h-full w-full">
+			<div className="messageBox-output p-1 mb-2 h-4/5">
+				<MessageOutput currentChat={currentChat} />
 			</div>
 
 			<div className="messageBox-input">
 				<MessageInput
 					setIsMessageSent={setIsMessageSent}
-					currentChat={currentBrick}
+					currentChat={currentChat}
 				/>
 			</div>
 		</div>

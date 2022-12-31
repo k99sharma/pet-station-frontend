@@ -15,7 +15,7 @@ import friends from '../../utilities/friendSeed';
 // message container component
 export default function MessageContainer() {
 	// state
-	const [currentBrick, setCurrentBrick] = useState(null);
+	const [currentChat, setCurrentChat] = useState(null);
 
 	return (
 		<div className="messageContainer box-container md:w-4/5 rounded-2xl">
@@ -33,22 +33,22 @@ export default function MessageContainer() {
 				{/* friend box */}
 				<div className="messageContainer-section-friendBox w-full md:w-2/5">
 					<FriendBox
-						currentBrick={currentBrick}
-						setCurrentBrick={setCurrentBrick}
+						currentChat={currentChat}
+						setCurrentChat={setCurrentChat}
 						friends={friends}
 					/>
 				</div>
 
 				{/* message box */}
 				<div className="messageContainer-section-messageBox hidden md:flex md:items-center md:justify-center md:w-3/5">
-					{currentBrick === null ? (
+					{currentChat === null ? (
 						<img
 							className="messageContainer h-full"
 							src="/assets/message1.gif"
 							alt="svg"
 						/>
 					) : (
-						<MessageBox currentBrick={currentBrick} />
+						<MessageBox currentChat={currentChat} />
 					)}
 				</div>
 			</div>

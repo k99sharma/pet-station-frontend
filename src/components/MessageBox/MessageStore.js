@@ -1,5 +1,5 @@
 // importing helper functions
-import { getTime } from '../../utilities/helper';
+import { getTime, generateUniqueId } from '../../utilities/helper';
 
 // message store class
 export default class MessageStore {
@@ -11,6 +11,7 @@ export default class MessageStore {
 	sendMessage(username, message) {
 		// save message
 		const payload = {
+			id: generateUniqueId,
 			message,
 			type: 'sent',
 			time: getTime(new Date()),
@@ -18,7 +19,6 @@ export default class MessageStore {
 		this.saveMessage(username, payload);
 
 		// now we just need to send message to specified username
-		console.log(`${username} --> ${message}`);
 		this.socket.emit('message', {
 			to: username,
 			content: message,
@@ -44,9 +44,5 @@ export default class MessageStore {
 		// return messages of username
 		const messages = this.messagesMap.get(username);
 		return messages;
-	}
-
-	displayMap() {
-		console.log(this.messagesMap);
 	}
 }

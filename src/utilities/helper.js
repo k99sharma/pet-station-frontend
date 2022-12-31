@@ -2,6 +2,7 @@
 
 // importing libraries
 import axios from 'axios';
+import { sha256 } from 'crypto-js';
 
 // handle user login
 export function handleLogin(payload) {
@@ -375,16 +376,6 @@ export async function updatePassword(payload, token) {
 	return response;
 }
 
-// function to get session id
-export function getSocketSessionId() {
-	return localStorage.getItem('socketSessionId');
-}
-
-// function to set session id
-export function setSocketSessionId(id) {
-	localStorage.setItem('socketSessionId', id);
-}
-
 // function to generate time
 export function getTime(date) {
 	// in indian time zone
@@ -439,4 +430,12 @@ export async function getUserFriend(token) {
 	);
 
 	return response.json();
+}
+
+// function to generate unique hash
+export function generateUniqueId() {
+	// create a unique hash by combining the current time with a random number
+	const hashInput = Date.now().toString() + Math.random().toString();
+	// generate a SHA-256 hash of the input
+	return sha256(hashInput).toString();
 }
