@@ -1,6 +1,14 @@
 // importing components
 import { Typography } from '@mui/material';
+import { useQuery } from 'react-query';
+import { useContext } from 'react';
 import UserAvatar from '../UserAvatar/UserAvatar';
+
+// importing context
+import AuthContext from '../../context/auth';
+
+// importing helper functions
+import { getUserFriend } from '../../utilities/helper';
 
 // friend brick component
 function FriendBrick(props) {
@@ -10,8 +18,6 @@ function FriendBrick(props) {
 	// function to select receiver
 	const handleClick = () => {
 		const { userId } = friend;
-
-		console.log(`User selected is ${userId}`);
 		setCurrentBrick(userId);
 	};
 
@@ -31,7 +37,7 @@ function FriendBrick(props) {
 					{/* avatar */}
 					<UserAvatar
 						profilePictureUrl={friend.profilePictureUrl}
-						name={friend.label}
+						name={friend.name}
 						height={50}
 						width={50}
 					/>
@@ -40,7 +46,7 @@ function FriendBrick(props) {
 				<div className="friendBrick-content-title mx-3">
 					{/* label */}
 					<Typography variant="h6" className="friendBrick-content-title-label">
-						{friend.label}
+						{friend.name}
 					</Typography>
 
 					{/* last message */}
@@ -61,11 +67,21 @@ function FriendBrick(props) {
 // friend box component
 export default function FriendBox(props) {
 	// props
-	const { currentBrick, setCurrentBrick, friends } = props;
+	const { currentBrick, setCurrentBrick } = props;
+	const authCtx = useContext(AuthContext);
+
+	// fetch data
+	const { isLoading, error, data } = useQuery('friends', () =>
+		getUserFriend(authCtx.token)
+	);
+
+	if (isLoading) return <div>Loading ...</div>;
+
+	if (error) return <div>error</div>;
 
 	return (
 		<div className="friendBox overflow-auto p-2 h-full w-full">
-			{friends.map((friend) => (
+			{data.data.friends.map((friend) => (
 				<FriendBrick
 					key={friend.userId}
 					currentBrick={currentBrick}

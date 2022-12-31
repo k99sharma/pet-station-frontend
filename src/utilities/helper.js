@@ -385,16 +385,58 @@ export function setSocketSessionId(id) {
 	localStorage.setItem('socketSessionId', id);
 }
 
-
 // function to generate time
 export function getTime(date) {
 	// in indian time zone
 	const offset = 330; // Time zone offset for India in minutes
-	const currentTime = new Date(date.getTime() + offset*60*1000);
+	const currentTime = new Date(date.getTime() + offset * 60 * 1000);
 	const hours = currentTime.getHours();
 	let minutes = currentTime.getMinutes();
 	if (minutes < 10) {
-	minutes = `0${minutes}`;
+		minutes = `0${minutes}`;
 	}
 	return `${hours}:${minutes}`;
+}
+
+// function to add user friend
+export function addUserFriend(friendId, token) {
+	const config = {
+		headers: {
+			'x-auth-token': token,
+		},
+	};
+
+	const response = axios
+		.post(
+			`${process.env.REACT_APP_SERVER}/user/friend/add/${friendId}`,
+			{},
+			config
+		)
+		.then((res) => {
+			const { data } = res;
+			return data;
+		})
+		.catch((err) => {
+			const { data } = err.response;
+			return data;
+		});
+
+	return response;
+}
+
+// function to get user friend
+export async function getUserFriend(token) {
+	const options = {
+		method: 'GET',
+		headers: {
+			'x-auth-token': token,
+		},
+	};
+
+	const response = await fetch(
+		`${process.env.REACT_APP_SERVER}/user/friend/get`,
+		options
+	);
+
+	return response.json();
 }

@@ -57,13 +57,13 @@ function MessageInput(props) {
 
 // message output component
 // socket
-socket.on('message', (res)=>{
+socket.on('message', (res) => {
 	const { from, content } = res;
 	const payload = {
 		message: content,
 		type: 'received',
-		time: getTime(new Date())
-	}
+		time: getTime(new Date()),
+	};
 	messageStore.saveMessage(from, payload);
 });
 
@@ -75,24 +75,24 @@ function MessageOutput(props) {
 
 	// function to fetch messages
 	const fetchMessages = () => {
-		const temp = messageStore.getMessages(currentChat);		// getting stored messages using username
+		const temp = messageStore.getMessages(currentChat); // getting stored messages using username
 		messages = temp;
-	}
+	};
 	fetchMessages();
 
 	return (
 		<div className="messageOutput bg-neutral-300 h-full rounded-lg p-3">
-			{
-				messages !== undefined && messages.length !== 0
-				?
-				<div className="messageOutput-messages">
-					{
-						messages.map((message) => <Message content={message.message} type={message.type} time={message.time} />)
-					}
+			{messages !== undefined && messages.length !== 0 ? (
+				<div className="messageOutput-messages overflow-auto h-full flex flex-col">
+					{messages.map((message) => (
+						<Message
+							content={message.message}
+							type={message.type}
+							time={message.time}
+						/>
+					))}
 				</div>
-				:
-				null
-			}
+			) : null}
 		</div>
 	);
 }
@@ -106,7 +106,7 @@ export default function MessageBox(props) {
 
 	useEffect(() => {
 		setIsMessageSent(false);
-	}, [isMessageSent])
+	}, [isMessageSent]);
 
 	return (
 		<div className="messageBox flex flex-col h-full w-full">
@@ -115,7 +115,10 @@ export default function MessageBox(props) {
 			</div>
 
 			<div className="messageBox-input">
-				<MessageInput setIsMessageSent={setIsMessageSent} currentChat={currentBrick} />
+				<MessageInput
+					setIsMessageSent={setIsMessageSent}
+					currentChat={currentBrick}
+				/>
 			</div>
 		</div>
 	);

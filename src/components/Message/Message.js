@@ -4,7 +4,7 @@ export default function Message(props){
     const { content, type } = props;
 
     return(
-        <div className={`message py-3 px-5 mb-3 rounded-xl shadow-md bg-gradient-to-b ${type === 'sent' ? 'from-green-500 to-green-400' : 'from-blue-500 to-blue-400' }`}>
+        <div className={`message py-3 px-5 mb-3 rounded-xl ${type === 'sent' ? 'bg-green-300 border-2 border-green-500' : 'bg-blue-300 border-2 border-blue-500' }`}>
             <div className="message-content text-lg">
                 {
                     content

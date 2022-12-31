@@ -2,7 +2,7 @@
 import './MessageContainer.css';
 
 // importing components
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 // importing custom components
 import Heading from '../Heading/Heading';
@@ -12,30 +12,10 @@ import MessageBox from '../MessageBox/MessageBox';
 // importing friend list
 import friends from '../../utilities/friendSeed';
 
-// importing helper functions
-import { setSocketSessionId } from '../../utilities/helper';
-
-// importing socket
-import socket from '../../websocket/socketio';
-
 // message container component
 export default function MessageContainer() {
 	// state
 	const [currentBrick, setCurrentBrick] = useState(null);
-
-	useEffect(() => {
-		// function to make socket connection
-		function socketConnection() {
-			socket.connect();
-
-			socket.on('session', (res) => {
-				const  { sessionId } = res;
-				setSocketSessionId(sessionId);
-			});
-		}
-
-		socketConnection(); // invoke socket connection
-	}, []);
 
 	return (
 		<div className="messageContainer box-container md:w-4/5 rounded-2xl">

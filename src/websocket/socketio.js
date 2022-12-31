@@ -1,7 +1,7 @@
 // importing libraries
 import { io } from 'socket.io-client';
 
-const username = 'user1'; // username
+const username = localStorage.getItem('userId');
 
 const URL = `https://petstation.onrender.com?username=${username}`;
 const socket = io(URL, { autoConnect: false });
