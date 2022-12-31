@@ -2,9 +2,6 @@
 import { StrictMode, useContext } from 'react';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 
-// importing socket
-import socket from '../../websocket/socketio';
-
 // importing context
 import AuthContext from '../../context/auth';
 
