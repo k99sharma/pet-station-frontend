@@ -1,13 +1,26 @@
 /* eslint-disable react/prop-types */
 // importing components
+import { useEffect } from 'react';
 import Profile from '../Profile/Profile';
 import Adoption from '../Adoption/Adoption';
 import MessageContainer from '../MessageContainer/MessageContainer';
 import Settings from '../Settings/Settings';
 
+// importing socket
+import socket from '../../websocket/socketio';
+
 // board component
 export default function Board(props) {
 	const { option, authCtx, user } = props;
+	
+	useEffect(() => { // function to make socket connection 
+		function socketConnection() { 
+			socket.connect(); 
+			localStorage.setItem('userId', authCtx.user.userId); 
+		} 
+		socketConnection(); 
+		// invoke socket connection 
+	}, []);
 
 	return (
 		<>
