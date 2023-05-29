@@ -116,7 +116,7 @@ export default function PetCard(props) {
 					<div className="pet-content-attributes-gender">
 						<div className="pet-content-attributes-gender flex flex-col items-center bg-blue-200 p-2 rounded-md shadow-md w-16">
 							<div className="pet-content-attributes-gender">
-								{`${pet.gender}`}
+								Male
 							</div>
 
 							<div className="pet-content-attributes-gender-label">Gender</div>
